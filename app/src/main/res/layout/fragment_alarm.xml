@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="alarm"
+            type="com.sillyapps.alarmarmy.data.EditableAlarm" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primaryColor"
+        tools:context=".ui.gallery.AlarmFragment">
+
+        <NumberPicker
+            android:id="@+id/minutePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:theme="@style/NumberPicker"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/colon"
+            app:layout_constraintTop_toTopOf="@+id/hourPicker" />
+
+        <TextView
+            android:id="@+id/colon"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/colon"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toBottomOf="@+id/hourPicker"
+            app:layout_constraintEnd_toStartOf="@+id/minutePicker"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/hourPicker"
+            app:layout_constraintTop_toTopOf="@+id/hourPicker" />
+
+        <NumberPicker
+            android:id="@+id/hourPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="16dp"
+            android:theme="@style/NumberPicker"
+            app:layout_constraintEnd_toStartOf="@+id/colon"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+
+            android:background="@color/neutralColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hourPicker" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchMaterial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+
+            android:layout_marginTop="16dp"
+            android:text="@string/repeat"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            app:switchPadding="16dp" />
+
+        <ToggleButton
+            android:id="@+id/mondayButton"
+            style="@style/ToggleButton"
+            android:layout_width="@dimen/dayButtonSize"
+            android:layout_height="@dimen/dayButtonSize"
+            android:layout_marginTop="32dp"
+
+            android:textOff="@string/monday"
+            android:textOn="@string/monday"
+
+            app:layout_constraintEnd_toStartOf="@+id/tuesdayButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switchMaterial" />
+
+        <ToggleButton
+            android:id="@+id/tuesdayButton"
+            style="@style/ToggleButton"
+            android:layout_width="@dimen/dayButtonSize"
+            android:layout_height="@dimen/dayButtonSize"
+
+            android:textOff="@string/tuesday"
+
+            android:textOn="@string/tuesday"
+            app:layout_constraintEnd_toStartOf="@+id/wednesdayButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/mondayButton"
+            app:layout_constraintTop_toTopOf="@+id/mondayButton" />
+
+        <ToggleButton
+            android:id="@+id/wednesdayButton"
+            style="@style/ToggleButton"
+            android:layout_width="@dimen/dayButtonSize"
+            android:layout_height="@dimen/dayButtonSize"
+
+            android:textOff="@string/wednesday"
+            android:textOn="@string/wednesday"
+
+            app:layout_constraintEnd_toStartOf="@+id/thursdayButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tuesdayButton"
+            app:layout_constraintTop_toTopOf="@+id/mondayButton" />
+
+        <ToggleButton
+            android:id="@+id/thursdayButton"
+            style="@style/ToggleButton"
+            android:layout_width="@dimen/dayButtonSize"
+            android:layout_height="@dimen/dayButtonSize"
+            android:textOff="@string/thursday"
+
+            android:textOn="@string/thursday"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/wednesdayButton"
+            app:layout_constraintTop_toTopOf="@+id/mondayButton" />
+
+        <ToggleButton
+            android:id="@+id/fridayButton"
+            style="@style/ToggleButton"
+            android:layout_width="@dimen/dayButtonSize"
+            android:layout_height="@dimen/dayButtonSize"
+            android:layout_marginTop="32dp"
+
+            android:textOff="@string/friday"
+            android:textOn="@string/friday"
+
+            app:layout_constraintEnd_toStartOf="@+id/saturdayButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mondayButton" />
+
+        <ToggleButton
+            android:id="@+id/saturdayButton"
+            style="@style/ToggleButton"
+            android:layout_width="@dimen/dayButtonSize"
+            android:layout_height="@dimen/dayButtonSize"
+
+            android:textOff="@string/saturday"
+
+            android:textOn="@string/saturday"
+            app:layout_constraintEnd_toStartOf="@+id/sundayButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/fridayButton"
+            app:layout_constraintTop_toTopOf="@+id/fridayButton" />
+
+        <ToggleButton
+            android:id="@+id/sundayButton"
+            style="@style/ToggleButton"
+            android:layout_width="@dimen/dayButtonSize"
+            android:layout_height="@dimen/dayButtonSize"
+
+            android:textOff="@string/sunday"
+
+            android:textOn="@string/sunday"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/saturdayButton"
+            app:layout_constraintTop_toTopOf="@+id/fridayButton" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            android:src="@drawable/ic_check"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
