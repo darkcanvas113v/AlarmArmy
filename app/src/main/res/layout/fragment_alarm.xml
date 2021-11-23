@@ -6,7 +6,7 @@
     <data>
         <variable
             name="alarm"
-            type="com.sillyapps.alarmarmy.data.EditableAlarm" />
+            type="com.sillyapps.alarmarmy.data.Alarm" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/colon"
-            app:layout_constraintTop_toTopOf="@+id/hourPicker" />
+            app:layout_constraintTop_toTopOf="@+id/hourPicker"/>
 
         <TextView
             android:id="@+id/colon"
@@ -80,7 +80,9 @@
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view"
-            app:switchPadding="16dp" />
+            app:switchPadding="16dp"
+
+            android:checked="@={alarm.repeat}"/>
 
         <ToggleButton
             android:id="@+id/mondayButton"
@@ -95,7 +97,9 @@
             app:layout_constraintEnd_toStartOf="@+id/tuesdayButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/switchMaterial" />
+            app:layout_constraintTop_toBottomOf="@+id/switchMaterial"
+
+            android:checked="@={alarm.repeatMonday}"/>
 
         <ToggleButton
             android:id="@+id/tuesdayButton"
@@ -109,7 +113,9 @@
             app:layout_constraintEnd_toStartOf="@+id/wednesdayButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/mondayButton"
-            app:layout_constraintTop_toTopOf="@+id/mondayButton" />
+            app:layout_constraintTop_toTopOf="@+id/mondayButton"
+
+            android:checked="@={alarm.repeatTuesday}"/>
 
         <ToggleButton
             android:id="@+id/wednesdayButton"
@@ -123,7 +129,9 @@
             app:layout_constraintEnd_toStartOf="@+id/thursdayButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/tuesdayButton"
-            app:layout_constraintTop_toTopOf="@+id/mondayButton" />
+            app:layout_constraintTop_toTopOf="@+id/mondayButton"
+
+            android:checked="@={alarm.repeatWednesday}"/>
 
         <ToggleButton
             android:id="@+id/thursdayButton"
@@ -137,7 +145,9 @@
 
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/wednesdayButton"
-            app:layout_constraintTop_toTopOf="@+id/mondayButton" />
+            app:layout_constraintTop_toTopOf="@+id/mondayButton"
+
+            android:checked="@={alarm.repeatThursday}"/>
 
         <ToggleButton
             android:id="@+id/fridayButton"
@@ -152,7 +162,9 @@
             app:layout_constraintEnd_toStartOf="@+id/saturdayButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mondayButton" />
+            app:layout_constraintTop_toBottomOf="@+id/mondayButton"
+
+            android:checked="@={alarm.repeatFriday}"/>
 
         <ToggleButton
             android:id="@+id/saturdayButton"
@@ -166,7 +178,9 @@
             app:layout_constraintEnd_toStartOf="@+id/sundayButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/fridayButton"
-            app:layout_constraintTop_toTopOf="@+id/fridayButton" />
+            app:layout_constraintTop_toTopOf="@+id/fridayButton"
+
+            android:checked="@={alarm.repeatSaturday}"/>
 
         <ToggleButton
             android:id="@+id/sundayButton"
@@ -180,9 +194,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/saturdayButton"
-            app:layout_constraintTop_toTopOf="@+id/fridayButton" />
+            app:layout_constraintTop_toTopOf="@+id/fridayButton"
+
+            android:checked="@={alarm.repeatSunday}"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/confirmationButton"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"

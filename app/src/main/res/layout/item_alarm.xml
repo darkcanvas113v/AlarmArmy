@@ -11,10 +11,10 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/alarm_item_background">
 
         <TextView
@@ -25,8 +25,8 @@
 
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
-            android:textSize="@dimen/bigFont"
             android:textColor="@color/white"
+            android:textSize="@dimen/bigFont"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
 
@@ -34,34 +34,34 @@
             tools:text="9:20" />
 
         <TextView
+            android:id="@+id/repeatInfo"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:layout_constraintVertical_bias="0.0"
 
-            android:textColor="@color/neutralColor"
-            tools:text="Every day" />
+            app:repeatingInfo="@{alarm}"
+            tools:text="@string/monday"/>
 
         <androidx.appcompat.widget.SwitchCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
+            android:checked="@{alarm.active}"
+            android:scaleX="1.4"
+
+            android:scaleY="1.4"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
 
             app:layout_constraintTop_toTopOf="parent"
-
-            android:checked="@={alarm.active}"
-            tools:checked="true"
-
-            android:scaleX="1.4"
-            android:scaleY="1.4"/>
+            tools:checked="true" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

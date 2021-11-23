@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.sillyapps.alarmarmy.data.Alarm
 
-@Database(entities = [Alarm::class], version = 1, exportSchema = false)
+@Database(entities = [Alarm::class], version = 2, exportSchema = false)
 //@TypeConverters(TypeConverter::class)
 abstract class AppDatabase: RoomDatabase() {
 

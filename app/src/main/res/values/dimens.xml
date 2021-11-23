@@ -9,4 +9,5 @@
     <dimen name="bigFont">44sp</dimen>
 
     <dimen name="dayButtonSize">70dp</dimen>
+    <dimen name="littleButtonSize">24dp</dimen>
 </resources>

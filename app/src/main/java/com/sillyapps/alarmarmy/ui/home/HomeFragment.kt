@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.sillyapps.alarmarmy.R
+import com.sillyapps.alarmarmy.data.Alarm
 import com.sillyapps.alarmarmy.databinding.FragmentHomeBinding
 import com.sillyapps.alarmarmy.ui.ListClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,16 +36,31 @@ class HomeFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         setupAdapter()
+
+        setupFab()
+    }
+
+    private fun setupFab() {
+        binding.floatingActionButton.setOnClickListener {
+            navigateToAlarmFragment()
+        }
     }
 
     private fun setupAdapter() {
-        val onClickListener = ListClickListener {}
+        val onClickListener = ListClickListener {
+            navigateToAlarmFragment(viewModel.alarms.value!![it].id)
+        }
 
         val adapter = AlarmAdapter(onClickListener)
 
         binding.alarmRecView.adapter = adapter
 
         viewModel.alarms.observe(viewLifecycleOwner, { adapter.submitList(it) })
+    }
+
+    private fun navigateToAlarmFragment(alarmId: Long = 0L) {
+        val action = HomeFragmentDirections.actionNavHomeToNavEdit(alarmId)
+        findNavController().navigate(action)
     }
 
 }

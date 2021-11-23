@@ -10,16 +10,31 @@
         android:name="com.sillyapps.alarmarmy.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" >
+
         <action
-            android:id="@+id/action_nav_home_to_nav_gallery"
-            app:destination="@id/nav_gallery" />
+            android:id="@+id/action_nav_home_to_nav_edit"
+            app:destination="@id/nav_edit">
+
+            <argument
+                android:name="alarmId"
+                app:argType="long"
+                android:defaultValue="0L"
+                app:nullable="false"/>
+
+        </action>
+
     </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
+        android:id="@+id/nav_edit"
         android:name="com.sillyapps.alarmarmy.ui.gallery.AlarmFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_alarm" />
+        android:label="@string/menu_edit"
+        tools:layout="@layout/fragment_alarm" >
+        <argument
+            android:name="alarmId"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_slideshow"

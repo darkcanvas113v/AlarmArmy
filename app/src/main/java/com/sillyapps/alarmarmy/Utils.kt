@@ -14,8 +14,8 @@ fun convertToMillis(hours: Int, minutes: Int, seconds: Int = 0): Long {
     return ((hours*60L + minutes)*60 + seconds)*1000L
 }
 
-fun getHoursAndMinutes(timeInMillis: Long): Pair<Long, Long> {
-    val overallMinutes = timeInMillis / 60000
+fun getHoursAndMinutes(timeInMillis: Long): Pair<Int, Int> {
+    val overallMinutes = (timeInMillis / 60000).toInt()
     val minutes = overallMinutes % 60
     val overallHours = overallMinutes / 60
     val hours = overallHours % 24
@@ -60,4 +60,11 @@ fun formatIfNeeded(hours: Int, minutes: Int, secondsFormatted: String = ""): Str
         stringMinutes = "0$minutes"
     }
     return "$stringHours:$stringMinutes$secondsFormatted"
+}
+
+fun getFormattedValuesInRange(size: Int): Array<String> {
+    return Array(size) {
+        if (it < 10) return@Array "0$it"
+        return@Array it.toString()
+    }
 }
