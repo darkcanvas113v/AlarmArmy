@@ -40,8 +40,12 @@ android {
 }
 
 dependencies {
+  implementation project(":core")
   implementation project(":core-ui")
-  implementation project(":alarm-ui")
+  implementation project(':alarm-list-ui')
+  implementation project(':alarm-editor-ui')
+  implementation project(":alarm-domain")
+  implementation project(":alarm-data")
 
   implementation coreKtx
   implementation appCompat
@@ -74,7 +78,5 @@ dependencies {
 
   implementation daggerDeps.core
   kapt daggerDeps.annotationProcessor
-
-  implementation timberDep
 
 }

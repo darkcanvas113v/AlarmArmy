@@ -1,20 +1,32 @@
 package com.sillyapps.alarmarmy.di
 
-import com.sillyapps.alarm_ui.di.AlarmDeps
+import android.content.Context
+import dagger.BindsInstance
 import dagger.Component
+import dagger.Module
 import javax.inject.Scope
 
 @Scope
 @kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
 annotation class AppScope
 
-@Component
+@Component(modules = [AppModule::class])
 @AppScope
-interface AppComponent: AlarmDeps {
+interface AppComponent {
+
+  val context: Context
 
   @Component.Builder
   interface Builder {
+    @BindsInstance
+    fun context(context: Context): Builder
+
     fun build(): AppComponent
   }
+
+}
+
+@Module
+class AppModule {
 
 }

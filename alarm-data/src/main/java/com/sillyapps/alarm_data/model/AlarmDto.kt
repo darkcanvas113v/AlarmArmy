@@ -1,4 +1,21 @@
 package com.sillyapps.alarm_data.model
 
-class AlarmDto {
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.sillyapps.alarm_domain.model.Alarm
+
+@Entity(tableName = "alarms")
+data class AlarmDto(
+  @PrimaryKey(autoGenerate = true) val id: Long,
+  val time: Long,
+  val active: Boolean,
+  val repeat: Int
+)
+
+fun AlarmDto.toDomainModel(): Alarm {
+  return Alarm(id, time, active, repeat)
+}
+
+fun Alarm.toDataModel(): AlarmDto {
+  return AlarmDto(id, time, active, repeat)
 }

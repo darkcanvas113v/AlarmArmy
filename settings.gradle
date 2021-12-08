@@ -1,7 +1,8 @@
 rootProject.name = "AlarmArmy"
 include ':app'
 include ':alarm-domain'
-include ':alarm-ui'
+include ':alarm-list-ui'
 include ':alarm-data'
 include ':core'
 include ':core-ui'
+include ':alarm-editor-ui'

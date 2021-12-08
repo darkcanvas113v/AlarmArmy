@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -31,12 +32,22 @@ android {
 }
 
 dependencies {
+    implementation project(":core")
+    implementation project(":alarm-domain")
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation coreKtx
+
+    // Room
+    implementation roomDeps.runtime
+    implementation roomDeps.ktx
+    kapt roomDeps.annotationProcessor
+    testImplementation roomDeps.testing
+
+    implementation timberDep
+
+    implementation coroutinesDeps.core
+    implementation coroutinesDeps.android
+
+    implementation daggerDeps.core
+    kapt daggerDeps.annotationProcessor
 }
