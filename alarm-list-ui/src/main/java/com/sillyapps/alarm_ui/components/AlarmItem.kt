@@ -37,12 +37,12 @@ fun AlarmItem(
       ) {
         Text(
           text = item.time,
-          modifier = Modifier.align(Alignment.CenterHorizontally),
+          modifier = Modifier.align(Alignment.Start),
           style = Typography.h4
         )
         Text(
           text = item.repeat,
-          modifier = Modifier.align(Alignment.CenterHorizontally),
+          modifier = Modifier.align(Alignment.Start).padding(top = 4.dp),
           style = Typography.subtitle1
         )
       }

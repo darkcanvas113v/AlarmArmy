@@ -1,4 +1,4 @@
-package com.sillyapps.alarm_domain.repository
+package com.sillyapps.alarm_domain.alarm_list
 
 import com.sillyapps.alarm_domain.model.Alarm
 import kotlinx.coroutines.flow.Flow
@@ -12,5 +12,7 @@ interface AlarmRepository {
     suspend fun updateAlarm(alarm: Alarm)
 
     suspend fun saveAlarm(alarm: Alarm)
+
+    suspend fun upsert(alarm: Alarm)
 
 }

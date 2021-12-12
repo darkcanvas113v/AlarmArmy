@@ -5,7 +5,7 @@ import com.sillyapps.alarm_data.model.toDataModel
 import com.sillyapps.alarm_data.model.toDomainModel
 import com.sillyapps.alarm_data.persistence.AlarmDao
 import com.sillyapps.alarm_domain.model.Alarm
-import com.sillyapps.alarm_domain.repository.AlarmRepository
+import com.sillyapps.alarm_domain.alarm_list.AlarmRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -33,10 +33,12 @@ class AlarmRepositoryImpl @Inject constructor(
     }
   }
 
-  override suspend fun updateAlarm(alarm: Alarm) {
-    withContext(ioDispatcher) {
+  override suspend fun upsert(alarm: Alarm) = withContext(ioDispatcher) {
+    alarmDao.upsert(alarm.toDataModel())
+  }
+
+  override suspend fun updateAlarm(alarm: Alarm) = withContext(ioDispatcher) {
       alarmDao.update(alarm.toDataModel())
-    }
   }
 
 }

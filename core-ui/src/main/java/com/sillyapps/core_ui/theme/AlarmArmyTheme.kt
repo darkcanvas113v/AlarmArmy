@@ -37,7 +37,7 @@ fun AlarmArmyTheme(content: @Composable () -> Unit) {
  */
 @Composable
 fun AlarmArmyDialogThemeOverlay(content: @Composable () -> Unit) {
-    // Rally is always dark themed.
+
     val dialogColors = darkColors(
         primary = Color.White,
         surface = Color.White.copy(alpha = 0.12f).compositeOver(Color.Black),

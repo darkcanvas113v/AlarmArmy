@@ -97,10 +97,16 @@ private fun TimePickerItem(
   keyboardOptions: KeyboardOptions,
   keyboardActions: KeyboardActions
 ) {
+  val (typing, setTyping) = remember {
+    mutableStateOf(false)
+  }
 
   val (text, setText) = remember {
-    mutableStateOf(formatValue(value))
+    mutableStateOf("")
   }
+
+  if (!typing)
+    setText(formatValue(value))
 
   TextField(
     value = text,
@@ -125,12 +131,12 @@ private fun TimePickerItem(
       .onFocusChanged {
         if (it.isFocused) {
           setText("")
+          setTyping(true)
         }
         if (!it.isFocused) {
           val newValue = text.toIntOrNull() ?: 0
+          setTyping(false)
           valueChanged(newValue)
-
-          setText(formatValue(newValue))
         }
 
       }

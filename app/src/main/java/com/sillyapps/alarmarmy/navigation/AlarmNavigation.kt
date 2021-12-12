@@ -51,6 +51,7 @@ fun NavGraphBuilder.alarmGraph(
       val component = DaggerAlarmEditorScreenComponent.builder()
         .context(context)
         .alarmID(alarmId)
+        .alarmDataSource(alarmComponent.alarmDataSource)
         .repository(alarmComponent.repository)
         .build()
 
@@ -59,8 +60,8 @@ fun NavGraphBuilder.alarmGraph(
       }
 
       AlarmEditorScreen(
-        alarmEditorStateHolder = viewModel) {
-      }
+        stateHolder = viewModel,
+        onConfirmationButtonClicked = { navController.navigateUp() })
     }
 
   }

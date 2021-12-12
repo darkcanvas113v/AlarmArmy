@@ -1,13 +1,10 @@
 package com.sillyapps.alarm_ui.di
 
 import android.content.Context
-import com.sillyapps.alarm_domain.repository.AlarmRepository
+import com.sillyapps.alarm_domain.alarm_list.AlarmRepository
 import com.sillyapps.alarm_ui.screens.AlarmListViewModel
-import dagger.Binds
 import dagger.BindsInstance
 import dagger.Component
-import dagger.Module
-import javax.inject.Qualifier
 import javax.inject.Scope
 
 @Component()
