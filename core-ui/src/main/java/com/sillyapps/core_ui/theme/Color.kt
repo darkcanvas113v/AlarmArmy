@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.Color
 
 val Green500 = Color(0xFF1EB980)
 val DarkBlue900 = Color(0xFF26282F)
-val Gray = Color(0xFF828994)
+val Gray = Color(0xFF7C8086)
 
 // Rally is always dark themed.
 val ColorPalette = darkColors(
@@ -30,5 +30,6 @@ val ColorPalette = darkColors(
     onSurface = Color.White,
     background = DarkBlue900,
     onBackground = Color.White,
-    error = Gray
+    error = Gray,
+    onError = Color.Black
 )

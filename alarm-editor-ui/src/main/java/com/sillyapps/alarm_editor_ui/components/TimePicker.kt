@@ -102,7 +102,7 @@ private fun TimePickerItem(
   }
 
   val (text, setText) = remember {
-    mutableStateOf("")
+    mutableStateOf(formatValue(value))
   }
 
   if (!typing)
