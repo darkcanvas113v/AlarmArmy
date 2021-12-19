@@ -5,7 +5,7 @@ import com.sillyapps.alarm_data.model.toDataModel
 import com.sillyapps.alarm_data.model.toDomainModel
 import com.sillyapps.alarm_data.persistence.AlarmDao
 import com.sillyapps.alarm_domain.model.Alarm
-import com.sillyapps.alarm_domain.alarm_list.AlarmRepository
+import com.sillyapps.alarm_domain.AlarmRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

@@ -47,7 +47,7 @@ ext {
 
   // Moshi
   moshiDeps = [
-      core    : "com.squareup.moshi:moshi-kotlin:${versions.moshi}",
+      core    : "com.squareup.moshi:moshi:${versions.moshi}",
       compiler: "com.squareup.moshi:moshi-kotlin-codegen:${versions.moshi}"
   ]
 

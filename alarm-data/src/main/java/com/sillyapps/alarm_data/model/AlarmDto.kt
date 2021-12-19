@@ -12,10 +12,10 @@ data class AlarmDto(
   val repeat: Int
 )
 
-fun AlarmDto.toDomainModel(): Alarm {
+internal fun AlarmDto.toDomainModel(): Alarm {
   return Alarm(id, time, active, repeat)
 }
 
-fun Alarm.toDataModel(): AlarmDto {
+internal fun Alarm.toDataModel(): AlarmDto {
   return AlarmDto(id, time, active, repeat)
 }

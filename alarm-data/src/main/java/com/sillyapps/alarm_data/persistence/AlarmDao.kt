@@ -8,6 +8,9 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface AlarmDao {
 
+  @Query("select * from alarms where id = :id")
+  fun get(id: Long): AlarmDto
+
   @Query("select * from alarms")
   fun observeAll(): Flow<List<AlarmDto>>
 

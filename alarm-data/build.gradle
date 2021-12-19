@@ -50,4 +50,7 @@ dependencies {
 
     implementation daggerDeps.core
     kapt daggerDeps.annotationProcessor
+
+    implementation moshiDeps.core
+    kapt moshiDeps.compiler
 }
