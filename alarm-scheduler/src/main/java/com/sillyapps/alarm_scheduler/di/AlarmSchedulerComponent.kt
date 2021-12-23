@@ -1,18 +1,25 @@
 package com.sillyapps.alarm_scheduler.di
 
 import android.content.Context
-import com.sillyapps.alarm_domain.AlarmRepository
+import com.sillyapps.alarm_data.di.IODispatcher
+import com.sillyapps.alarm_data.persistence.AlarmDao
+import com.sillyapps.alarm_scheduler.data.AlarmSchedulerRepositoryImpl
 import com.sillyapps.alarm_scheduler.domain.AlarmSchedulerRepository
-import com.sillyapps.alarm_scheduler.service.AlarmScheduler
-import dagger.BindsInstance
-import dagger.Component
+import com.sillyapps.alarm_scheduler.service.AlarmSchedulerServiceImpl
+import dagger.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Scope
 
-@Component()
-@AlarmSchedulerScreenScope
+@Scope
+@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
+annotation class AlarmSchedulerScope
+
+@Component(modules = [RepositoryModule::class, IOModule::class])
+@AlarmSchedulerScope
 interface AlarmSchedulerComponent {
 
-  fun inject(alarmScheduler: AlarmScheduler)
+  fun inject(alarmScheduler: AlarmSchedulerServiceImpl)
 
   @Component.Builder
   interface Builder {
@@ -20,15 +27,25 @@ interface AlarmSchedulerComponent {
     fun context(context: Context): Builder
 
     @BindsInstance
-    fun alarmDataSource(alarmSchedulerRepository: AlarmSchedulerRepository): Builder
-
-    @BindsInstance
-    fun repository(repository: AlarmRepository): Builder
+    fun alarmDao(alarmDao: AlarmDao): Builder
 
     fun build(): AlarmSchedulerComponent
   }
 }
 
-@Scope
-@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
-annotation class AlarmSchedulerScreenScope
+@Module
+interface RepositoryModule {
+  @AlarmSchedulerScope
+  @Binds
+  fun bindRepository(impl: AlarmSchedulerRepositoryImpl): AlarmSchedulerRepository
+}
+
+@Module
+class IOModule {
+  @AlarmSchedulerScope
+  @Provides
+  @IODispatcher
+  fun provideIODispatcher(): CoroutineDispatcher {
+    return Dispatchers.IO
+  }
+}

@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface AlarmSchedulerRepository {
 
+  fun getAlarms(): Flow<List<SchedulerAlarm>>
+
   fun getQueue(): Flow<List<SchedulerAlarm>>
 
   suspend fun updateQueue(newQueue: List<SchedulerAlarm>)

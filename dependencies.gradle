@@ -59,6 +59,9 @@ ext {
   // Timber
   timberDep = 'com.jakewharton.timber:timber:4.7.1'
 
+  // Java 8 support
+  desugaring = "com.android.tools:desugar_jdk_libs:1.0.9"
+
   // Jetpack Compose
   composeDeps = [
       runtime              : "androidx.compose.runtime:runtime:${versions.compose}",

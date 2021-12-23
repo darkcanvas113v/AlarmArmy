@@ -4,5 +4,6 @@ data class SchedulerAlarm(
   val id: Long,
   val time: Long,
   val active: Boolean,
-  val repeat: Int
+  val repeat: Int,
+  val remainingTime: Long
 )

@@ -9,6 +9,10 @@ object AlarmConstants {
   const val sa = 0b00100000
   const val su = 0b01000000
 
+  const val outOfTheWeek = 0b10000000
+
   const val everyDay = 0b01111111
   const val onlyOnce = 0b00000000
+
+  const val ONE_DAY_DURATION = 86400000
 }

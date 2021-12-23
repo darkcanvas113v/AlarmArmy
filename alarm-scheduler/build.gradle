@@ -24,6 +24,7 @@ android {
     }
   }
   compileOptions {
+    coreLibraryDesugaringEnabled true
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
@@ -38,11 +39,21 @@ dependencies {
   implementation project(":alarm-domain")
   implementation project(":alarm-data")
 
+  coreLibraryDesugaring desugaring
+
   implementation coreKtx
   implementation appCompat
 
   implementation coroutinesDeps.android
   implementation coroutinesDeps.core
+
+  testImplementation junitDeps.core
+  androidTestImplementation junitDeps.android
+  androidTestImplementation junitDeps.espresso
+
+  // LifeCycle
+  implementation lifecycleDeps.viewModel
+  kapt lifecycleDeps.annotationProcessor
 
   implementation moshiDeps.core
   kapt moshiDeps.compiler

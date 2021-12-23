@@ -23,6 +23,16 @@ fun getHoursAndMinutes(timeInMillis: Long): Pair<Int, Int> {
   return Pair(hours, minutes)
 }
 
+fun convertMillisToStringFormatWithDays(millis: Long): String {
+  val overallMinutes = millis / 60000
+  val minutes = overallMinutes % 60
+  val overallHours = overallMinutes / 60
+  val hours = overallHours % 24
+  val days = overallHours / 24
+
+  return "$days days, $hours hours, $minutes minutes"
+}
+
 fun convertMillisToStringFormat(millis: Long): String {
   val overallMinutes = millis / 60000
   val minutes = overallMinutes % 60
