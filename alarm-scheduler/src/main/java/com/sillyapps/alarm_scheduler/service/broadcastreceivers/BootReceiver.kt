@@ -1,4 +1,4 @@
-package com.sillyapps.alarmarmy.broadcastreceivers
+package com.sillyapps.alarm_scheduler.service.broadcastreceivers
 
 import android.content.BroadcastReceiver
 import android.content.Context

@@ -1,6 +1,7 @@
 package com.sillyapps.alarm_scheduler.data
 
 import android.content.Context
+import android.util.Log
 import com.sillyapps.alarm_data.di.IODispatcher
 import com.sillyapps.alarm_data.model.AlarmDto
 import com.sillyapps.alarm_data.persistence.AlarmDao
@@ -15,6 +16,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import java.lang.Error
 import java.lang.Exception
 import javax.inject.Inject
@@ -25,7 +27,7 @@ class AlarmSchedulerRepositoryImpl @Inject constructor(
   private val alarmDao: AlarmDao
 ): AlarmSchedulerRepository {
 
-  private val listAdapter = Moshi.Builder().build().adapter<List<Long>>(Types.newParameterizedType(List::class.java, Long::class.java))
+  private val listAdapter = Moshi.Builder().build().adapter<List<Long>>(Types.newParameterizedType(List::class.java, Long::class.javaObjectType))
 
   private val sharedPreferences = context.getSharedPreferences(ALARM_SCHEDULER_SHP, Context.MODE_PRIVATE)
 
@@ -36,6 +38,7 @@ class AlarmSchedulerRepositoryImpl @Inject constructor(
 
   override suspend fun loadQueue() = withContext(ioDispatcher) {
     val queueJson = sharedPreferences.getString(ALARM_QUEUE, "") ?: return@withContext
+    if (queueJson.isBlank()) return@withContext
 
     alarmsIDQueue.value = listAdapter.fromJson(queueJson) ?: throw Error("Moshi returned null in queue list")
   }

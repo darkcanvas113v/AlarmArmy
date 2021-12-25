@@ -5,5 +5,7 @@ import kotlinx.coroutines.CoroutineScope
 interface AlarmSchedulerService {
   val scope: CoroutineScope
 
-  fun setAlarm()
+  fun setAlarm(triggerTime: Long)
+
+  fun cancelAlarm()
 }

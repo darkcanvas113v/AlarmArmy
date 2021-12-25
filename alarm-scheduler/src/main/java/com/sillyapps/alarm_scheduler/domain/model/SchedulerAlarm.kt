@@ -6,4 +6,10 @@ data class SchedulerAlarm(
   val active: Boolean,
   val repeat: Int,
   val remainingTime: Long
-)
+) {
+  fun isSameAs(other: SchedulerAlarm?): Boolean {
+    if (other == null) return false
+
+    return id == other.id && time == other.time && active == other.active && repeat == other.repeat
+  }
+}

@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.sillyapps.alarm_data.di.AlarmComponent
 import com.sillyapps.alarm_data.di.DaggerAlarmComponent
 import com.sillyapps.alarm_ui.di.AlarmScreenComponent
 import com.sillyapps.alarm_ui.di.DaggerAlarmScreenComponent
@@ -20,10 +21,10 @@ import com.sillyapps.core_ui.daggerViewModel
 import com.sillyapps.core_ui.theme.AlarmArmyTheme
 
 @Composable
-fun MainApp(context: Context) {
+fun MainApp(context: Context, alarmComponent: AlarmComponent) {
   val appComponent = DaggerAppComponent.builder().context(context).build()
 
   AlarmArmyTheme {
-    AppNavHost(appComponent = appComponent)
+    AppNavHost(appComponent = appComponent, alarmComponent = alarmComponent)
   }
 }

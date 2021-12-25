@@ -4,22 +4,22 @@ import android.content.Context
 import com.sillyapps.alarm_data.persistence.AlarmDao
 import java.lang.Error
 
-interface Dependencies {
+interface AlarmSchedulerDependencies {
   fun provideContext(): Context
   fun provideAlarmDao(): AlarmDao
 
   companion object {
-    private var deps: Dependencies? = null
+    private var deps: AlarmSchedulerDependencies? = null
 
     fun initialize(context: Context, alarmDao: AlarmDao) {
-      deps = object : Dependencies {
+      deps = object : AlarmSchedulerDependencies {
         override fun provideContext() = context
 
         override fun provideAlarmDao(): AlarmDao = alarmDao
       }
     }
 
-    fun getDeps(): Dependencies {
+    fun getDeps(): AlarmSchedulerDependencies {
       return deps ?: throw Error("AlarmScheduler component dependencies were not initialized")
     }
   }

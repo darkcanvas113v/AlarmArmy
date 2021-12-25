@@ -38,6 +38,7 @@ dependencies {
   implementation project(":core-ui")
   implementation project(":alarm-domain")
   implementation project(":alarm-data")
+  implementation project(':alarm-alert')
 
   coreLibraryDesugaring desugaring
 

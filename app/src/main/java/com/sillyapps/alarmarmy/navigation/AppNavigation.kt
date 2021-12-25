@@ -5,11 +5,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.sillyapps.alarm_data.di.AlarmComponent
 import com.sillyapps.alarmarmy.di.AppComponent
 import com.sillyapps.alarmarmy.ui.Screen
 
 @Composable
-fun AppNavHost(appComponent: AppComponent) {
+fun AppNavHost(
+  appComponent: AppComponent,
+  alarmComponent: AlarmComponent
+) {
   val allScreens = Screen.values().toList()
   val navController = rememberNavController()
   val backStackEntry = navController.currentBackStackEntryAsState()
@@ -20,7 +24,7 @@ fun AppNavHost(appComponent: AppComponent) {
     startDestination = AlarmNavigation.alarmGraphRoute
   ) {
 
-    alarmGraph(navController, appComponent.context)
+    alarmGraph(navController, appComponent.context, alarmComponent)
 
     composable(Screen.Profile.name) {
 

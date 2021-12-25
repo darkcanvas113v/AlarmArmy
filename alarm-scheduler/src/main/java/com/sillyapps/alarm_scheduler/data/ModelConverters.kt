@@ -9,9 +9,7 @@ import java.time.Instant
 import java.time.LocalDateTime
 
 internal fun AlarmDto.toDomainModel(): SchedulerAlarm {
-
-
-  return SchedulerAlarm(id, time, active, repeat, 0L)
+  return SchedulerAlarm(id, time, active, repeat, getRemainingTime(repeat, time))
 }
 
 fun getRemainingTime(activeDays: Int, time: Long, currentTime: LocalDateTime = LocalDateTime.now()): Long {

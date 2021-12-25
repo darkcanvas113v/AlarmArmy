@@ -5,7 +5,7 @@ import kotlin.reflect.KProperty
 
 class ComponentDelegate {
   operator fun getValue(thisRef: AlarmSchedulerServiceImpl, property: KProperty<*>): AlarmSchedulerComponent {
-    val deps = Dependencies.getDeps()
+    val deps = AlarmSchedulerDependencies.getDeps()
     return DaggerAlarmSchedulerComponent.builder().context(deps.provideContext()).alarmDao(deps.provideAlarmDao()).build()
   }
 }
