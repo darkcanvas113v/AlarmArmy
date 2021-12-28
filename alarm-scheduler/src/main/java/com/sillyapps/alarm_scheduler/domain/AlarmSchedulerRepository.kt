@@ -8,10 +8,10 @@ interface AlarmSchedulerRepository {
 
   fun getAlarms(): Flow<List<SchedulerAlarm>>
 
-  fun getQueue(): Flow<List<SchedulerAlarm>>
+  fun getCurrentAlarm(): Flow<SchedulerAlarm?>
 
-  suspend fun updateQueue(newQueue: List<SchedulerAlarm>)
+  suspend fun updateCurrentAlarm(newAlarm: SchedulerAlarm?)
 
-  suspend fun loadQueue()
+  suspend fun loadAlarm()
 
 }

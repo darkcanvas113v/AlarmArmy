@@ -32,7 +32,7 @@ class AlarmSchedulerServiceImpl: Service(), AlarmSchedulerService {
 
   private val pi by lazy {
     // TODO maybe better to do it with broadcastrecievers?
-    val turnAlarmOnIntent = Intent(this, AlarmAlertActivity::class.java)
+    val turnAlarmOnIntent = Intent(applicationContext, AlarmAlertActivity::class.java)
     turnAlarmOnIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
 
     var piFlags = PendingIntent.FLAG_UPDATE_CURRENT
@@ -55,7 +55,6 @@ class AlarmSchedulerServiceImpl: Service(), AlarmSchedulerService {
 
     component.inject(this)
 
-    // TODO potential leak(or obvious)
     interactor.initialize(this)
   }
 
@@ -63,7 +62,7 @@ class AlarmSchedulerServiceImpl: Service(), AlarmSchedulerService {
     val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
     // TODO create showIntent, to handle the situation when user clicks the alarm icon in the notification drawer
-    val alarmInfo = AlarmManager.AlarmClockInfo(triggerTime, null)
+    val alarmInfo = AlarmManager.AlarmClockInfo(System.currentTimeMillis() + triggerTime, null)
 
     alarmManager.cancel(pi)
 
@@ -76,12 +75,6 @@ class AlarmSchedulerServiceImpl: Service(), AlarmSchedulerService {
         ) == PackageManager.PERMISSION_GRANTED -> {
           alarmManager.setAlarmClock(alarmInfo, pi)
           showToast("Alarm will ring after ${convertMillisToStringFormatWithDays(triggerTime)}")
-        }
-        ContextCompat.checkSelfPermission(
-          applicationContext,
-          Manifest.permission.SCHEDULE_EXACT_ALARM
-        ) == PackageManager.PERMISSION_DENIED -> {
-          showToast("WTF")
         }
         else -> {
           showToast("This app cannot schedule exact alarms, please consider granting permission")

@@ -52,5 +52,5 @@ dependencies {
     kapt daggerDeps.annotationProcessor
 
     implementation moshiDeps.core
-    kapt moshiDeps.compiler
+    kapt moshiDeps.codegen
 }

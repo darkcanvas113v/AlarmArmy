@@ -1,8 +1,10 @@
 package com.sillyapps.alarm_scheduler.domain
 
 import com.sillyapps.alarm_scheduler.domain.model.SchedulerAlarm
+import com.sillyapps.core.convertMillisToStringFormat
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 
@@ -12,13 +14,13 @@ class AlarmScheduler @Inject constructor(
 
   private var alarmService: WeakReference<AlarmSchedulerService>? = null
 
-  private val activeAlarm: Flow<SchedulerAlarm?> = repository.getQueue().map { if (it.isNotEmpty()) it[0] else null }
+  private val activeAlarm: Flow<SchedulerAlarm?> = repository.getCurrentAlarm()
 
   fun initialize(service: AlarmSchedulerService) {
     alarmService = WeakReference(service)
 
     service.scope.launch {
-      repository.loadQueue()
+      repository.loadAlarm()
 
       repository.getAlarms().drop(1).collect {
         handleUpdateOnAlarms(it)
@@ -34,14 +36,14 @@ class AlarmScheduler @Inject constructor(
 
     if (newAlarm == null) {
       alarmService?.get()?.cancelAlarm()
-      repository.updateQueue(sortedAlarms)
+      repository.updateCurrentAlarm(null)
       return
     }
 
     if (!newAlarm.isSameAs(currentAlarm)) {
       alarmService?.get()?.setAlarm(newAlarm.remainingTime)
+      repository.updateCurrentAlarm(newAlarm)
     }
-    repository.updateQueue(sortedAlarms)
   }
 
 }

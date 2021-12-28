@@ -2,4 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.sillyapps.alarm_notifier">
 
+  <application>
+    <activity android:name=".AlarmAlertActivity"
+      android:launchMode="singleInstance"
+      android:showOnLockScreen="true"
+      android:showWhenLocked="true"
+      android:turnScreenOn="true"
+      android:excludeFromRecents="true">
+
+    </activity>
+  </application>
+
 </manifest>

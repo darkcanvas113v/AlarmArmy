@@ -101,8 +101,8 @@ private fun TimePickerItem(
   TextField(
     value = text,
     onValueChange = { newText ->
-      val typedCharacter = newText.last()
-      if (!typedCharacter.isDigit()) return@TextField
+      val typedCharacter = newText.lastOrNull()
+      if (typedCharacter != null && !typedCharacter.isDigit()) return@TextField
 
       val newValue = newText.toIntOrNull()
       if (newValue == null || newValue < maxValue)
