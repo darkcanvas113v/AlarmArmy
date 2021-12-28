@@ -10,7 +10,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.IBinder
 import androidx.core.content.ContextCompat
-import com.sillyapps.alarm_notifier.AlarmAlertActivity
+import com.sillyapps.alarm_alert.ui.AlarmAlertActivity
 import com.sillyapps.alarm_scheduler.di.ComponentDelegate
 import com.sillyapps.alarm_scheduler.domain.AlarmScheduler
 import com.sillyapps.alarm_scheduler.domain.AlarmSchedulerService
@@ -67,7 +67,7 @@ class AlarmSchedulerServiceImpl: Service(), AlarmSchedulerService {
     alarmManager.cancel(pi)
 
     // TODO make better handling for this, like showing a permission request launcher
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
       when {
         ContextCompat.checkSelfPermission(
           applicationContext,

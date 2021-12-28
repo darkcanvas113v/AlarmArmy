@@ -19,7 +19,8 @@ class AlarmEditorRepositoryImpl @Inject constructor(
   override fun getAlarm() = editorDataSource.getAlarm()
 
   override suspend fun loadAlarm(id: Long) = withContext(ioDispatcher) {
-    val alarm = alarmDao.get(id)
+    val alarm = alarmDao.get(id) ?: return@withContext
+
     editorDataSource.update(alarm.toDomainModel())
   }
 

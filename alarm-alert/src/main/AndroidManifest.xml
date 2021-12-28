@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.sillyapps.alarm_notifier">
+  package="com.sillyapps.alarm_alert">
+
+  <uses-permission android:name="android.permission.VIBRATE"/>
 
   <application>
-    <activity android:name=".AlarmAlertActivity"
+    <activity android:name="com.sillyapps.alarm_alert.ui.AlarmAlertActivity"
       android:launchMode="singleInstance"
       android:showOnLockScreen="true"
       android:showWhenLocked="true"
