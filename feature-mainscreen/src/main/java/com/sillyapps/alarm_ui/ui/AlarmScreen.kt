@@ -60,10 +60,10 @@ fun AlarmScreen(
 fun AlarmScreenPreview() {
   val alarmsPreview = remember {
     mutableStateListOf(
-      UIAlarm(1, "09:00", true, "Once"),
-      UIAlarm(2, "10:00", false, "Once"),
-      UIAlarm(3, "12:00", true, "Once"),
-      UIAlarm(4, "15:00", true, "Once"),
+      UIAlarm(1, "09:00", true, "Once", false),
+      UIAlarm(2, "10:00", false, "Once", true),
+      UIAlarm(3, "12:00", true, "Once", false),
+      UIAlarm(4, "15:00", true, "Once", false),
     )
   }
 
@@ -79,7 +79,7 @@ fun AlarmScreenPreview() {
       requireNotNull(alarm)
       val pos = alarmsPreview.indexOf(alarm)
       alarmsPreview[pos] =
-        UIAlarm(alarm.id, alarm.time, !alarm.active, alarm.repeat)
+        UIAlarm(alarm.id, alarm.time, !alarm.active, alarm.weekDays, alarm.repeat)
     }
 
   }

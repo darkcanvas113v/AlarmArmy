@@ -32,10 +32,12 @@ android {
 
 dependencies {
   implementation project(":core")
+  implementation project(":core-time")
   implementation project(":core-ui")
   implementation project(":core-di")
   implementation project(':common-alarm-usecases')
   implementation project(":feature-alarm-setter-api")
+  implementation project(":feature-next-alarm-setter-api")
 
   coreLibraryDesugaring desugaring
 

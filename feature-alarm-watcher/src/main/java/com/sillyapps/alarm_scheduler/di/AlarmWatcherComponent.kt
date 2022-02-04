@@ -2,8 +2,8 @@ package com.sillyapps.alarm_scheduler.di
 
 import android.content.Context
 import com.sillyapps.alarm_domain.AlarmRepository
-import com.sillyapps.alarm_scheduler.data.AlarmSchedulerRepositoryImpl
-import com.sillyapps.alarm_scheduler.domain.AlarmSchedulerRepository
+import com.sillyapps.alarm_scheduler.data.AlarmWatcherRepositoryImpl
+import com.sillyapps.alarm_scheduler.domain.AlarmWatcherRepository
 import com.sillyapps.alarm_scheduler.service.AlarmWatcherService
 import com.sillyapps.core_di.FeatureScope
 import com.sillyapps.core_di.modules.IOModule
@@ -12,7 +12,7 @@ import dagger.*
 
 @Component(modules = [RepositoryModule::class, IOModule::class])
 @FeatureScope
-interface AlarmWatcherComponent {
+internal interface AlarmWatcherComponent {
 
   fun inject(alarmWatcher: AlarmWatcherService)
 
@@ -62,5 +62,5 @@ interface AlarmWatcherComponent {
 interface RepositoryModule {
   @FeatureScope
   @Binds
-  fun bindRepository(impl: AlarmSchedulerRepositoryImpl): AlarmSchedulerRepository
+  fun bindRepository(impl: AlarmWatcherRepositoryImpl): AlarmWatcherRepository
 }

@@ -8,11 +8,15 @@ import android.os.*
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.sillyapps.feature_next_alarm_setter_api.NextAlarmSetterService
+import javax.inject.Inject
 
 class AlarmAlertActivity: ComponentActivity() {
 
   private var ringtone: Ringtone? = null
   private var vibrator: Vibrator? = null
+
+  @Inject lateinit var nextAlarmSetterService: NextAlarmSetterService
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

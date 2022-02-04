@@ -9,14 +9,15 @@ data class UIAlarm(
   val timeHours: Int = 0,
   val timeMinutes: Int = 0,
 
-  val repeat: Repeat = Repeat()
+  val weekDays: WeekDays = WeekDays(),
+  val repeat: Boolean = false
 )
 
 fun UIAlarm.timeInMillis(): Long {
   return convertToMillis(timeHours, timeMinutes)
 }
 
-data class Repeat(
+data class WeekDays(
   val mo: Boolean = false,
   val tu: Boolean = false,
   val we: Boolean = false,
@@ -26,8 +27,8 @@ data class Repeat(
   val su: Boolean = false
 )
 
-fun Repeat.toInt(): Int {
-  AlarmConstants.let {
+fun WeekDays.toInt(): Int {
+  com.sillyapps.core_time.AlarmConstants.let {
     return mo.int() * it.mo +
         tu.int() * it.tu +
         we.int() * it.we +
@@ -38,16 +39,16 @@ fun Repeat.toInt(): Int {
   }
 }
 
-fun toRepeat(repeat: Int): Repeat {
-  AlarmConstants.apply {
-    return Repeat(
-      (repeat and mo != 0),
-      (repeat and tu != 0),
-      (repeat and we != 0),
-      (repeat and th != 0),
-      (repeat and fr != 0),
-      (repeat and sa != 0),
-      (repeat and su != 0))
+fun toWeekDays(weekDay: Int): WeekDays {
+  com.sillyapps.core_time.AlarmConstants.apply {
+    return WeekDays(
+      (weekDay and mo != 0),
+      (weekDay and tu != 0),
+      (weekDay and we != 0),
+      (weekDay and th != 0),
+      (weekDay and fr != 0),
+      (weekDay and sa != 0),
+      (weekDay and su != 0))
   }
 }
 
@@ -57,5 +58,7 @@ fun EditorAlarm.toUIModel(): UIAlarm {
     id = id,
     timeHours = hm.first,
     timeMinutes = hm.second,
-    repeat = toRepeat(repeat))
+    weekDays = toWeekDays(weekDays),
+    repeat = repeat
+  )
 }

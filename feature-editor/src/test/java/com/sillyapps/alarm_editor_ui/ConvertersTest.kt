@@ -1,8 +1,8 @@
 package com.sillyapps.alarm_editor_ui
 
-import com.sillyapps.alarm_editor_ui.ui.model.Repeat
+import com.sillyapps.alarm_editor_ui.ui.model.WeekDays
 import com.sillyapps.alarm_editor_ui.ui.model.toInt
-import com.sillyapps.alarm_editor_ui.ui.model.toRepeat
+import com.sillyapps.alarm_editor_ui.ui.model.toWeekDays
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -16,7 +16,7 @@ class ConvertersTest {
 
   @Test
   fun repeatConversionToInt_isWorkingProperly() {
-    val repeat = Repeat(
+    val repeat = WeekDays(
       mo = true,
       tu = true,
       we = true,
@@ -33,7 +33,7 @@ class ConvertersTest {
 
   @Test
   fun intConversionToRepeat_isWorkingProperly() {
-    val actualRepeat = Repeat(
+    val actualRepeat = WeekDays(
       mo = true,
       tu = true,
       we = true,
@@ -43,7 +43,7 @@ class ConvertersTest {
       su = true
     )
 
-    val intConvertedToRepeat = toRepeat(0b01111111)
+    val intConvertedToRepeat = toWeekDays(0b01111111)
 
     assertEquals(intConvertedToRepeat, actualRepeat)
   }

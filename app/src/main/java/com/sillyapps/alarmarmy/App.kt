@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Intent
 import com.sillyapps.alarm_alert.ui.AlarmAlertActivity
 import com.sillyapps.alarm_data.di.DaggerAlarmDbComponent
+import com.sillyapps.alarmarmy.ringer_entrypoint.RingerBroadcastReceiver
 import com.sillyapps.feature_alarm_setter.api.getAlarmSetter
 import com.sillyapps.feature_alarm_setter_api.AlarmSetter
 import timber.log.Timber
@@ -16,8 +17,7 @@ class App : Application() {
   val alarmSetter: AlarmSetter by lazy {
     getAlarmSetter(
       context = applicationContext,
-      ringerIntent = Intent(applicationContext, AlarmAlertActivity::class.java)
-        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+      ringerIntent = Intent(applicationContext, RingerBroadcastReceiver::class.java)
     )
   }
 

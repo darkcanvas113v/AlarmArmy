@@ -1,7 +1,6 @@
 package com.sillyapps.alarm_ui.model
 
 import com.sillyapps.alarm_domain.model.Alarm
-import com.sillyapps.core.AlarmConstants
 import com.sillyapps.core.convertMillisToStringFormat
 
 
@@ -9,21 +8,22 @@ data class UIAlarm(
   val id: Long,
   val time: String,
   val active: Boolean,
-  val repeat: String
+  val weekDays: String,
+  val repeat: Boolean
 )
 
-fun repeatToString(repeat: Int): String {
-  if (repeat == AlarmConstants.everyDay) return "Every day"
-  if (repeat == AlarmConstants.onlyOnce) return "Only once"
+fun weekDaysToString(repeat: Int): String {
+  if (repeat == com.sillyapps.core_time.AlarmConstants.everyDay) return "Every day"
+  if (repeat == com.sillyapps.core_time.AlarmConstants.onlyOnce) return "Only once"
 
   val str = StringBuilder()
-  if (repeat and AlarmConstants.mo != 0) str.append("Mo ")
-  if (repeat and AlarmConstants.tu != 0) str.append("Tu ")
-  if (repeat and AlarmConstants.we != 0) str.append("We ")
-  if (repeat and AlarmConstants.th != 0) str.append("Th ")
-  if (repeat and AlarmConstants.fr != 0) str.append("Fr ")
-  if (repeat and AlarmConstants.sa != 0) str.append("Sa ")
-  if (repeat and AlarmConstants.su != 0) str.append("Su ")
+  if (repeat and com.sillyapps.core_time.AlarmConstants.mo != 0) str.append("Mo ")
+  if (repeat and com.sillyapps.core_time.AlarmConstants.tu != 0) str.append("Tu ")
+  if (repeat and com.sillyapps.core_time.AlarmConstants.we != 0) str.append("We ")
+  if (repeat and com.sillyapps.core_time.AlarmConstants.th != 0) str.append("Th ")
+  if (repeat and com.sillyapps.core_time.AlarmConstants.fr != 0) str.append("Fr ")
+  if (repeat and com.sillyapps.core_time.AlarmConstants.sa != 0) str.append("Sa ")
+  if (repeat and com.sillyapps.core_time.AlarmConstants.su != 0) str.append("Su ")
 
   if (str.isBlank()) throw Exception("Invalid repeat value: $repeat")
 
@@ -31,5 +31,5 @@ fun repeatToString(repeat: Int): String {
 }
 
 fun Alarm.toUIModel(): UIAlarm {
-  return UIAlarm(id, convertMillisToStringFormat(time), active, repeatToString(repeat))
+  return UIAlarm(id, convertMillisToStringFormat(time), active, weekDaysToString(weekDays), repeat)
 }

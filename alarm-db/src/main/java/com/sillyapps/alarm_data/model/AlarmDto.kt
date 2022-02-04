@@ -9,13 +9,14 @@ data class AlarmDto(
   @PrimaryKey(autoGenerate = true) val id: Long,
   val time: Long,
   val active: Boolean,
-  val repeat: Int
+  val weekDays: Int,
+  val repeat: Boolean
 )
 
 internal fun AlarmDto.toDomainModel(): Alarm {
-  return Alarm(id, time, active, repeat)
+  return Alarm(id, time, active, weekDays, repeat)
 }
 
 internal fun Alarm.toDataModel(): AlarmDto {
-  return AlarmDto(id, time, active, repeat)
+  return AlarmDto(id, time, active, weekDays, repeat)
 }

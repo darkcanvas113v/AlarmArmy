@@ -23,7 +23,7 @@ internal class AlarmSetterImpl(
       piFlags = piFlags or PendingIntent.FLAG_IMMUTABLE
     }
 
-    PendingIntent.getActivity(
+    PendingIntent.getBroadcast(
       context,
       SHOW_ALARM_ACTIVITY,
       ringerIntent,

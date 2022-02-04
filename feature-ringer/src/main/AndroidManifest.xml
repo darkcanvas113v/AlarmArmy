@@ -5,12 +5,17 @@
   <uses-permission android:name="android.permission.VIBRATE"/>
 
   <application>
-    <activity android:name="com.sillyapps.alarm_alert.ui.AlarmAlertActivity"
+    <activity android:name=".ui.AlarmAlertActivity"
       android:launchMode="singleInstance"
       android:showOnLockScreen="true"
       android:showWhenLocked="true"
       android:turnScreenOn="true"
-      android:excludeFromRecents="true">
+      android:excludeFromRecents="true"
+      android:exported="true">
+
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+      </intent-filter>
 
     </activity>
   </application>

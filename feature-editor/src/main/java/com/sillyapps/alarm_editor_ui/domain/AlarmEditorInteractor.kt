@@ -1,6 +1,5 @@
 package com.sillyapps.alarm_editor_ui.domain
 
-import com.sillyapps.core.AlarmConstants
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
@@ -20,17 +19,17 @@ class AlarmEditorInteractor @Inject constructor(
 
   suspend fun enableAllDays() {
     val alarm = data.first()
-    repository.update(alarm.copy(repeat = AlarmConstants.everyDay))
+    repository.update(alarm.copy(weekDays = com.sillyapps.core_time.AlarmConstants.everyDay))
   }
 
   suspend fun disableAllDays() {
     val alarm = data.first()
-    repository.update(alarm.copy(repeat = AlarmConstants.onlyOnce))
+    repository.update(alarm.copy(weekDays = com.sillyapps.core_time.AlarmConstants.onlyOnce))
   }
 
   suspend fun toggleRepeatDay(day: Int) {
     val alarm = data.first()
-    repository.update(alarm.copy(repeat = alarm.repeat xor day))
+    repository.update(alarm.copy(weekDays = alarm.weekDays xor day))
   }
 
   suspend fun updateTime(time: Long) {

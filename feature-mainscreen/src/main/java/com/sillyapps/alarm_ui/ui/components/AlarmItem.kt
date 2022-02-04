@@ -41,7 +41,7 @@ fun AlarmItem(
           style = Typography.h4
         )
         Text(
-          text = item.repeat,
+          text = item.weekDays,
           modifier = Modifier.align(Alignment.Start).padding(top = 4.dp),
           style = Typography.subtitle1
         )
@@ -67,7 +67,7 @@ fun AlarmItem(
 @Preview
 @Composable
 fun AlarmItemPreview() {
-  val previewAlarm = UIAlarm(0, "09:20", true, "Once")
+  val previewAlarm = UIAlarm(0, "09:20", true, "Once", false)
 
   AlarmArmyTheme {
     AlarmItem(
