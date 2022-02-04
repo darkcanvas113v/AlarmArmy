@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.navigation.*
 import androidx.navigation.compose.composable
 import com.sillyapps.alarm_data.di.AlarmComponent
-import com.sillyapps.alarm_data.di.DaggerAlarmComponent
+import com.sillyapps.alarm_domain.AlarmRepository
 import com.sillyapps.alarm_editor_ui.ui.AlarmEditorNavigation
-import com.sillyapps.alarm_ui.MainScreenNavigation
+import com.sillyapps.alarm_ui.api.MainScreenNavigation
 import com.sillyapps.alarmarmy.ui.Screen
 
 fun NavGraphBuilder.alarmGraph(
@@ -18,11 +18,8 @@ fun NavGraphBuilder.alarmGraph(
 
     composable(Screen.AlarmList.name) {
       MainScreenNavigation(
-        context = context,
-        alarmRepository = alarmComponent.repository,
-        onItemClick = { alarmId ->
-          navController.navigate("${Screen.AlarmEditor.name}/$alarmId")
-        })
+        repository = alarmComponent.repository,
+        onItemClick = { id -> navController.navigate("${Screen.AlarmEditor.name}/$id") })
     }
 
     val alarmScreenName = Screen.AlarmEditor.name

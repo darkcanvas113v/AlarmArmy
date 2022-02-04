@@ -1,21 +1,20 @@
 plugins {
-  id 'com.android.application'
+  id 'com.android.library'
   id 'kotlin-android'
   id 'kotlin-kapt'
 }
 
 android {
-  compileSdkVersion 31
-  buildToolsVersion "30.0.3"
+  compileSdk 31
 
   defaultConfig {
-    applicationId "com.sillyapps.alarmarmy"
-    minSdkVersion 21
-    targetSdkVersion 31
+    minSdk 21
+    targetSdk 31
     versionCode 1
     versionName "1.0"
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles "consumer-rules.pro"
   }
 
   buildTypes {
@@ -25,17 +24,12 @@ android {
     }
   }
   compileOptions {
+    coreLibraryDesugaringEnabled true
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
   kotlinOptions {
     jvmTarget = '1.8'
-  }
-  buildFeatures {
-    compose true
-  }
-  composeOptions {
-    kotlinCompilerExtensionVersion versions.compose
   }
 }
 
@@ -43,14 +37,17 @@ dependencies {
   implementation project(":core")
   implementation project(":core-ui")
   implementation project(":core-di")
-  implementation project(':feature-mainscreen')
-  implementation project(':feature-editor')
   implementation project(':common-alarm-usecases')
   implementation project(':alarm-db')
-  implementation project(':feature-alarm-watcher')
+  implementation project(':feature-ringer')
+
+  coreLibraryDesugaring desugaring
 
   implementation coreKtx
   implementation appCompat
+
+  implementation coroutinesDeps.android
+  implementation coroutinesDeps.core
 
   testImplementation junitDeps.core
   androidTestImplementation junitDeps.android
@@ -60,24 +57,8 @@ dependencies {
   implementation lifecycleDeps.viewModel
   kapt lifecycleDeps.annotationProcessor
 
-  // Compose
-  implementation composeDeps.runtime
-  implementation composeDeps.ui
-  implementation composeDeps.uiTooling
-  implementation composeDeps.foundation
-  implementation composeDeps.foundationLayout
-  implementation composeDeps.material
-  implementation composeDeps.materialIcons
-  implementation composeDeps.materialIconsExtended
-  implementation composeDeps.activity
-  implementation composeDeps.viewModel
-  implementation composeDeps.navigation
-
-  androidTestImplementation composeDeps.testing
-
-  // Material
-  implementation materialDep
+  implementation moshiDeps.core
+  kapt moshiDeps.codegen
 
   kapt daggerDeps.annotationProcessor
-
 }

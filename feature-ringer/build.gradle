@@ -1,21 +1,20 @@
 plugins {
-  id 'com.android.application'
+  id 'com.android.library'
   id 'kotlin-android'
   id 'kotlin-kapt'
 }
 
 android {
-  compileSdkVersion 31
-  buildToolsVersion "30.0.3"
+  compileSdk 31
 
   defaultConfig {
-    applicationId "com.sillyapps.alarmarmy"
-    minSdkVersion 21
-    targetSdkVersion 31
+    minSdk 21
+    targetSdk 31
     versionCode 1
     versionName "1.0"
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles "consumer-rules.pro"
   }
 
   buildTypes {
@@ -43,11 +42,6 @@ dependencies {
   implementation project(":core")
   implementation project(":core-ui")
   implementation project(":core-di")
-  implementation project(':feature-mainscreen')
-  implementation project(':feature-editor')
-  implementation project(':common-alarm-usecases')
-  implementation project(':alarm-db')
-  implementation project(':feature-alarm-watcher')
 
   implementation coreKtx
   implementation appCompat
@@ -79,5 +73,4 @@ dependencies {
   implementation materialDep
 
   kapt daggerDeps.annotationProcessor
-
 }
