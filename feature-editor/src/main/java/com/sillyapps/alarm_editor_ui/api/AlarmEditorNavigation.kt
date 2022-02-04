@@ -1,26 +1,22 @@
-package com.sillyapps.alarm_editor_ui.ui
+package com.sillyapps.alarm_editor_ui.api
 
-import android.content.Context
 import androidx.compose.runtime.Composable
-import com.sillyapps.alarm_data.persistence.AlarmDao
+import com.sillyapps.alarm_domain.AlarmRepository
 import com.sillyapps.alarm_editor_ui.di.DaggerAlarmEditorComponent
 import com.sillyapps.alarm_editor_ui.ui.screen.AlarmEditorScreen
 import com.sillyapps.alarm_editor_ui.ui.screen.AlarmEditorViewModel
 import com.sillyapps.core_ui.daggerViewModel
-import kotlinx.coroutines.CoroutineDispatcher
 
 @Composable
 fun AlarmEditorNavigation(
   alarmId: Long,
-  context: Context,
-  alarmDao: AlarmDao,
+  alarmRepository: AlarmRepository,
   onConfirmationButtonClicked: () -> Unit
 ) {
 
   val component = DaggerAlarmEditorComponent.builder()
-    .context(context)
     .alarmID(alarmId)
-    .alarmDao(alarmDao)
+    .repository(alarmRepository)
     .build()
 
   val viewModel: AlarmEditorViewModel = daggerViewModel {

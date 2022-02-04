@@ -1,36 +1,25 @@
 package com.sillyapps.alarm_scheduler.service
 
-import android.Manifest
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.app.Service
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.IBinder
-import androidx.core.content.ContextCompat
-import com.sillyapps.alarm_alert.ui.AlarmAlertActivity
-import com.sillyapps.alarm_scheduler.di.ComponentDelegate
+import com.sillyapps.alarm_scheduler.api.AlarmSetter
+import com.sillyapps.alarm_scheduler.di.AlarmWatcherComponent
 import com.sillyapps.alarm_scheduler.domain.AlarmScheduler
-import com.sillyapps.alarm_scheduler.domain.AlarmSchedulerService
-import com.sillyapps.core.convertMillisToStringFormatWithDays
-import com.sillyapps.core_ui.showToast
+import com.sillyapps.alarm_scheduler.domain.AlarmSetterService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import javax.inject.Inject
 
-class AlarmSchedulerServiceImpl: Service(), AlarmSchedulerService {
+class AlarmWatcherService: Service(), AlarmSetterService {
 
   private val binder = Binder()
-
-  private val component by ComponentDelegate()
 
   private val serviceJob = Job()
   override val scope = CoroutineScope(Dispatchers.Main + serviceJob)
 
-  private val pi by lazy {
+  /*private val pi by lazy {
     // TODO maybe better to do it with broadcastrecievers?
     val turnAlarmOnIntent = Intent(applicationContext, AlarmAlertActivity::class.java)
     turnAlarmOnIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -46,20 +35,22 @@ class AlarmSchedulerServiceImpl: Service(), AlarmSchedulerService {
       turnAlarmOnIntent,
       piFlags
     )
-  }
+  }*/
 
   @Inject lateinit var interactor: AlarmScheduler
+  @Inject lateinit var alarmSetter: AlarmSetter
 
   override fun onCreate() {
     super.onCreate()
 
+    val component = AlarmWatcherComponent.resetAndGetInstance()
     component.inject(this)
 
     interactor.initialize(this)
   }
 
   override fun setAlarm(triggerTime: Long) {
-    val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+    /*val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
     // TODO create showIntent, to handle the situation when user clicks the alarm icon in the notification drawer
     val alarmInfo = AlarmManager.AlarmClockInfo(System.currentTimeMillis() + triggerTime, null)
@@ -84,13 +75,16 @@ class AlarmSchedulerServiceImpl: Service(), AlarmSchedulerService {
     else {
       alarmManager.setAlarmClock(alarmInfo, pi)
       showToast("Alarm will ring after ${convertMillisToStringFormatWithDays(triggerTime)}")
-    }
+    }*/
+
+    alarmSetter.setAlarm(triggerTime)
   }
 
   override fun cancelAlarm() {
-    val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+    /*val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-    alarmManager.cancel(pi)
+    alarmManager.cancel(pi)*/
+    alarmSetter.cancelAlarm()
   }
 
   override fun onBind(p0: Intent?): IBinder {
@@ -98,7 +92,7 @@ class AlarmSchedulerServiceImpl: Service(), AlarmSchedulerService {
   }
 
   inner class Binder: android.os.Binder() {
-    fun getService(): AlarmSchedulerServiceImpl = this@AlarmSchedulerServiceImpl
+    fun getService(): AlarmWatcherService = this@AlarmWatcherService
   }
 
   override fun onDestroy() {
@@ -106,8 +100,8 @@ class AlarmSchedulerServiceImpl: Service(), AlarmSchedulerService {
     serviceJob.cancel()
   }
 
-  companion object {
+  /*companion object {
     const val SHOW_ALARM_ACTIVITY = 0
-  }
+  }*/
 
 }

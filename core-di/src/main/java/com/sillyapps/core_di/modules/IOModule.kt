@@ -1,0 +1,19 @@
+package com.sillyapps.core_di.modules
+
+import dagger.Module
+import dagger.Provides
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import javax.inject.Qualifier
+
+@Qualifier
+annotation class IODispatcher
+
+@Module
+class IOModule {
+  @Provides
+  @IODispatcher
+  fun provideIODispatcher(): CoroutineDispatcher {
+    return Dispatchers.IO
+  }
+}

@@ -5,9 +5,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface AlarmRepository {
 
-    fun getAlarms(): Flow<List<Alarm>>
+    fun observeAlarms(): Flow<List<Alarm>>
 
-    fun getAlarm(id: Long): Flow<Alarm>
+    fun observeAlarm(id: Long): Flow<Alarm>
+
+    suspend fun getAlarm(id: Long): Alarm?
 
     suspend fun updateAlarm(alarm: Alarm)
 

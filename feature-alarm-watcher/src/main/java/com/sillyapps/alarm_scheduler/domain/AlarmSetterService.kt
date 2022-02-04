@@ -2,7 +2,7 @@ package com.sillyapps.alarm_scheduler.domain
 
 import kotlinx.coroutines.CoroutineScope
 
-interface AlarmSchedulerService {
+interface AlarmSetterService {
   val scope: CoroutineScope
 
   fun setAlarm(triggerTime: Long)

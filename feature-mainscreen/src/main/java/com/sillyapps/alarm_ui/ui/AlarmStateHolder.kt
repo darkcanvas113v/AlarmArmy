@@ -1,6 +1,5 @@
-package com.sillyapps.alarm_ui.screens
+package com.sillyapps.alarm_ui.ui
 
-import androidx.compose.runtime.State
 import com.sillyapps.alarm_ui.model.UIAlarm
 import kotlinx.coroutines.flow.Flow
 

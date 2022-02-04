@@ -2,9 +2,9 @@ package com.sillyapps.alarm_ui.api
 
 import androidx.compose.runtime.Composable
 import com.sillyapps.alarm_domain.AlarmRepository
-import com.sillyapps.alarm_ui.di.DaggerAlarmScreenComponent
-import com.sillyapps.alarm_ui.screens.AlarmListViewModel
-import com.sillyapps.alarm_ui.screens.AlarmScreen
+import com.sillyapps.alarm_ui.di.DaggerMainScreenComponent
+import com.sillyapps.alarm_ui.ui.AlarmListViewModel
+import com.sillyapps.alarm_ui.ui.AlarmScreen
 import com.sillyapps.core_ui.daggerViewModel
 
 @Composable
@@ -12,7 +12,7 @@ fun MainScreenNavigation(
   repository: AlarmRepository,
   onItemClick: (Long) -> Unit
 ) {
-  val component = DaggerAlarmScreenComponent.builder()
+  val component = DaggerMainScreenComponent.builder()
     .alarmRepository(repository)
     .build()
 

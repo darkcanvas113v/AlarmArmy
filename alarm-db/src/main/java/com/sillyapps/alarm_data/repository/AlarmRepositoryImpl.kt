@@ -1,11 +1,11 @@
 package com.sillyapps.alarm_data.repository
 
-import com.sillyapps.alarm_data.di.IODispatcher
 import com.sillyapps.alarm_data.model.toDataModel
 import com.sillyapps.alarm_data.model.toDomainModel
 import com.sillyapps.alarm_data.persistence.AlarmDao
 import com.sillyapps.common_model.Alarm
 import com.sillyapps.alarm_domain.AlarmRepository
+import com.sillyapps.core_di.modules.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -17,14 +17,18 @@ class AlarmRepositoryImpl @Inject constructor(
   @IODispatcher private val ioDispatcher: CoroutineDispatcher
 ): AlarmRepository {
 
-  override fun getAlarms(): Flow<List<Alarm>> {
+  override fun observeAlarms(): Flow<List<Alarm>> {
     return alarmDao.observeAll().map { alarms ->
       alarms.map { alarmDto -> alarmDto.toDomainModel() }
     }
   }
 
-  override fun getAlarm(id: Long): Flow<Alarm> {
+  override fun observeAlarm(id: Long): Flow<Alarm> {
     return alarmDao.observeOne(id).map { it.toDomainModel() }
+  }
+
+  override suspend fun getAlarm(id: Long): Alarm? {
+    return alarmDao.get(id)?.toDomainModel()
   }
 
   override suspend fun saveAlarm(alarm: Alarm) {

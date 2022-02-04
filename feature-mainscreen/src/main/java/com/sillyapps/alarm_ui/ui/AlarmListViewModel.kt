@@ -1,9 +1,9 @@
-package com.sillyapps.alarm_ui.screens
+package com.sillyapps.alarm_ui.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sillyapps.alarm_domain.use_cases.GetAlarmsUseCase
-import com.sillyapps.alarm_domain.use_cases.ToggleAlarmUseCase
+import com.sillyapps.alarm_ui.domain.ToggleAlarmUseCase
 import com.sillyapps.alarm_ui.model.UIAlarm
 import com.sillyapps.alarm_ui.model.toUIModel
 import kotlinx.coroutines.flow.Flow

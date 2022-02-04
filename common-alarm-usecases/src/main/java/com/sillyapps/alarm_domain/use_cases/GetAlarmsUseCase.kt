@@ -10,7 +10,7 @@ class GetAlarmsUseCase @Inject constructor(
 ) {
 
   operator fun invoke(): Flow<List<Alarm>> {
-    return repository.getAlarms()
+    return repository.observeAlarms()
   }
 
 }

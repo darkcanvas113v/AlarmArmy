@@ -1,4 +1,4 @@
-package com.sillyapps.alarm_ui.screens
+package com.sillyapps.alarm_ui.ui
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.sillyapps.alarm_ui.components.AlarmItem
+import com.sillyapps.alarm_ui.ui.components.AlarmItem
 import com.sillyapps.alarm_ui.model.UIAlarm
 import com.sillyapps.core_ui.theme.AlarmArmyTheme
 import kotlinx.coroutines.flow.Flow

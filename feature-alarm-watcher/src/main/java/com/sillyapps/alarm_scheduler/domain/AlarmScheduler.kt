@@ -1,10 +1,8 @@
 package com.sillyapps.alarm_scheduler.domain
 
 import com.sillyapps.alarm_scheduler.domain.model.SchedulerAlarm
-import com.sillyapps.core.convertMillisToStringFormat
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 
@@ -12,11 +10,11 @@ class AlarmScheduler @Inject constructor(
   private val repository: AlarmSchedulerRepository
 ) {
 
-  private var alarmService: WeakReference<AlarmSchedulerService>? = null
+  private var alarmService: WeakReference<AlarmSetterService>? = null
 
   private val activeAlarm: Flow<SchedulerAlarm?> = repository.getCurrentAlarm()
 
-  fun initialize(service: AlarmSchedulerService) {
+  fun initialize(service: AlarmSetterService) {
     alarmService = WeakReference(service)
 
     service.scope.launch {

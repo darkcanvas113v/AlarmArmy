@@ -6,7 +6,7 @@ import com.sillyapps.alarm_editor_ui.ui.components.RepeatButtonsPreview
 import com.sillyapps.alarm_editor_ui.ui.components.StateButtonPreview
 import com.sillyapps.alarm_editor_ui.ui.components.TimePickerPreview
 import com.sillyapps.alarm_editor_ui.ui.screen.AlarmEditorScreenPreview
-import com.sillyapps.alarm_ui.screens.AlarmScreenPreview
+import com.sillyapps.alarm_ui.ui.AlarmScreenPreview
 
 // Wrapper functions to run previews from other modules
 

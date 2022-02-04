@@ -1,17 +1,18 @@
 package com.sillyapps.alarm_editor_ui.data
 
-import com.sillyapps.alarm_data.di.IODispatcher
-import com.sillyapps.alarm_data.persistence.AlarmDao
+import com.sillyapps.alarm_domain.use_cases.GetAlarmByIdUseCase
+import com.sillyapps.alarm_domain.use_cases.UpdateAlarmUseCase
 import com.sillyapps.alarm_editor_ui.domain.AlarmEditorRepository
 import com.sillyapps.alarm_editor_ui.domain.model.EditorAlarm
+import com.sillyapps.core_di.modules.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class AlarmEditorRepositoryImpl @Inject constructor(
-  private val alarmDao: AlarmDao,
+  private val getAlarmByIdUseCase: GetAlarmByIdUseCase,
+  private val updateAlarmUseCase: UpdateAlarmUseCase,
   private val editorDataSource: AlarmEditorDataSource,
   @IODispatcher private val ioDispatcher: CoroutineDispatcher
 ): AlarmEditorRepository {
@@ -19,16 +20,16 @@ class AlarmEditorRepositoryImpl @Inject constructor(
   override fun getAlarm() = editorDataSource.getAlarm()
 
   override suspend fun loadAlarm(id: Long) = withContext(ioDispatcher) {
-    val alarm = alarmDao.get(id) ?: return@withContext
+    if (id == 0L) return@withContext
+    val alarm = getAlarmByIdUseCase(id) ?: return@withContext
 
     editorDataSource.update(alarm.toDomainModel())
   }
 
   override suspend fun saveAlarm() = withContext(ioDispatcher) {
-    alarmDao.upsert(editorDataSource.getAlarm().first().toDataModel())
+    updateAlarmUseCase(editorDataSource.getAlarm().first().toCommonModel())
   }
 
-  // TODO use ioDispatcher?
   override suspend fun update(alarm: EditorAlarm) = withContext(ioDispatcher) {
     editorDataSource.update(alarm)
   }

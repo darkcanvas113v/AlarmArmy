@@ -1,14 +1,9 @@
 package com.sillyapps.alarm_scheduler.data
 
-import com.sillyapps.alarm_data.model.AlarmDto
 import com.sillyapps.alarm_scheduler.domain.model.SchedulerAlarm
-import com.sillyapps.core.AlarmConstants
-import com.sillyapps.core.convertToMillis
-import java.time.DayOfWeek
-import java.time.Instant
-import java.time.LocalDateTime
+import com.sillyapps.common_model.Alarm
 
-internal fun AlarmDto.toDomainModel(): SchedulerAlarm {
+internal fun Alarm.toDomainModel(): SchedulerAlarm {
   return SchedulerAlarm(
     id = id,
     time = time,

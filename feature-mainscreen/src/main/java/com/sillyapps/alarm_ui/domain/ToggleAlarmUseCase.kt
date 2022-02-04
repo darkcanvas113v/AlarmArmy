@@ -9,7 +9,7 @@ class ToggleAlarmUseCase @Inject constructor(
 ) {
 
   suspend operator fun invoke(alarmId: Long) {
-    val alarm = repository.getAlarm(alarmId).first()
+    val alarm = repository.observeAlarm(alarmId).first()
 
     val toggledAlarm = alarm.copy(active = !alarm.active)
 

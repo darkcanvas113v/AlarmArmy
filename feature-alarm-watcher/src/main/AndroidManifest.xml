@@ -16,7 +16,7 @@
       </intent-filter>
     </receiver>
 
-    <service android:name=".service.AlarmSchedulerServiceImpl">
+    <service android:name=".service.AlarmWatcherService">
 
     </service>
 
