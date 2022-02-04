@@ -1,7 +1,7 @@
 package com.sillyapps.alarm_domain.use_cases
 
 import com.sillyapps.alarm_domain.AlarmRepository
-import com.sillyapps.common_model.Alarm
+import com.sillyapps.alarm_domain.model.Alarm
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.sillyapps.common_model
+package com.sillyapps.alarm_domain.model
 
 data class Alarm(
   val id: Long,

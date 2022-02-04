@@ -1,7 +1,7 @@
 package com.sillyapps.alarm_scheduler.data
 
 import com.sillyapps.alarm_scheduler.domain.model.SchedulerAlarm
-import com.sillyapps.common_model.Alarm
+import com.sillyapps.alarm_domain.model.Alarm
 
 internal fun Alarm.toDomainModel(): SchedulerAlarm {
   return SchedulerAlarm(

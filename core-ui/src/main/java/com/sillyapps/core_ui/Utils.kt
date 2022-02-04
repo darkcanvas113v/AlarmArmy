@@ -2,6 +2,7 @@ package com.sillyapps.core_ui
 
 import android.app.Activity
 import android.app.Service
+import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
@@ -27,6 +28,6 @@ fun Service.showToast(string: String) {
   }
 }
 
-fun Activity.showToast(string: String) {
-  Toast.makeText(this, string, Toast.LENGTH_LONG).show()
+fun showToast(context: Context, string: String) {
+  Toast.makeText(context, string, Toast.LENGTH_LONG).show()
 }

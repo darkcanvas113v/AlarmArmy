@@ -2,12 +2,12 @@ package com.sillyapps.alarm_scheduler.di
 
 import android.content.Context
 import com.sillyapps.alarm_domain.AlarmRepository
-import com.sillyapps.alarm_scheduler.api.AlarmSetter
 import com.sillyapps.alarm_scheduler.data.AlarmSchedulerRepositoryImpl
 import com.sillyapps.alarm_scheduler.domain.AlarmSchedulerRepository
 import com.sillyapps.alarm_scheduler.service.AlarmWatcherService
 import com.sillyapps.core_di.FeatureScope
 import com.sillyapps.core_di.modules.IOModule
+import com.sillyapps.feature_alarm_setter_api.AlarmSetter
 import dagger.*
 
 @Component(modules = [RepositoryModule::class, IOModule::class])

@@ -1,6 +1,6 @@
 package com.sillyapps.alarm_ui.model
 
-import com.sillyapps.common_model.Alarm
+import com.sillyapps.alarm_domain.model.Alarm
 import com.sillyapps.core.AlarmConstants
 import com.sillyapps.core.convertMillisToStringFormat
 

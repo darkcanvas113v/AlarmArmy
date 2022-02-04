@@ -2,19 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.sillyapps.alarm_scheduler">
 
-  <uses-permission android:name="android.permission.SET_ALARM"/>
-  <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
-  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-
   <application>
 
-    <receiver android:name=".service.broadcastreceivers.BootReceiver"
+    <!--<receiver android:name=".service.broadcastreceivers.BootReceiver"
       android:enabled="false"
       android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.BOOT_COMPLETED"/>
       </intent-filter>
-    </receiver>
+    </receiver>-->
 
     <service android:name=".service.AlarmWatcherService">
 

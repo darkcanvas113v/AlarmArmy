@@ -8,6 +8,7 @@ import android.os.IBinder
 import com.sillyapps.alarm_domain.AlarmRepository
 import com.sillyapps.alarm_scheduler.di.AlarmWatcherComponent
 import com.sillyapps.alarm_scheduler.service.AlarmWatcherService
+import com.sillyapps.feature_alarm_setter_api.AlarmSetter
 
 fun bindAlarmScheduler(
   context: Context,

@@ -24,7 +24,7 @@ fun AppNavHost(
     startDestination = AlarmNavigation.alarmGraphRoute
   ) {
 
-    alarmGraph(navController, appComponent.context, alarmDbComponent)
+    alarmGraph(navController, alarmDbComponent)
 
     composable(Screen.Profile.name) {
 

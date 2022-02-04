@@ -37,8 +37,8 @@ dependencies {
   implementation project(":core")
   implementation project(":core-ui")
   implementation project(":core-di")
-  implementation project(":common-models")
   implementation project(':common-alarm-usecases')
+  implementation project(":feature-alarm-setter-api")
 
   coreLibraryDesugaring desugaring
 
@@ -51,10 +51,6 @@ dependencies {
   testImplementation junitDeps.core
   androidTestImplementation junitDeps.android
   androidTestImplementation junitDeps.espresso
-
-  // LifeCycle
-  implementation lifecycleDeps.viewModel
-  kapt lifecycleDeps.annotationProcessor
 
   implementation moshiDeps.core
   kapt moshiDeps.codegen

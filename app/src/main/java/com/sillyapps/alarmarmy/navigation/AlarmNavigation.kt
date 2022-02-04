@@ -10,7 +10,6 @@ import com.sillyapps.alarmarmy.ui.Screen
 
 fun NavGraphBuilder.alarmGraph(
   navController: NavController,
-  context: Context,
   alarmDbComponent: AlarmDbComponent
 ) {
   navigation(startDestination = Screen.AlarmList.name, route = AlarmNavigation.alarmGraphRoute) {

@@ -34,7 +34,6 @@ android {
 dependencies {
     implementation project(":core")
     implementation project(":core-ui")
-    implementation project(":common-models")
 
     testImplementation junitDeps.core
 
