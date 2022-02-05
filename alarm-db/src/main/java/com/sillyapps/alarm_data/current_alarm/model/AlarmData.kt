@@ -1,4 +1,4 @@
-package com.sillyapps.alarm_scheduler.data.model
+package com.sillyapps.alarm_data.current_alarm.model
 
 import com.sillyapps.alarm_domain.model.AlarmWithRemainingTime
 import com.sillyapps.core_time.getRemainingTime
@@ -8,11 +8,12 @@ import com.squareup.moshi.JsonClass
 data class AlarmData(
   val id: Long,
   val time: Long,
-  val repeat: Int
+  val weekDays: Int,
+  val repeat: Boolean
 )
 
 fun AlarmWithRemainingTime.toDataModel(): AlarmData {
-  return AlarmData(id, time, repeat)
+  return AlarmData(id, time, weekDays, repeat)
 }
 
 fun AlarmData.toDomainModel(): AlarmWithRemainingTime {
@@ -20,7 +21,8 @@ fun AlarmData.toDomainModel(): AlarmWithRemainingTime {
     id = id,
     time = time,
     active = true,
-    repeat = repeat,
-    remainingTime = getRemainingTime(repeat, time)
+    weekDays = weekDays,
+    remainingTime = getRemainingTime(weekDays, time),
+    repeat = repeat
   )
 }

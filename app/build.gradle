@@ -46,9 +46,12 @@ dependencies {
 
   implementation project(':common-alarm-usecases')
   implementation project(':alarm-db')
+  implementation project(':app-api')
 
   implementation project(":feature-alarm-setter")
   implementation project(":feature-alarm-setter-api")
+  implementation project(":feature-next-alarm-setter-api")
+  implementation project(":feature-next-alarm-setter")
   implementation project(':feature-mainscreen')
   implementation project(':feature-editor')
   implementation project(':feature-ringer')

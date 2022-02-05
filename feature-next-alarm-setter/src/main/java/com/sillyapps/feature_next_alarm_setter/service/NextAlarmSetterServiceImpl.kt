@@ -3,6 +3,7 @@ package com.sillyapps.feature_next_alarm_setter.service
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
+import com.sillyapps.alarm_domain.model.AlarmWithRemainingTime
 import com.sillyapps.alarm_domain.use_cases.GetClosestActiveAlarmUseCase
 import com.sillyapps.feature_alarm_setter_api.AlarmSetter
 import com.sillyapps.feature_next_alarm_setter.di.NextAlarmSetterComponent
@@ -15,7 +16,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-internal class NextAlarmSetterServiceImpl: Service(), NextAlarmSetterService {
+class NextAlarmSetterServiceImpl: Service(), NextAlarmSetterService {
 
   private val binder = Binder()
 
@@ -41,8 +42,8 @@ internal class NextAlarmSetterServiceImpl: Service(), NextAlarmSetterService {
     return binder
   }
 
-  inner class Binder: android.os.Binder() {
-    fun getService(): NextAlarmSetterService = this@NextAlarmSetterServiceImpl
+  inner class Binder: android.os.Binder(), NextAlarmSetterService.Binder {
+    override fun getService(): NextAlarmSetterService = this@NextAlarmSetterServiceImpl
   }
 
   override fun onDestroy() {
@@ -50,30 +51,35 @@ internal class NextAlarmSetterServiceImpl: Service(), NextAlarmSetterService {
     serviceJob.cancel()
   }
 
-  override fun disableAlarm() {
+  override fun disableAlarm(alarmIsSetCallback: () -> Unit) {
     scope.launch {
       val nextAlarm = getNextAlarmUseCase().first()
       disableSkippedAlarms()
-      nextAlarm?.let { setAlarm(it.remainingTime) }
-      stopSelf()
-    }
-  }
-
-  override fun doze() {
-    scope.launch {
-      val dozeDuration = getNextAlarmByDozeUseCase()
-
-      if (dozeDuration == null) {
-        disableAlarm()
+      nextAlarm?.let {
+        setAlarm(it, alarmIsSetCallback)
         return@launch
       }
-      setAlarm(dozeDuration)
+      alarmIsSetCallback()
       stopSelf()
     }
   }
 
-  private fun setAlarm(triggerTime: Long) {
-    alarmSetter.setAlarm(triggerTime)
+  override fun doze(alarmIsSetCallback: () -> Unit) {
+    scope.launch {
+      val nextAlarm = getNextAlarmByDozeUseCase()
+
+      if (nextAlarm == null) {
+        disableAlarm(alarmIsSetCallback)
+        return@launch
+      }
+      setAlarm(nextAlarm, alarmIsSetCallback)
+    }
+  }
+
+  private fun setAlarm(alarm: AlarmWithRemainingTime, alarmIsSetCallback: () -> Unit) {
+    alarmSetter.setAlarm(alarm.remainingTime)
+    alarmIsSetCallback()
+    stopSelf()
   }
 
   private fun disableSkippedAlarms() {

@@ -1,7 +1,7 @@
 package com.sillyapps.alarm_data.persistence
 
 import androidx.room.*
-import com.sillyapps.alarm_data.model.AlarmDto
+import com.sillyapps.alarm_data.common_alarm.model.AlarmDto
 import kotlinx.coroutines.flow.Flow
 
 @Dao

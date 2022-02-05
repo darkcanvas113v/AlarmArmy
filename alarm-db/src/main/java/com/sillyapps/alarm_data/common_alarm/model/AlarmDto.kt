@@ -1,4 +1,4 @@
-package com.sillyapps.alarm_data.model
+package com.sillyapps.alarm_data.common_alarm.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

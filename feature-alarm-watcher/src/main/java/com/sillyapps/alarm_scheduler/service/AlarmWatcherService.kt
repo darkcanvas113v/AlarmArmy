@@ -12,12 +12,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import javax.inject.Inject
 
-class AlarmWatcherService: Service(), AlarmSetterService {
+class AlarmWatcherService: Service() {
 
   private val binder = Binder()
 
   private val serviceJob = Job()
-  override val scope = CoroutineScope(Dispatchers.Main + serviceJob)
+  private val scope = CoroutineScope(Dispatchers.Main + serviceJob)
 
   @Inject lateinit var interactor: AlarmWatcher
   @Inject lateinit var alarmSetter: AlarmSetter
@@ -28,15 +28,7 @@ class AlarmWatcherService: Service(), AlarmSetterService {
     val component = AlarmWatcherComponent.resetAndGetInstance()
     component.inject(this)
 
-    interactor.initialize(this)
-  }
-
-  override fun setAlarm(triggerTime: Long) {
-    alarmSetter.setAlarm(triggerTime)
-  }
-
-  override fun cancelAlarm() {
-    alarmSetter.cancelAlarm()
+    interactor.initialize(alarmSetter, scope)
   }
 
   override fun onBind(p0: Intent?): IBinder {

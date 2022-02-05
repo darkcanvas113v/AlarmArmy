@@ -1,11 +1,11 @@
-package com.sillyapps.alarmarmy.main_entrypoint.navigation
+package com.sillyapps.alarmarmy.navigation
 
 import androidx.navigation.*
 import androidx.navigation.compose.composable
 import com.sillyapps.alarm_data.di.AlarmDbComponent
 import com.sillyapps.alarm_editor_ui.api.AlarmEditorNavigation
 import com.sillyapps.alarm_ui.api.MainScreenNavigation
-import com.sillyapps.alarmarmy.main_entrypoint.ui.Screen
+import com.sillyapps.alarmarmy.ui.Screen
 
 fun NavGraphBuilder.alarmGraph(
   navController: NavController,
@@ -15,7 +15,7 @@ fun NavGraphBuilder.alarmGraph(
 
     composable(Screen.AlarmList.name) {
       MainScreenNavigation(
-        repository = alarmDbComponent.repository,
+        repository = alarmDbComponent.alarmRepository,
         onItemClick = { id -> navController.navigate("${Screen.AlarmEditor.name}/$id") })
     }
 
@@ -28,7 +28,7 @@ fun NavGraphBuilder.alarmGraph(
 
       AlarmEditorNavigation(
         alarmId = entry.arguments?.getLong("alarmId") ?: 0,
-        alarmRepository = alarmDbComponent.repository,
+        alarmRepository = alarmDbComponent.alarmRepository,
         onConfirmationButtonClicked = { navController.navigateUp() }
       )
     }

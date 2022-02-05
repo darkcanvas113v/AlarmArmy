@@ -1,4 +1,4 @@
-package com.sillyapps.alarmarmy.main_entrypoint.ui
+package com.sillyapps.alarmarmy.ui
 
 enum class Screen {
   AlarmList(),

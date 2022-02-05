@@ -1,4 +1,4 @@
-package com.sillyapps.alarmarmy.main_entrypoint.navigation
+package com.sillyapps.alarmarmy.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
@@ -7,7 +7,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.sillyapps.alarm_data.di.AlarmDbComponent
 import com.sillyapps.alarmarmy.di.AppComponent
-import com.sillyapps.alarmarmy.main_entrypoint.ui.Screen
+import com.sillyapps.alarmarmy.ui.Screen
 
 @Composable
 fun AppNavHost(

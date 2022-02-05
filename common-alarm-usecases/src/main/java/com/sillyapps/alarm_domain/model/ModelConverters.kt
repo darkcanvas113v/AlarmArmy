@@ -7,7 +7,8 @@ internal fun Alarm.calculateRemainingTime(): AlarmWithRemainingTime {
     id = id,
     time = time,
     active = active,
-    repeat = weekDays,
-    remainingTime = getRemainingTime(weekDays, time)
+    weekDays = weekDays,
+    remainingTime = getRemainingTime(weekDays, time),
+    repeat = repeat
   )
 }

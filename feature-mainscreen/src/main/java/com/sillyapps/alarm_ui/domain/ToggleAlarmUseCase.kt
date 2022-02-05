@@ -1,6 +1,6 @@
 package com.sillyapps.alarm_ui.domain
 
-import com.sillyapps.alarm_domain.AlarmRepository
+import com.sillyapps.alarm_domain.repositories.AlarmRepository
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 

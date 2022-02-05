@@ -1,7 +1,7 @@
-package com.sillyapps.alarm_scheduler.data
+package com.sillyapps.alarm_data.current_alarm
 
 import android.content.Context
-import com.sillyapps.alarm_scheduler.data.model.AlarmData
+import com.sillyapps.alarm_data.current_alarm.model.AlarmData
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

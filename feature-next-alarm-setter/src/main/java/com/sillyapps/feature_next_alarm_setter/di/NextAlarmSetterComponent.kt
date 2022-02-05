@@ -1,7 +1,8 @@
 package com.sillyapps.feature_next_alarm_setter.di
 
 import android.content.Context
-import com.sillyapps.alarm_domain.AlarmRepository
+import com.sillyapps.alarm_domain.repositories.AlarmRepository
+import com.sillyapps.alarm_domain.repositories.CurrentAlarmRepository
 import com.sillyapps.core_di.FeatureScope
 import com.sillyapps.core_di.modules.IOModule
 import com.sillyapps.feature_alarm_setter_api.AlarmSetter
@@ -30,6 +31,9 @@ internal interface NextAlarmSetterComponent {
     @BindsInstance
     fun alarmRepository(repository: AlarmRepository): Builder
 
+    @BindsInstance
+    fun currentAlarmRepository(repository: CurrentAlarmRepository): Builder
+
     fun build(): NextAlarmSetterComponent
   }
 
@@ -40,13 +44,15 @@ internal interface NextAlarmSetterComponent {
     fun initialize(
       context: Context,
       alarmSetter: AlarmSetter,
-      alarmRepository: AlarmRepository
+      alarmRepository: AlarmRepository,
+      currentAlarmRepository: CurrentAlarmRepository
     ) {
       synchronized(this) {
         INSTANCE = DaggerNextAlarmSetterComponent.builder()
           .context(context)
           .alarmSetter(alarmSetter)
           .alarmRepository(alarmRepository)
+          .currentAlarmRepository(currentAlarmRepository)
           .build()
       }
     }

@@ -5,7 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
-import com.sillyapps.alarm_domain.AlarmRepository
+import com.sillyapps.alarm_domain.repositories.AlarmRepository
+import com.sillyapps.alarm_domain.repositories.CurrentAlarmRepository
 import com.sillyapps.alarm_scheduler.di.AlarmWatcherComponent
 import com.sillyapps.alarm_scheduler.service.AlarmWatcherService
 import com.sillyapps.feature_alarm_setter_api.AlarmSetter
@@ -13,9 +14,10 @@ import com.sillyapps.feature_alarm_setter_api.AlarmSetter
 fun bindAlarmScheduler(
   context: Context,
   alarmSetter: AlarmSetter,
-  alarmRepository: AlarmRepository
+  alarmRepository: AlarmRepository,
+  currentAlarmRepository: CurrentAlarmRepository
 ): ServiceConnection {
-  AlarmWatcherComponent.initialize(context, alarmSetter, alarmRepository)
+  AlarmWatcherComponent.initialize(context, alarmSetter, alarmRepository, currentAlarmRepository)
   return bindService(context)
 }
 

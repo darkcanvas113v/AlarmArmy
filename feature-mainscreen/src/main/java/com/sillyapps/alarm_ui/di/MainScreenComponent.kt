@@ -1,6 +1,6 @@
 package com.sillyapps.alarm_ui.di
 
-import com.sillyapps.alarm_domain.AlarmRepository
+import com.sillyapps.alarm_domain.repositories.AlarmRepository
 import com.sillyapps.alarm_ui.ui.AlarmListViewModel
 import com.sillyapps.core_di.ScreenScope
 import dagger.BindsInstance

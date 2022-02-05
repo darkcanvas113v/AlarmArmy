@@ -1,6 +1,6 @@
 package com.sillyapps.alarm_editor_ui.di
 
-import com.sillyapps.alarm_domain.AlarmRepository
+import com.sillyapps.alarm_domain.repositories.AlarmRepository
 import com.sillyapps.alarm_editor_ui.data.AlarmEditorDataSource
 import com.sillyapps.alarm_editor_ui.data.AlarmEditorDataSourceImpl
 import com.sillyapps.alarm_editor_ui.data.AlarmEditorRepositoryImpl

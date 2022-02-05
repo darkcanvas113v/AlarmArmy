@@ -3,8 +3,10 @@ package com.sillyapps.alarm_data.di
 import android.content.Context
 import com.sillyapps.alarm_data.persistence.AlarmDao
 import com.sillyapps.alarm_data.persistence.AlarmDatabase
-import com.sillyapps.alarm_data.repository.AlarmRepositoryImpl
-import com.sillyapps.alarm_domain.AlarmRepository
+import com.sillyapps.alarm_data.common_alarm.AlarmRepositoryImpl
+import com.sillyapps.alarm_data.current_alarm.CurrentAlarmRepositoryImpl
+import com.sillyapps.alarm_domain.repositories.AlarmRepository
+import com.sillyapps.alarm_domain.repositories.CurrentAlarmRepository
 import com.sillyapps.core_di.AppScope
 import com.sillyapps.core_di.modules.IOModule
 import dagger.*
@@ -13,9 +15,8 @@ import dagger.*
 @AppScope
 interface AlarmDbComponent {
 
-  val repository: AlarmRepository
-
-  fun getAlarmDao(): AlarmDao
+  val alarmRepository: AlarmRepository
+  val currentAlarmRepository: CurrentAlarmRepository
 
   @Component.Builder
   interface Builder {
@@ -43,4 +44,8 @@ interface RepositoryModule {
   @AppScope
   @Binds
   fun bindAlarmRepository(repository: AlarmRepositoryImpl): AlarmRepository
+
+  @AppScope
+  @Binds
+  fun bindCurrentAlarmRepository(currentRepository: CurrentAlarmRepositoryImpl): CurrentAlarmRepository
 }

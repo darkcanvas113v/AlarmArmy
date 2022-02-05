@@ -16,27 +16,4 @@ interface RingerComponent {
     fun build(): RingerComponent
   }
 
-  companion object {
-    @Volatile
-    private var INSTANCE: RingerComponent? = null
-
-    fun initialize(
-      nextAlarmSetterService: NextAlarmSetterService
-    ) {
-      synchronized(this) {
-        INSTANCE = DaggerRingerComponent.builder()
-          .nextAlarmSetter(nextAlarmSetterService)
-          .build()
-      }
-    }
-
-    fun resetAndGetInstance(): RingerComponent {
-      synchronized(this) {
-        val instance = INSTANCE ?: throw Error("RingerComponent is not initialized.")
-        INSTANCE = null
-        return instance
-      }
-    }
-  }
-
 }

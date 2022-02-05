@@ -1,9 +1,9 @@
-package com.sillyapps.alarm_scheduler.domain
+package com.sillyapps.alarm_domain.repositories
 
 import com.sillyapps.alarm_domain.model.AlarmWithRemainingTime
 import kotlinx.coroutines.flow.Flow
 
-interface AlarmWatcherRepository {
+interface CurrentAlarmRepository {
 
   fun getCurrentAlarm(): Flow<AlarmWithRemainingTime?>
 

@@ -1,4 +1,4 @@
-package com.sillyapps.alarm_domain
+package com.sillyapps.alarm_domain.repositories
 
 import com.sillyapps.alarm_domain.model.Alarm
 import kotlinx.coroutines.flow.Flow

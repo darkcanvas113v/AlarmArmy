@@ -33,8 +33,10 @@ android {
 
 dependencies {
   implementation project(":core")
-  implementation project(':common-alarm-usecases')
+  implementation project(":core-time")
   implementation project(":core-di")
+
+  implementation project(':common-alarm-usecases')
 
   implementation coreKtx
 

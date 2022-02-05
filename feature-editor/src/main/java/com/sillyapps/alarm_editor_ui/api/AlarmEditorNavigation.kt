@@ -1,7 +1,7 @@
 package com.sillyapps.alarm_editor_ui.api
 
 import androidx.compose.runtime.Composable
-import com.sillyapps.alarm_domain.AlarmRepository
+import com.sillyapps.alarm_domain.repositories.AlarmRepository
 import com.sillyapps.alarm_editor_ui.di.DaggerAlarmEditorComponent
 import com.sillyapps.alarm_editor_ui.ui.screen.AlarmEditorScreen
 import com.sillyapps.alarm_editor_ui.ui.screen.AlarmEditorViewModel

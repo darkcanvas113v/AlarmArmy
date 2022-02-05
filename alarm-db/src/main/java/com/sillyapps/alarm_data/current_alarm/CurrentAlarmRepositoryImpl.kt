@@ -1,8 +1,8 @@
-package com.sillyapps.alarm_scheduler.data
+package com.sillyapps.alarm_data.current_alarm
 
-import com.sillyapps.alarm_scheduler.data.model.toDataModel
-import com.sillyapps.alarm_scheduler.data.model.toDomainModel
-import com.sillyapps.alarm_scheduler.domain.AlarmWatcherRepository
+import com.sillyapps.alarm_data.current_alarm.model.toDataModel
+import com.sillyapps.alarm_data.current_alarm.model.toDomainModel
+import com.sillyapps.alarm_domain.repositories.CurrentAlarmRepository
 import com.sillyapps.alarm_domain.model.AlarmWithRemainingTime
 import com.sillyapps.core_di.modules.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher
@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class AlarmWatcherRepositoryImpl @Inject constructor(
+class CurrentAlarmRepositoryImpl @Inject constructor(
   @IODispatcher private val ioDispatcher: CoroutineDispatcher,
   private val currentAlarmDataSource: CurrentAlarmDataSource
-): AlarmWatcherRepository {
+): CurrentAlarmRepository {
 
   override suspend fun loadAlarm() = withContext(ioDispatcher) {
     currentAlarmDataSource.load()

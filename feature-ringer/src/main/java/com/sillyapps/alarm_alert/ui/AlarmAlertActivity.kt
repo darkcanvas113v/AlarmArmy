@@ -1,29 +1,51 @@
 package com.sillyapps.alarm_alert.ui
 
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.ServiceConnection
 import android.media.Ringtone
 import android.media.RingtoneManager
 import android.os.*
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.sillyapps.app_api.ApplicationApi
 import com.sillyapps.feature_next_alarm_setter_api.NextAlarmSetterService
-import javax.inject.Inject
+import timber.log.Timber
 
-class AlarmAlertActivity: ComponentActivity() {
+class AlarmAlertActivity : ComponentActivity() {
 
   private var ringtone: Ringtone? = null
   private var vibrator: Vibrator? = null
 
-  @Inject lateinit var nextAlarmSetterService: NextAlarmSetterService
+  private var nextAlarmSetterService: NextAlarmSetterService? = null
+  private val connection: ServiceConnection by lazy {
+    object : ServiceConnection {
+      override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {
+        val binder = p1 as NextAlarmSetterService.Binder
+        nextAlarmSetterService = binder.getService()
+      }
+
+      override fun onServiceDisconnected(p0: ComponentName?) {
+      }
+    }
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
+    val nextAlarmServiceIntent = (application as ApplicationApi).initNextAlarmService()
+
+    applicationContext.bindService(
+      nextAlarmServiceIntent,
+      connection,
+      Context.BIND_AUTO_CREATE
+    )
+
     setContent {
       AlarmAlertScreen(
-        onStopButtonClick = { finish() }
+        onStopButtonClick = { setNextAlarm() }
       )
     }
 
@@ -41,7 +63,8 @@ class AlarmAlertActivity: ComponentActivity() {
   }
 
   private fun playRingtone() {
-    val soundUri = RingtoneManager.getActualDefaultRingtoneUri(applicationContext, RingtoneManager.TYPE_ALARM)
+    val soundUri =
+      RingtoneManager.getActualDefaultRingtoneUri(applicationContext, RingtoneManager.TYPE_ALARM)
 
     ringtone = RingtoneManager.getRingtone(applicationContext, soundUri)
 
@@ -63,6 +86,19 @@ class AlarmAlertActivity: ComponentActivity() {
       @Suppress("DEPRECATION")
       vibrator?.vibrate(600000L)
     }
+  }
+
+  private fun setNextAlarm() {
+    if (nextAlarmSetterService == null) {
+      Timber.d("NextAlarmService is not bound")
+      return
+    }
+    nextAlarmSetterService!!.disableAlarm(this::shutOffAlarm)
+
+  }
+
+  private fun shutOffAlarm() {
+    finish()
   }
 
   override fun onDestroy() {

@@ -1,4 +1,4 @@
-package com.sillyapps.alarmarmy.main_entrypoint.ui
+package com.sillyapps.alarmarmy.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview

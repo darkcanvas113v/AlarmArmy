@@ -1,6 +1,6 @@
 package com.sillyapps.alarm_domain.use_cases
 
-import com.sillyapps.alarm_domain.AlarmRepository
+import com.sillyapps.alarm_domain.repositories.AlarmRepository
 import com.sillyapps.alarm_domain.model.Alarm
 import javax.inject.Inject
 
