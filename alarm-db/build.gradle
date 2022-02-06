@@ -37,6 +37,7 @@ dependencies {
   implementation project(":core-di")
 
   implementation project(':common-alarm-usecases')
+  implementation project(':common-models')
 
   implementation coreKtx
 

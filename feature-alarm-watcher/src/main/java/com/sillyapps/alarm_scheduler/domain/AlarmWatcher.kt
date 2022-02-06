@@ -1,7 +1,7 @@
 package com.sillyapps.alarm_scheduler.domain
 
 import com.sillyapps.alarm_domain.repositories.CurrentAlarmRepository
-import com.sillyapps.alarm_domain.model.AlarmWithRemainingTime
+import com.sillyapps.common_models.alarm.AlarmWithRemainingTime
 import com.sillyapps.alarm_domain.use_cases.GetClosestActiveAlarmUseCase
 import com.sillyapps.feature_alarm_setter_api.AlarmSetter
 import kotlinx.coroutines.CoroutineScope

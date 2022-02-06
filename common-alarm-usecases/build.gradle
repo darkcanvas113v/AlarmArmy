@@ -36,6 +36,8 @@ dependencies {
     implementation project(":core-time")
     implementation project(":core-ui")
 
+    api project(":common-models")
+
     testImplementation junitDeps.core
 
     implementation coreKtx

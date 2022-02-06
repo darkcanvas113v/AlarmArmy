@@ -1,6 +1,6 @@
 package com.sillyapps.alarm_domain.repositories
 
-import com.sillyapps.alarm_domain.model.Alarm
+import com.sillyapps.common_models.alarm.Alarm
 import kotlinx.coroutines.flow.Flow
 
 interface AlarmRepository {

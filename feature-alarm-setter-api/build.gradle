@@ -9,5 +9,5 @@ java {
 }
 
 dependencies {
-  implementation project(":common-alarm-usecases")
+  implementation project(':common-models')
 }

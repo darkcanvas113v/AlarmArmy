@@ -1,11 +1,9 @@
 package com.sillyapps.feature_next_alarm_setter.domain
 
-import com.sillyapps.alarm_domain.model.Alarm
-import com.sillyapps.alarm_domain.model.AlarmWithRemainingTime
-import com.sillyapps.alarm_domain.model.calculateRemainingTime
+import com.sillyapps.common_models.alarm.AlarmWithRemainingTime
 import com.sillyapps.alarm_domain.repositories.AlarmRepository
+import com.sillyapps.common_models.alarm.calculateRemainingTime
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 

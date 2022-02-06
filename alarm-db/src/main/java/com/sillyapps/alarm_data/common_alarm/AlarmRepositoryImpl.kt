@@ -3,7 +3,7 @@ package com.sillyapps.alarm_data.common_alarm
 import com.sillyapps.alarm_data.common_alarm.model.toDataModel
 import com.sillyapps.alarm_data.common_alarm.model.toDomainModel
 import com.sillyapps.alarm_data.persistence.AlarmDao
-import com.sillyapps.alarm_domain.model.Alarm
+import com.sillyapps.common_models.alarm.Alarm
 import com.sillyapps.alarm_domain.repositories.AlarmRepository
 import com.sillyapps.core_di.modules.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher

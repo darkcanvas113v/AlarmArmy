@@ -1,4 +1,4 @@
-package com.sillyapps.alarm_domain.model
+package com.sillyapps.common_models.alarm
 
 import com.sillyapps.core_time.getRemainingTime
 

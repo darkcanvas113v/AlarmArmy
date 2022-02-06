@@ -1,7 +1,7 @@
 package com.sillyapps.alarm_domain.use_cases
 
 import com.sillyapps.alarm_domain.repositories.AlarmRepository
-import com.sillyapps.alarm_domain.model.Alarm
+import com.sillyapps.common_models.alarm.Alarm
 import javax.inject.Inject
 
 class GetAlarmByIdUseCase @Inject constructor(

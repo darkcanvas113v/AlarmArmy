@@ -1,8 +1,8 @@
 package com.sillyapps.alarm_domain.use_cases
 
 import com.sillyapps.alarm_domain.repositories.AlarmRepository
-import com.sillyapps.alarm_domain.model.AlarmWithRemainingTime
-import com.sillyapps.alarm_domain.model.calculateRemainingTime
+import com.sillyapps.common_models.alarm.AlarmWithRemainingTime
+import com.sillyapps.common_models.alarm.calculateRemainingTime
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
