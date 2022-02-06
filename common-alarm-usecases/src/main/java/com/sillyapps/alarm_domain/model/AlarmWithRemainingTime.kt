@@ -6,7 +6,8 @@ data class AlarmWithRemainingTime(
   val active: Boolean,
   val weekDays: Int,
   val repeat: Boolean,
-  val remainingTime: Long
+  val remainingTime: Long,
+  val startupTime: Long
 ) {
   fun isSameAs(other: AlarmWithRemainingTime?): Boolean {
     if (other == null) return false

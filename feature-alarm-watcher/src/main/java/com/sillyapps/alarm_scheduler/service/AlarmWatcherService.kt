@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.IBinder
 import com.sillyapps.alarm_scheduler.di.AlarmWatcherComponent
 import com.sillyapps.alarm_scheduler.domain.AlarmWatcher
-import com.sillyapps.alarm_scheduler.domain.AlarmSetterService
 import com.sillyapps.feature_alarm_setter_api.AlarmSetter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -15,7 +15,7 @@ class AlarmWatcher @Inject constructor(
 ) {
 
   private val closestAlarm = getClosestActiveAlarmUseCase()
-  private var alarmService: AlarmSetter? = null
+  private var alarmSetter: AlarmSetter? = null
 
   private val activeAlarm: Flow<AlarmWithRemainingTime?> = repositoryCurrent.getCurrentAlarm()
 
@@ -23,7 +23,7 @@ class AlarmWatcher @Inject constructor(
     service: AlarmSetter,
     scope: CoroutineScope
   ) {
-    alarmService = service
+    alarmSetter = service
 
     scope.launch {
       repositoryCurrent.loadAlarm()
@@ -36,7 +36,7 @@ class AlarmWatcher @Inject constructor(
 
   private suspend fun handleUpdateOnAlarms(newAlarm: AlarmWithRemainingTime?) {
     if (newAlarm == null) {
-      alarmService?.cancelAlarm()
+      alarmSetter?.cancelAlarm()
       repositoryCurrent.updateCurrentAlarm(null)
       return
     }
@@ -44,7 +44,7 @@ class AlarmWatcher @Inject constructor(
     val currentAlarm = activeAlarm.first()
 
     if (!newAlarm.isSameAs(currentAlarm)) {
-      alarmService?.setAlarm(newAlarm.remainingTime)
+      alarmSetter?.setAlarm(newAlarm.remainingTime)
       repositoryCurrent.updateCurrentAlarm(newAlarm)
     }
   }

@@ -1,20 +1,22 @@
 package com.sillyapps.core_time
 
-import com.sillyapps.core.convertToMillis
 import java.time.DayOfWeek
+import java.time.Instant
 import java.time.LocalDateTime
+import java.time.ZoneId
 
-fun getRemainingTime(activeDays: Int, time: Long, currentTime: LocalDateTime = LocalDateTime.now()): Long {
-  val now = currentTime.toMillisAfterStartOfTheDay()
+fun getRemainingTime(activeDays: Int, time: Long, from: Long = System.currentTimeMillis()): Long {
+  val fromLocalDateTime = Instant.ofEpochMilli(from).atZone(ZoneId.systemDefault()).toLocalDateTime()
+  val now = fromLocalDateTime.toMillisAfterStartOfTheDay()
 
   if (activeDays == AlarmConstants.onlyOnce) {
-    if (time > now) {
+    if (time >= now) {
       return time - now
     }
     return time - now + AlarmConstants.ONE_DAY_DURATION
   }
 
-  var day = getDayMask(currentTime.dayOfWeek)
+  var day = getDayMask(fromLocalDateTime.dayOfWeek)
   var dayCount = 0
 
   // Если будильник поставлен на сегодня, но время уже прошло

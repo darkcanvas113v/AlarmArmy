@@ -1,7 +1,8 @@
 package com.sillyapps.alarm_editor_ui.ui.model
 
 import com.sillyapps.alarm_editor_ui.domain.model.EditorAlarm
-import com.sillyapps.core.*
+import com.sillyapps.core_time.convertToMillis
+import com.sillyapps.core_time.getHoursAndMinutes
 import com.sillyapps.core_ui.int
 
 data class UIAlarm(

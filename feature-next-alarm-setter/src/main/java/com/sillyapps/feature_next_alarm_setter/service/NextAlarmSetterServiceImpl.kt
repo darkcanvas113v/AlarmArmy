@@ -7,6 +7,7 @@ import com.sillyapps.alarm_domain.model.AlarmWithRemainingTime
 import com.sillyapps.alarm_domain.use_cases.GetClosestActiveAlarmUseCase
 import com.sillyapps.feature_alarm_setter_api.AlarmSetter
 import com.sillyapps.feature_next_alarm_setter.di.NextAlarmSetterComponent
+import com.sillyapps.feature_next_alarm_setter.domain.DisableAllSkippedAlarmUseCase
 import com.sillyapps.feature_next_alarm_setter.domain.GetNextAlarmByDozeUseCase
 import com.sillyapps.feature_next_alarm_setter_api.NextAlarmSetterService
 import kotlinx.coroutines.CoroutineScope
@@ -27,6 +28,8 @@ class NextAlarmSetterServiceImpl: Service(), NextAlarmSetterService {
   lateinit var getNextAlarmUseCase: GetClosestActiveAlarmUseCase
   @Inject
   lateinit var getNextAlarmByDozeUseCase: GetNextAlarmByDozeUseCase
+  @Inject
+  lateinit var disableAllSkippedAlarmUseCase: DisableAllSkippedAlarmUseCase
   @Inject
   lateinit var alarmSetter: AlarmSetter
 
@@ -53,8 +56,9 @@ class NextAlarmSetterServiceImpl: Service(), NextAlarmSetterService {
 
   override fun disableAlarm(alarmIsSetCallback: () -> Unit) {
     scope.launch {
+      disableAllSkippedAlarmUseCase()
       val nextAlarm = getNextAlarmUseCase().first()
-      disableSkippedAlarms()
+
       nextAlarm?.let {
         setAlarm(it, alarmIsSetCallback)
         return@launch
@@ -80,10 +84,6 @@ class NextAlarmSetterServiceImpl: Service(), NextAlarmSetterService {
     alarmSetter.setAlarm(alarm.remainingTime)
     alarmIsSetCallback()
     stopSelf()
-  }
-
-  private fun disableSkippedAlarms() {
-    // TODO implement this
   }
 
 }

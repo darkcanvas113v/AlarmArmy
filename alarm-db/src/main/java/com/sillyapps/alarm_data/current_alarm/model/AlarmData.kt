@@ -9,20 +9,24 @@ data class AlarmData(
   val id: Long,
   val time: Long,
   val weekDays: Int,
-  val repeat: Boolean
+  val repeat: Boolean,
+  val startupTime: Long
 )
 
 fun AlarmWithRemainingTime.toDataModel(): AlarmData {
-  return AlarmData(id, time, weekDays, repeat)
+  return AlarmData(id, time, weekDays, repeat, startupTime)
 }
 
 fun AlarmData.toDomainModel(): AlarmWithRemainingTime {
+  val from = startupTime
+  val remainingTime = getRemainingTime(weekDays, time, from)
   return AlarmWithRemainingTime(
     id = id,
     time = time,
     active = true,
     weekDays = weekDays,
-    remainingTime = getRemainingTime(weekDays, time),
+    remainingTime = remainingTime,
+    startupTime = from + remainingTime,
     repeat = repeat
   )
 }

@@ -1,4 +1,4 @@
-package com.sillyapps.core
+package com.sillyapps.core_time
 
 import java.util.*
 
@@ -24,13 +24,19 @@ fun getHoursAndMinutes(timeInMillis: Long): Pair<Int, Int> {
 }
 
 fun convertMillisToStringFormatWithDays(millis: Long): String {
+  val seconds = (millis / 1000) % 60
   val overallMinutes = millis / 60000
   val minutes = overallMinutes % 60
   val overallHours = overallMinutes / 60
   val hours = overallHours % 24
   val days = overallHours / 24
 
-  return "$days days, $hours hours, $minutes minutes"
+  return when {
+    days > 0 -> "$days days, $hours hours"
+    hours > 0 -> "$hours hours, $minutes minutes"
+    minutes > 0 -> "$minutes minutes, $seconds seconds"
+    else -> "$seconds seconds"
+  }
 }
 
 fun convertMillisToStringFormat(millis: Long): String {

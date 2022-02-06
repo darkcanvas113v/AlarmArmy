@@ -9,13 +9,16 @@ class GetNextAlarmByDozeUseCase @Inject constructor(
 
   suspend operator fun invoke(): AlarmWithRemainingTime? {
     // TODO check profile alarm
+    val dozeDuration = repository.getDozeDuration()
     return AlarmWithRemainingTime(
       id = 0,
       time = 0,
       active = false,
       weekDays = 0,
       repeat = false,
-      remainingTime = repository.getDozeDuration())
+      remainingTime = dozeDuration,
+      startupTime = System.currentTimeMillis() + dozeDuration
+    )
   }
 
 }

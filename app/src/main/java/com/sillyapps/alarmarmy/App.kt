@@ -2,7 +2,7 @@ package com.sillyapps.alarmarmy
 
 import android.app.Application
 import android.content.Intent
-import com.sillyapps.alarm_alert.ui.AlarmAlertActivity
+import com.sillyapps.alarm_alert.RingerReceiver
 import com.sillyapps.alarm_data.di.DaggerAlarmDbComponent
 import com.sillyapps.app_api.ApplicationApi
 import com.sillyapps.feature_alarm_setter.api.getAlarmSetter
@@ -18,8 +18,7 @@ class App : Application(), ApplicationApi {
   val alarmSetter: AlarmSetter by lazy {
     getAlarmSetter(
       context = applicationContext,
-      ringerIntent = Intent(applicationContext, AlarmAlertActivity::class.java)
-        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+      ringerIntent = Intent(applicationContext, RingerReceiver::class.java)
     )
   }
 

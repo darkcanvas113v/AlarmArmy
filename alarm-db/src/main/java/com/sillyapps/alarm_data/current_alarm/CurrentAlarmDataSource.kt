@@ -5,7 +5,9 @@ import com.sillyapps.alarm_data.current_alarm.model.AlarmData
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import timber.log.Timber
 import java.lang.Error
+import java.lang.Exception
 import javax.inject.Inject
 
 class CurrentAlarmDataSource @Inject constructor(
@@ -24,7 +26,15 @@ class CurrentAlarmDataSource @Inject constructor(
     val json = sharedPreferences.getString(CURRENT_ALARM, "") ?: return
     if (json.isBlank() || json == "null") return
 
-    currentAlarm.value = adapter.fromJson(json) ?: throw Error("Moshi returned null in queue list")
+    try {
+      currentAlarm.value = adapter.fromJson(json) ?: throw Error("Moshi returned null in queue list")
+    } catch (e: Exception) {
+      Timber.e(e)
+      Timber.w("Error in moshi, maybe you changed data class? Returning null and clearing current data state...")
+      update(null)
+      return
+    }
+
   }
 
   fun update(newAlarm: AlarmData?) {

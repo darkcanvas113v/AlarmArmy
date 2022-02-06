@@ -8,12 +8,13 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.core.content.ContextCompat
-import com.sillyapps.core.convertMillisToStringFormatWithDays
+import com.sillyapps.core_time.convertMillisToStringFormatWithDays
 import com.sillyapps.core_ui.showToast
 import com.sillyapps.feature_alarm_setter_api.AlarmSetter
+import java.lang.ref.WeakReference
 
 internal class AlarmSetterImpl(
-  private val context: Context,
+  context: Context,
   ringerIntent: Intent
 ) : AlarmSetter {
 
@@ -23,7 +24,7 @@ internal class AlarmSetterImpl(
       piFlags = piFlags or PendingIntent.FLAG_IMMUTABLE
     }
 
-    PendingIntent.getActivity(
+    PendingIntent.getBroadcast(
       context,
       SHOW_ALARM_ACTIVITY,
       ringerIntent,
@@ -31,9 +32,13 @@ internal class AlarmSetterImpl(
     )
   }
 
+  private val context = WeakReference(context)
+
   private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
   override fun setAlarm(triggerTime: Long) {
+    val context = context.get() ?: return
+
     val untilString = "Alarm will ring after ${convertMillisToStringFormatWithDays(triggerTime)}"
     // TODO create showIntent, to handle the situation when user clicks the alarm icon in the notification drawer
     val alarmInfo = AlarmManager.AlarmClockInfo(System.currentTimeMillis() + triggerTime, null)
@@ -41,9 +46,8 @@ internal class AlarmSetterImpl(
     alarmManager.cancel(pi)
 
     // TODO make better handling for this, like showing a permission request launcher
-    if (!scheduleExactAlarmPermissionIsGranted()) {
-      showToast(
-        context,
+    if (!scheduleExactAlarmPermissionIsGranted(context)) {
+      showToast(context,
         "This app cannot schedule exact alarms, please consider granting permission"
       )
     }
@@ -56,7 +60,7 @@ internal class AlarmSetterImpl(
     alarmManager.cancel(pi)
   }
 
-  private fun scheduleExactAlarmPermissionIsGranted(): Boolean {
+  private fun scheduleExactAlarmPermissionIsGranted(context: Context): Boolean {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S)
       return true
 
@@ -71,7 +75,7 @@ internal class AlarmSetterImpl(
   }
 
   companion object {
-    private const val SHOW_ALARM_ACTIVITY = 0
+    private const val SHOW_ALARM_ACTIVITY = 1
   }
 
 }

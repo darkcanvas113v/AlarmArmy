@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.sillyapps.alarm_editor_ui.di.AlarmID
 import com.sillyapps.alarm_editor_ui.domain.AlarmEditorInteractor
 import com.sillyapps.alarm_editor_ui.ui.model.toUIModel
-import com.sillyapps.core.convertToMillis
+import com.sillyapps.core_time.convertToMillis
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
