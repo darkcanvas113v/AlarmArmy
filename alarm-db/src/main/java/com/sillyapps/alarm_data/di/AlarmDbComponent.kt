@@ -1,17 +1,18 @@
 package com.sillyapps.alarm_data.di
 
 import android.content.Context
-import com.sillyapps.alarm_data.persistence.AlarmDao
 import com.sillyapps.alarm_data.persistence.AlarmDatabase
 import com.sillyapps.alarm_data.common_alarm.AlarmRepositoryImpl
 import com.sillyapps.alarm_data.current_alarm.CurrentAlarmRepositoryImpl
 import com.sillyapps.alarm_domain.repositories.AlarmRepository
 import com.sillyapps.alarm_domain.repositories.CurrentAlarmRepository
 import com.sillyapps.core_di.AppScope
+import com.sillyapps.core_di.modules.IOCoroutineScope
 import com.sillyapps.core_di.modules.IOModule
 import dagger.*
+import kotlinx.coroutines.CoroutineScope
 
-@Component(modules = [AlarmModule::class, RepositoryModule::class, IOModule::class])
+@Component(modules = [DbModule::class, RepositoryModule::class, IOModule::class])
 @AppScope
 interface AlarmDbComponent {
 
@@ -23,13 +24,16 @@ interface AlarmDbComponent {
     @BindsInstance
     fun context(context: Context): Builder
 
+    @BindsInstance
+    fun coroutineScope(@IOCoroutineScope coroutineScope: CoroutineScope): Builder
+
     fun build(): AlarmDbComponent
   }
 
 }
 
 @Module
-class AlarmModule {
+class DbModule {
   @AppScope
   @Provides
   fun provideDatabase(context: Context) = AlarmDatabase.getInstance(context)

@@ -9,6 +9,9 @@ import javax.inject.Qualifier
 @Qualifier
 annotation class IODispatcher
 
+@Qualifier
+annotation class IOCoroutineScope
+
 @Module
 class IOModule {
   @Provides

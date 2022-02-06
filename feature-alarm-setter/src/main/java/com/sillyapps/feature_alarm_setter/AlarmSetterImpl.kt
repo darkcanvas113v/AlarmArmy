@@ -8,14 +8,22 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.core.content.ContextCompat
+import com.sillyapps.alarm_domain.use_cases.UpdateCurrentAlarmUseCase
+import com.sillyapps.common_models.alarm.Alarm
+import com.sillyapps.common_models.alarm.AlarmWithRemainingTime
+import com.sillyapps.core_di.modules.IOCoroutineScope
 import com.sillyapps.core_time.convertMillisToStringFormatWithDays
 import com.sillyapps.core_ui.showToast
 import com.sillyapps.feature_alarm_setter_api.AlarmSetter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
 
 internal class AlarmSetterImpl(
   context: Context,
-  ringerIntent: Intent
+  ringerIntent: Intent,
+  @IOCoroutineScope private val scope: CoroutineScope,
+  private val updateCurrentAlarmUseCase: UpdateCurrentAlarmUseCase
 ) : AlarmSetter {
 
   private val pi by lazy {
@@ -36,12 +44,15 @@ internal class AlarmSetterImpl(
 
   private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-  override fun setAlarm(triggerTime: Long) {
+  override fun setAlarm(alarm: AlarmWithRemainingTime) {
     val context = context.get() ?: return
 
-    val untilString = "Alarm will ring after ${convertMillisToStringFormatWithDays(triggerTime)}"
+    scope.launch { updateCurrentAlarmUseCase(alarm) }
+
+    val untilString = "Alarm will ring after ${convertMillisToStringFormatWithDays(alarm.remainingTime)}"
+
     // TODO create showIntent, to handle the situation when user clicks the alarm icon in the notification drawer
-    val alarmInfo = AlarmManager.AlarmClockInfo(System.currentTimeMillis() + triggerTime, null)
+    val alarmInfo = AlarmManager.AlarmClockInfo(alarm.startupTime, null)
 
     alarmManager.cancel(pi)
 
@@ -57,6 +68,8 @@ internal class AlarmSetterImpl(
   }
 
   override fun cancelAlarm() {
+    scope.launch { updateCurrentAlarmUseCase(null) }
+
     alarmManager.cancel(pi)
   }
 

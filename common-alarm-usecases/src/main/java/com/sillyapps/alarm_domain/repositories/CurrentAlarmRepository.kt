@@ -9,6 +9,4 @@ interface CurrentAlarmRepository {
 
   suspend fun updateCurrentAlarm(newAlarm: AlarmWithRemainingTime?)
 
-  suspend fun loadAlarm()
-
 }

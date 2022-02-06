@@ -81,7 +81,7 @@ class NextAlarmSetterServiceImpl: Service(), NextAlarmSetterService {
   }
 
   private fun setAlarm(alarm: AlarmWithRemainingTime, alarmIsSetCallback: () -> Unit) {
-    alarmSetter.setAlarm(alarm.remainingTime)
+    alarmSetter.setAlarm(alarm)
     alarmIsSetCallback()
     stopSelf()
   }

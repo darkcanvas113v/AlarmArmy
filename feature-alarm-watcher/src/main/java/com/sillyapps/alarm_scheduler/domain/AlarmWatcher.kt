@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AlarmWatcher @Inject constructor(
-  private val repositoryCurrent: CurrentAlarmRepository,
+  repositoryCurrent: CurrentAlarmRepository,
   getClosestActiveAlarmUseCase: GetClosestActiveAlarmUseCase
 ) {
 
@@ -26,8 +26,6 @@ class AlarmWatcher @Inject constructor(
     alarmSetter = service
 
     scope.launch {
-      repositoryCurrent.loadAlarm()
-
       closestAlarm.drop(1).collect {
         handleUpdateOnAlarms(it)
       }
@@ -37,15 +35,13 @@ class AlarmWatcher @Inject constructor(
   private suspend fun handleUpdateOnAlarms(newAlarm: AlarmWithRemainingTime?) {
     if (newAlarm == null) {
       alarmSetter?.cancelAlarm()
-      repositoryCurrent.updateCurrentAlarm(null)
       return
     }
 
     val currentAlarm = activeAlarm.first()
 
     if (!newAlarm.isSameAs(currentAlarm)) {
-      alarmSetter?.setAlarm(newAlarm.remainingTime)
-      repositoryCurrent.updateCurrentAlarm(newAlarm)
+      alarmSetter?.setAlarm(newAlarm)
     }
   }
 

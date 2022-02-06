@@ -10,6 +10,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.sillyapps.alarm_scheduler.api.bindAlarmScheduler
 import com.sillyapps.alarmarmy.ui.MainApp
+import com.sillyapps.common_models.alarm.AlarmWithRemainingTime
 import com.sillyapps.feature_alarm_setter_api.AlarmSetter
 
 
@@ -53,7 +54,17 @@ class MainActivity : ComponentActivity() {
   }
 
   private fun setMockAlarm() {
-    alarmSetter?.setAlarm(10000L)
+    val triggerTime = 10000L
+    val mockAlarm = AlarmWithRemainingTime(
+      id = 0,
+      time = 0,
+      active = true,
+      weekDays = 0,
+      repeat = false,
+      remainingTime = triggerTime,
+      startupTime = System.currentTimeMillis() + triggerTime)
+
+    alarmSetter?.setAlarm(mockAlarm)
   }
 
   override fun onDestroy() {
