@@ -9,6 +9,7 @@ import com.sillyapps.feature_alarm_setter_api.AlarmSetter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AlarmWatcherService: Service() {
@@ -28,6 +29,10 @@ class AlarmWatcherService: Service() {
     component.inject(this)
 
     interactor.initialize(alarmSetter, scope)
+
+    scope.launch {
+      interactor.setFakeAlarm()
+    }
   }
 
   override fun onBind(p0: Intent?): IBinder {

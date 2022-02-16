@@ -13,6 +13,7 @@ import com.sillyapps.common_models.alarm.Alarm
 import com.sillyapps.common_models.alarm.AlarmWithRemainingTime
 import com.sillyapps.core_di.modules.IOCoroutineScope
 import com.sillyapps.core_time.convertMillisToStringFormatWithDays
+import com.sillyapps.core_ui.getImmutablePendingIntentFlags
 import com.sillyapps.core_ui.showToast
 import com.sillyapps.feature_alarm_setter_api.AlarmSetter
 import kotlinx.coroutines.CoroutineScope
@@ -27,16 +28,11 @@ internal class AlarmSetterImpl(
 ) : AlarmSetter {
 
   private val pi by lazy {
-    var piFlags = PendingIntent.FLAG_UPDATE_CURRENT
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      piFlags = piFlags or PendingIntent.FLAG_IMMUTABLE
-    }
-
     PendingIntent.getBroadcast(
       context,
       SHOW_ALARM_ACTIVITY,
       ringerIntent,
-      piFlags
+      getImmutablePendingIntentFlags()
     )
   }
 

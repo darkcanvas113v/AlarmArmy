@@ -25,6 +25,7 @@ android {
     }
   }
   compileOptions {
+    coreLibraryDesugaringEnabled true
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
@@ -57,6 +58,8 @@ dependencies {
   implementation project(':feature-editor')
   implementation project(':feature-ringer')
   implementation project(':feature-alarm-watcher')
+
+  coreLibraryDesugaring desugaringDep
 
   implementation coreKtx
   implementation appCompat

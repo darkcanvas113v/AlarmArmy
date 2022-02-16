@@ -1,110 +1,54 @@
 package com.sillyapps.alarm_alert.ui
 
+import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
-import android.media.Ringtone
-import android.media.RingtoneManager
 import android.os.*
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.sillyapps.app_api.ApplicationApi
+import com.sillyapps.alarm_alert.RingerService
+import com.sillyapps.core_ui.getImmutablePendingIntentFlags
 import com.sillyapps.feature_next_alarm_setter_api.NextAlarmSetterService
-import timber.log.Timber
 
 class AlarmAlertActivity : ComponentActivity() {
 
-  private var ringtone: Ringtone? = null
-  private var vibrator: Vibrator? = null
+  private lateinit var ringerService: RingerService
+  private val ringerConnection = object : ServiceConnection {
+    override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {
+      ringerService = (p1 as RingerService.Binder).getService()
+    }
 
-  private var nextAlarmSetterService: NextAlarmSetterService? = null
-  private val connection: ServiceConnection by lazy {
-    object : ServiceConnection {
-      override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {
-        val binder = p1 as NextAlarmSetterService.Binder
-        nextAlarmSetterService = binder.getService()
-      }
-
-      override fun onServiceDisconnected(p0: ComponentName?) {
-      }
+    override fun onServiceDisconnected(p0: ComponentName?) {
     }
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    val nextAlarmServiceIntent = (application as ApplicationApi).initNextAlarmService()
-
-    applicationContext.bindService(
-      nextAlarmServiceIntent,
-      connection,
-      Context.BIND_AUTO_CREATE
-    )
+    val intent = Intent(this, RingerService::class.java)
+    bindService(intent, ringerConnection, BIND_IMPORTANT)
 
     setContent {
       AlarmAlertScreen(
-        onStopButtonClick = { setNextAlarm() }
+        onStopButtonClick = {
+          ringerService.disable()
+          finish()
+        }
       )
     }
-
-    playRingtone()
-    vibrate()
-  }
-
-  override fun onNewIntent(intent: Intent?) {
-    super.onNewIntent(intent)
-  }
-
-  override fun onAttachedToWindow() {
-    super.onAttachedToWindow()
-    showActivityIfDeviceIsSleeping()
-  }
-
-  private fun playRingtone() {
-    val soundUri =
-      RingtoneManager.getActualDefaultRingtoneUri(applicationContext, RingtoneManager.TYPE_ALARM)
-
-    ringtone = RingtoneManager.getRingtone(applicationContext, soundUri)
-
-    ringtone?.play()
-  }
-
-  private fun vibrate() {
-    vibrator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-      (getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager).defaultVibrator
-    } else {
-      getSystemService(VIBRATOR_SERVICE) as Vibrator
-    }
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      vibrator?.vibrate(
-        VibrationEffect.createOneShot(600000L, VibrationEffect.DEFAULT_AMPLITUDE)
-      )
-    } else {
-      @Suppress("DEPRECATION")
-      vibrator?.vibrate(600000L)
-    }
-  }
-
-  private fun setNextAlarm() {
-    if (nextAlarmSetterService == null) {
-      Timber.d("NextAlarmService is not bound")
-      return
-    }
-    nextAlarmSetterService!!.disableAlarm(this::shutOffAlarm)
-
-  }
-
-  private fun shutOffAlarm() {
-    finish()
   }
 
   override fun onDestroy() {
     super.onDestroy()
-    ringtone?.stop()
-    vibrator?.cancel()
+    unbindService(ringerConnection)
+  }
+
+  override fun onAttachedToWindow() {
+    super.onAttachedToWindow()
+//    showActivityIfDeviceIsSleeping()
   }
 
   private fun showActivityIfDeviceIsSleeping() {
@@ -122,6 +66,15 @@ class AlarmAlertActivity : ComponentActivity() {
             or WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
             or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
       )
+    }
+  }
+
+  companion object {
+    fun getIntent(context: Context): PendingIntent {
+      val intent = Intent(context, AlarmAlertActivity::class.java)
+        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+
+      return PendingIntent.getActivity(context, 0, intent, getImmutablePendingIntentFlags())
     }
   }
 

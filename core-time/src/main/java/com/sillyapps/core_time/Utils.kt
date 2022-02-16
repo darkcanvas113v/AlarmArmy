@@ -51,6 +51,10 @@ fun getDayMask(day: DayOfWeek): Int {
   }
 }
 
+fun getMillisAfterStartOfTheDay(): Long {
+  return LocalDateTime.now().toMillisAfterStartOfTheDay()
+}
+
 fun LocalDateTime.toMillisAfterStartOfTheDay(): Long {
   return convertToMillis(hour, minute, second)
 }

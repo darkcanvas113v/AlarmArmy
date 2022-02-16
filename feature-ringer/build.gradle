@@ -42,6 +42,7 @@ dependencies {
   implementation project(":core")
   implementation project(":core-ui")
   implementation project(":core-di")
+  implementation project(":core-android-services")
 
   implementation project(":app-api")
   implementation project(":feature-next-alarm-setter-api")

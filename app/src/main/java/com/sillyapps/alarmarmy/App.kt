@@ -3,6 +3,7 @@ package com.sillyapps.alarmarmy
 import android.app.Application
 import android.content.Intent
 import com.sillyapps.alarm_alert.RingerReceiver
+import com.sillyapps.alarm_alert.setRingerNotificationChannel
 import com.sillyapps.alarm_data.di.DaggerAlarmDbComponent
 import com.sillyapps.alarm_domain.use_cases.UpdateCurrentAlarmUseCase
 import com.sillyapps.app_api.ApplicationApi
@@ -37,6 +38,8 @@ class App : Application(), ApplicationApi {
   override fun onCreate() {
     initializeTimber()
     super.onCreate()
+
+    setRingerNotificationChannel(applicationContext)
   }
 
   private fun initializeTimber() {

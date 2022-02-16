@@ -1,7 +1,9 @@
 package com.sillyapps.core_ui
 
+import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
+import android.os.Build
 import android.os.Handler
 import android.widget.Toast
 import androidx.compose.ui.text.input.TextFieldValue
@@ -27,4 +29,12 @@ fun Service.showToast(string: String) {
 
 fun showToast(context: Context, string: String) {
   Toast.makeText(context, string, Toast.LENGTH_LONG).show()
+}
+
+fun getImmutablePendingIntentFlags(): Int {
+  var piFlags = PendingIntent.FLAG_UPDATE_CURRENT
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+    piFlags = piFlags or PendingIntent.FLAG_IMMUTABLE
+  }
+  return piFlags
 }

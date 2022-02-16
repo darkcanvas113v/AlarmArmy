@@ -8,10 +8,12 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.sillyapps.alarm_data.common_alarm.AlarmRepositoryImpl
 import com.sillyapps.alarm_scheduler.api.bindAlarmScheduler
 import com.sillyapps.alarmarmy.ui.MainApp
 import com.sillyapps.common_models.alarm.AlarmWithRemainingTime
 import com.sillyapps.feature_alarm_setter_api.AlarmSetter
+import javax.inject.Inject
 
 
 class MainActivity : ComponentActivity() {
@@ -36,8 +38,8 @@ class MainActivity : ComponentActivity() {
     setContent {
       MainApp(context = applicationContext, alarmDbComponent = alarmDbComponent)
     }
-//    setMockAlarm()
-    requestAlertWindowPermission()
+
+//    requestAlertWindowPermission()
   }
 
   private fun requestAlertWindowPermission() {
@@ -51,20 +53,6 @@ class MainActivity : ComponentActivity() {
         startActivityForResult(intent, ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE)
       }
     }
-  }
-
-  private fun setMockAlarm() {
-    val triggerTime = 10000L
-    val mockAlarm = AlarmWithRemainingTime(
-      id = 0,
-      time = 0,
-      active = true,
-      weekDays = 0,
-      repeat = false,
-      remainingTime = triggerTime,
-      startupTime = System.currentTimeMillis() + triggerTime)
-
-    alarmSetter?.setAlarm(mockAlarm)
   }
 
   override fun onDestroy() {

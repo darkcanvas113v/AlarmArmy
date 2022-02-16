@@ -39,8 +39,6 @@ dependencies {
   implementation project(":feature-alarm-setter-api")
   implementation project(":feature-next-alarm-setter-api")
 
-  coreLibraryDesugaring desugaring
-
   implementation coreKtx
   implementation appCompat
 
