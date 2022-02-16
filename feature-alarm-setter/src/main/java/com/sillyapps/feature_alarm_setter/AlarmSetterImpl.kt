@@ -43,7 +43,7 @@ internal class AlarmSetterImpl(
   override fun setAlarm(alarm: AlarmWithRemainingTime) {
     val context = context.get() ?: return
 
-    scope.launch { updateCurrentAlarmUseCase(alarm) }
+    updateCurrentAlarm(alarm)
 
     val untilString = "Alarm will ring after ${convertMillisToStringFormatWithDays(alarm.remainingTime)}"
 
@@ -67,6 +67,11 @@ internal class AlarmSetterImpl(
     scope.launch { updateCurrentAlarmUseCase(null) }
 
     alarmManager.cancel(pi)
+  }
+
+  private fun updateCurrentAlarm(alarm: AlarmWithRemainingTime) {
+    if (alarm.id == 0L) return
+    scope.launch { updateCurrentAlarmUseCase(alarm) }
   }
 
   private fun scheduleExactAlarmPermissionIsGranted(context: Context): Boolean {

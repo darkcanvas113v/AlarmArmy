@@ -1,4 +1,4 @@
-package com.sillyapps.alarm_alert
+package com.sillyapps.alarm_alert.service
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

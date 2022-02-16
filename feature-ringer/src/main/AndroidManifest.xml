@@ -24,7 +24,7 @@
 
     <receiver android:name=".RingerReceiver"/>
 
-    <service android:name=".RingerService"/>
+    <service android:name=".service.RingerService"/>
   </application>
 
 </manifest>

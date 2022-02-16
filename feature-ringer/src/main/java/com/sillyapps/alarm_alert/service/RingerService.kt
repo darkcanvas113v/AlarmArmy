@@ -1,4 +1,4 @@
-package com.sillyapps.alarm_alert
+package com.sillyapps.alarm_alert.service
 
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import com.sillyapps.alarm_alert.R
 import com.sillyapps.alarm_alert.ui.AlarmAlertActivity
 import com.sillyapps.app_api.ApplicationApi
 import com.sillyapps.core_ui.getImmutablePendingIntentFlags

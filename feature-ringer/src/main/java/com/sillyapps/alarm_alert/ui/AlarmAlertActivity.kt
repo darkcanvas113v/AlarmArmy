@@ -9,9 +9,8 @@ import android.os.*
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.sillyapps.alarm_alert.RingerService
+import com.sillyapps.alarm_alert.service.RingerService
 import com.sillyapps.core_ui.getImmutablePendingIntentFlags
-import com.sillyapps.feature_next_alarm_setter_api.NextAlarmSetterService
 
 class AlarmAlertActivity : ComponentActivity() {
 
@@ -36,6 +35,10 @@ class AlarmAlertActivity : ComponentActivity() {
         onStopButtonClick = {
           ringerService.disable()
           finish()
+        },
+        onDozeButtonClick = {
+          ringerService.doze()
+          finish()
         }
       )
     }
@@ -44,29 +47,6 @@ class AlarmAlertActivity : ComponentActivity() {
   override fun onDestroy() {
     super.onDestroy()
     unbindService(ringerConnection)
-  }
-
-  override fun onAttachedToWindow() {
-    super.onAttachedToWindow()
-//    showActivityIfDeviceIsSleeping()
-  }
-
-  private fun showActivityIfDeviceIsSleeping() {
-    window.addFlags(
-      WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-          or WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON
-    )
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-      setTurnScreenOn(true)
-      setShowWhenLocked(true)
-    } else {
-      window.addFlags(
-        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-            or WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
-            or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
-      )
-    }
   }
 
   companion object {

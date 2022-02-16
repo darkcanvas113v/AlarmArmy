@@ -2,6 +2,7 @@ package com.sillyapps.feature_next_alarm_setter.data
 
 import android.content.Context
 import com.sillyapps.core_di.modules.IODispatcher
+import com.sillyapps.core_time.Time
 import com.sillyapps.feature_next_alarm_setter.domain.NextAlarmRepository
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.CoroutineDispatcher
@@ -30,6 +31,6 @@ class NextAlarmRepositoryImpl @Inject constructor(
 
   companion object {
     const val DOZE_DURATION = "DOZE_DURATION"
-    const val DEFAULT_DOZE_DURATION = 300000L
+    const val DEFAULT_DOZE_DURATION = 10 * Time.s
   }
 }

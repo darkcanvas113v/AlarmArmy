@@ -1,9 +1,6 @@
 package com.sillyapps.alarm_alert.ui
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -18,7 +15,8 @@ import com.sillyapps.core_ui.theme.Typography
 
 @Composable
 fun AlarmAlertScreen(
-  onStopButtonClick: () -> Unit
+  onStopButtonClick: () -> Unit,
+  onDozeButtonClick: () -> Unit
 ) {
 
   AlarmArmyTheme {
@@ -29,15 +27,37 @@ fun AlarmAlertScreen(
             text = "Whoohooho! Alarm is alarming!",
             style = Typography.h4,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(bottom = 16.dp).padding(horizontal = 16.dp)
+            modifier = Modifier
+              .padding(bottom = 16.dp)
+              .padding(horizontal = 16.dp)
           )
 
-          Button(
-            onClick = onStopButtonClick,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+          Row(
+            modifier = Modifier
+              .align(Alignment.CenterHorizontally)
+              .padding(top = 16.dp)
           ) {
-            Text(text = "Stop it!")
+            Button(
+              onClick = onStopButtonClick,
+              modifier = Modifier
+                .padding(end = 32.dp)
+                .width(150.dp)
+                .height(50.dp)
+            ) {
+              Text(text = "Stop it!")
+            }
+
+            Button(
+              onClick = onDozeButtonClick,
+              modifier = Modifier
+                .width(150.dp)
+                .height(50.dp)
+            ) {
+              Text(text = "Let me sleep!")
+            }
           }
+
+
         }
       }
     }
@@ -49,6 +69,7 @@ fun AlarmAlertScreen(
 @Composable
 fun AlertScreenPreview() {
   AlarmAlertScreen(
-    onStopButtonClick = {}
+    onStopButtonClick = {},
+    onDozeButtonClick = {}
   )
 }
