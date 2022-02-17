@@ -78,4 +78,9 @@ ext {
       testing              : "androidx.compose.ui:ui-test-junit4:${versions.compose}",
       navigation           : "androidx.navigation:navigation-compose:2.4.0-beta02"
   ]
+
+  constraintLayoutDeps = [
+      core   : "androidx.constraintlayout:constraintlayout:2.1.3",
+      compose: "androidx.constraintlayout:constraintlayout-compose:1.0.0"
+  ]
 }

@@ -1,6 +1,8 @@
 package com.sillyapps.core_time
 
 import java.util.*
+import kotlin.math.abs
+import kotlin.math.sign
 
 fun getLocalCurrentTimeMillis(): Long {
   val tz = TimeZone.getDefault()
@@ -40,13 +42,20 @@ fun convertMillisToStringFormatWithDays(millis: Long): String {
 }
 
 fun convertMillisToStringFormat(millis: Long): String {
-  val overallMinutes = millis / 60000
+  val overallMinutes = abs(millis) / 60000
   val minutes = overallMinutes % 60
   val overallHours = overallMinutes / 60
   val hours = overallHours % 24
 
   return formatIfNeeded(hours.toInt(), minutes.toInt())
 }
+
+fun convertMillisToStringFormatWithSign(millis: Long): String {
+  val sign = if (millis < 0L) "-" else "+"
+
+  return "$sign${convertMillisToStringFormat(abs(millis))}"
+}
+
 
 fun convertMillisToStringFormatWithSeconds(millis: Long): String {
   val overallSeconds = millis / 1000

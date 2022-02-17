@@ -37,7 +37,7 @@ fun AlarmEditorScreen(
           hours = alarm.timeHours,
           minutes = alarm.timeMinutes,
           onHoursChanged = stateHolder::hoursChanged,
-          onMinutesChanged = stateHolder::minutesChanged )
+          onMinutesChanged = stateHolder::minutesChanged)
 
         Divider()
 
