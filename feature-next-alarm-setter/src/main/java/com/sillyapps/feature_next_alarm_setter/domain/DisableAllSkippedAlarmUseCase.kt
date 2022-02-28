@@ -1,6 +1,6 @@
 package com.sillyapps.feature_next_alarm_setter.domain
 
-import com.sillyapps.common_models.alarm.toAlarm
+import com.sillyapps.common_models.alarm.alarm.toAlarm
 import com.sillyapps.alarm_domain.repositories.AlarmRepository
 import com.sillyapps.alarm_domain.repositories.CurrentAlarmRepository
 import kotlinx.coroutines.flow.first

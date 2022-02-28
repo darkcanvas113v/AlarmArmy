@@ -5,4 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ProfilerScreenStateHolder {
   fun getProfilerAlarms(): Flow<List<UIProfilerAlarm>>
+
+  fun updateProfilerAlarm(profilerAlarm: UIProfilerAlarm)
+  fun deleteProfilerAlarm(profilerAlarm: UIProfilerAlarm)
 }

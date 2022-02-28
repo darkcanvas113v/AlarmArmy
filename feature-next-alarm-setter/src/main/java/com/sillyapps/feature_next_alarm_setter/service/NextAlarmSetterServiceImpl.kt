@@ -3,7 +3,7 @@ package com.sillyapps.feature_next_alarm_setter.service
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import com.sillyapps.common_models.alarm.AlarmWithRemainingTime
+import com.sillyapps.common_models.alarm.alarm.AlarmWithRemainingTime
 import com.sillyapps.alarm_domain.use_cases.GetClosestActiveAlarmUseCase
 import com.sillyapps.feature_alarm_setter_api.AlarmSetter
 import com.sillyapps.feature_next_alarm_setter.di.NextAlarmSetterComponent

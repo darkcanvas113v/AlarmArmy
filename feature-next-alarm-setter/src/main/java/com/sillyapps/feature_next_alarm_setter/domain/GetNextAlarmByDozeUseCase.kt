@@ -1,6 +1,6 @@
 package com.sillyapps.feature_next_alarm_setter.domain
 
-import com.sillyapps.common_models.alarm.AlarmWithRemainingTime
+import com.sillyapps.common_models.alarm.alarm.AlarmWithRemainingTime
 import javax.inject.Inject
 
 class GetNextAlarmByDozeUseCase @Inject constructor(

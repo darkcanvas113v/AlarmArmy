@@ -47,7 +47,9 @@ dependencies {
 
   implementation project(':common-alarm-usecases')
   implementation project(':common-models')
+  implementation project(':common-profiler-usecases')
   implementation project(':alarm-db')
+  implementation project(':profiler-db')
   implementation project(':app-api')
 
   implementation project(":feature-alarm-setter")
@@ -58,6 +60,7 @@ dependencies {
   implementation project(':feature-editor')
   implementation project(':feature-ringer')
   implementation project(':feature-alarm-watcher')
+  implementation project(':feature-profiler')
 
   coreLibraryDesugaring desugaringDep
 
@@ -84,6 +87,12 @@ dependencies {
   implementation composeDeps.activity
   implementation composeDeps.viewModel
   implementation composeDeps.navigation
+
+  // Room
+  implementation roomDeps.runtime
+  implementation roomDeps.ktx
+  kapt roomDeps.annotationProcessor
+  testImplementation roomDeps.testing
 
   androidTestImplementation composeDeps.testing
 

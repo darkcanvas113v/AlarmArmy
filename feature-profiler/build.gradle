@@ -45,6 +45,8 @@ dependencies {
   implementation project(":core-time")
 
   implementation project(":app-api")
+  implementation project(":common-models")
+  implementation project(":common-profiler-usecases")
 
   implementation coreKtx
   implementation appCompat

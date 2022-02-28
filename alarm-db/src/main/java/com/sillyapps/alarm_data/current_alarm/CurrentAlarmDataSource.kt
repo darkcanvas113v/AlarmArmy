@@ -2,6 +2,7 @@ package com.sillyapps.alarm_data.current_alarm
 
 import android.content.Context
 import com.sillyapps.alarm_data.current_alarm.model.AlarmData
+import com.sillyapps.core_di.AppScope
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,6 +11,7 @@ import java.lang.Error
 import java.lang.Exception
 import javax.inject.Inject
 
+@AppScope
 class CurrentAlarmDataSource @Inject constructor(
   context: Context
 ) {

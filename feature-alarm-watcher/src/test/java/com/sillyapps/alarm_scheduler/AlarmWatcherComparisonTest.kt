@@ -1,6 +1,6 @@
 package com.sillyapps.alarm_scheduler
 
-import com.sillyapps.common_models.alarm.AlarmWithRemainingTime
+import com.sillyapps.common_models.alarm.alarm.AlarmWithRemainingTime
 import org.junit.Test
 
 class AlarmWatcherComparisonTest {

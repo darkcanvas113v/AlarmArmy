@@ -1,8 +1,7 @@
 package com.sillyapps.alarm_domain.use_cases
 
 import com.sillyapps.alarm_domain.repositories.CurrentAlarmRepository
-import com.sillyapps.common_models.alarm.AlarmWithRemainingTime
-import kotlinx.coroutines.flow.Flow
+import com.sillyapps.common_models.alarm.alarm.AlarmWithRemainingTime
 import javax.inject.Inject
 
 class UpdateCurrentAlarmUseCase @Inject constructor(

@@ -3,7 +3,7 @@ package com.sillyapps.alarm_data.current_alarm
 import com.sillyapps.alarm_data.current_alarm.model.toDataModel
 import com.sillyapps.alarm_data.current_alarm.model.toDomainModel
 import com.sillyapps.alarm_domain.repositories.CurrentAlarmRepository
-import com.sillyapps.common_models.alarm.AlarmWithRemainingTime
+import com.sillyapps.common_models.alarm.alarm.AlarmWithRemainingTime
 import com.sillyapps.core_di.modules.IOCoroutineScope
 import com.sillyapps.core_di.modules.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher

@@ -1,10 +1,10 @@
 package com.sillyapps.alarm_scheduler.domain
 
 import com.sillyapps.alarm_domain.repositories.CurrentAlarmRepository
-import com.sillyapps.common_models.alarm.AlarmWithRemainingTime
+import com.sillyapps.common_models.alarm.alarm.AlarmWithRemainingTime
 import com.sillyapps.alarm_domain.use_cases.GetClosestActiveAlarmUseCase
 import com.sillyapps.alarm_domain.use_cases.UpdateAlarmUseCase
-import com.sillyapps.common_models.alarm.Alarm
+import com.sillyapps.common_models.alarm.alarm.Alarm
 import com.sillyapps.core_time.Time
 import com.sillyapps.core_time.getMillisAfterStartOfTheDay
 import com.sillyapps.feature_alarm_setter_api.AlarmSetter

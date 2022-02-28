@@ -30,9 +30,9 @@ class AlarmWatcherService: Service() {
 
     interactor.initialize(alarmSetter, scope)
 
-    scope.launch {
+    /*scope.launch {
       interactor.setFakeAlarm()
-    }
+    }*/
   }
 
   override fun onBind(p0: Intent?): IBinder {

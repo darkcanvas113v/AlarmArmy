@@ -2,7 +2,7 @@ package com.sillyapps.alarm_data.common_alarm.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.sillyapps.common_models.alarm.Alarm
+import com.sillyapps.common_models.alarm.alarm.Alarm
 
 @Entity(tableName = "alarms")
 data class AlarmDto(

@@ -1,20 +1,22 @@
 package com.sillyapps.alarmarmy.di
 
 import android.content.Context
+import com.sillyapps.alarmarmy.database.AppDatabase
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
+import dagger.Provides
 import javax.inject.Scope
 
 @Scope
 @kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
 annotation class AppScope
 
-@Component(modules = [AppModule::class])
+@Component(modules = [DatabaseModule::class])
 @AppScope
 interface AppComponent {
 
-  val context: Context
+  val db: AppDatabase
 
   @Component.Builder
   interface Builder {
@@ -27,6 +29,8 @@ interface AppComponent {
 }
 
 @Module
-class AppModule {
-
+class DatabaseModule {
+  @AppScope
+  @Provides
+  fun provideDatabase(context: Context) = AppDatabase.getInstance(context)
 }

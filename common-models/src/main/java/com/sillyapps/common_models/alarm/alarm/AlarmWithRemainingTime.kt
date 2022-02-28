@@ -1,4 +1,4 @@
-package com.sillyapps.common_models.alarm
+package com.sillyapps.common_models.alarm.alarm
 
 data class AlarmWithRemainingTime(
   val id: Long,

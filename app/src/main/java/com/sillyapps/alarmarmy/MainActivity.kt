@@ -8,12 +8,9 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.sillyapps.alarm_data.common_alarm.AlarmRepositoryImpl
 import com.sillyapps.alarm_scheduler.api.bindAlarmScheduler
 import com.sillyapps.alarmarmy.ui.MainApp
-import com.sillyapps.common_models.alarm.AlarmWithRemainingTime
 import com.sillyapps.feature_alarm_setter_api.AlarmSetter
-import javax.inject.Inject
 
 
 class MainActivity : ComponentActivity() {
@@ -26,6 +23,7 @@ class MainActivity : ComponentActivity() {
 
     val app = application as App
     val alarmDbComponent = app.alarmDbComponent
+    val profilerDbComponent = app.profilerAlarmComponent
     alarmSetter = app.alarmSetter
 
     alarmWatcherConnection = bindAlarmScheduler(
@@ -36,31 +34,15 @@ class MainActivity : ComponentActivity() {
     )
 
     setContent {
-      MainApp(context = applicationContext, alarmDbComponent = alarmDbComponent)
-    }
-
-//    requestAlertWindowPermission()
-  }
-
-  private fun requestAlertWindowPermission() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      if (!Settings.canDrawOverlays(this)) {
-        val intent = Intent(
-          Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-          Uri.parse("package:" + this.packageName)
-        )
-        // TODO replace deprecated method
-        startActivityForResult(intent, ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE)
-      }
+      MainApp(
+        context = applicationContext,
+        alarmDbComponent = alarmDbComponent,
+        profilerDbComponent = profilerDbComponent)
     }
   }
 
   override fun onDestroy() {
     super.onDestroy()
     alarmWatcherConnection?.let { unbindService(it) }
-  }
-
-  companion object {
-    const val ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE = 101
   }
 }

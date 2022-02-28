@@ -6,14 +6,19 @@ import com.sillyapps.alarm_alert.RingerReceiver
 import com.sillyapps.alarm_alert.service.setRingerNotificationChannel
 import com.sillyapps.alarm_data.di.DaggerAlarmDbComponent
 import com.sillyapps.alarm_domain.use_cases.UpdateCurrentAlarmUseCase
+import com.sillyapps.alarmarmy.di.DaggerAppComponent
 import com.sillyapps.app_api.ApplicationApi
 import com.sillyapps.feature_alarm_setter.api.getAlarmSetter
 import com.sillyapps.feature_alarm_setter_api.AlarmSetter
 import com.sillyapps.feature_next_alarm_setter.api.initNextAlarmModule
+import com.sillyapps.profiler_db.di.DaggerProfilerDbComponent
 import kotlinx.coroutines.MainScope
 import timber.log.Timber
 
 class App : Application(), ApplicationApi {
+
+  private val appComponent by lazy {
+    DaggerAppComponent.builder().context(applicationContext).build() }
 
   private val appScope = MainScope()
 
@@ -21,8 +26,18 @@ class App : Application(), ApplicationApi {
     DaggerAlarmDbComponent.builder()
       .context(applicationContext)
       .coroutineScope(appScope)
+      .database(appComponent.db)
       .build()
   }
+
+  val profilerAlarmComponent by lazy {
+    DaggerProfilerDbComponent.builder()
+      .context(applicationContext)
+      .coroutineScope(appScope)
+      .database(appComponent.db)
+      .build()
+  }
+
   val alarmSetter: AlarmSetter by lazy {
     getAlarmSetter(
       context = applicationContext,
