@@ -1,6 +1,7 @@
 package com.sillyapps.alarm_data.current_alarm
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.sillyapps.alarm_data.current_alarm.model.AlarmData
 import com.sillyapps.core_di.AppScope
 import com.squareup.moshi.Moshi
@@ -11,16 +12,10 @@ import java.lang.Error
 import java.lang.Exception
 import javax.inject.Inject
 
-@AppScope
 class CurrentAlarmDataSource @Inject constructor(
-  context: Context
+  private val sharedPreferences: SharedPreferences
 ) {
   private val adapter = Moshi.Builder().build().adapter(AlarmData::class.java)
-
-  private val sharedPreferences = context.getSharedPreferences(
-    CURRENT_ALARM_SHARED_P,
-    Context.MODE_PRIVATE
-  )
 
   private val currentAlarm: MutableStateFlow<AlarmData?> = MutableStateFlow(null)
 

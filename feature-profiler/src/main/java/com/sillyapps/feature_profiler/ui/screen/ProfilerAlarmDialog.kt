@@ -14,9 +14,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.sillyapps.core_time.Time
-import com.sillyapps.core_time.convertToMillis
-import com.sillyapps.core_time.getHoursAndMinutes
-import com.sillyapps.core_ui.components.TimePicker
 import com.sillyapps.core_ui.components.TimePickerItem
 import com.sillyapps.core_ui.theme.AlarmArmyTheme
 import com.sillyapps.core_ui.theme.Typography
@@ -48,7 +45,7 @@ fun AlarmDialog(
 
         Row(
           modifier = Modifier
-            .fillMaxWidth()
+//            .fillMaxWidth()
             .weight(1f, fill = false)
             .padding(vertical = 16.dp)
         ) {

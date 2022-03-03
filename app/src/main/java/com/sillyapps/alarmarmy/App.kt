@@ -27,6 +27,7 @@ class App : Application(), ApplicationApi {
       .context(applicationContext)
       .coroutineScope(appScope)
       .database(appComponent.db)
+      .sharedPref(appComponent.sharedPref)
       .build()
   }
 
@@ -35,6 +36,7 @@ class App : Application(), ApplicationApi {
       .context(applicationContext)
       .coroutineScope(appScope)
       .database(appComponent.db)
+      .sharedPref(appComponent.sharedPref)
       .build()
   }
 

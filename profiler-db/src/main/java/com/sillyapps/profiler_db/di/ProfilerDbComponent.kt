@@ -1,15 +1,19 @@
 package com.sillyapps.profiler_db.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.sillyapps.common_profiler_usecases.ProfilerRepository
 import com.sillyapps.core_di.AppScope
 import com.sillyapps.core_di.modules.IOCoroutineScope
+import com.sillyapps.core_di.modules.IOModule
+import com.sillyapps.profiler_db.persistence.ProfilerDataSourceImpl
 import com.sillyapps.profiler_db.persistence.ProfilerDatabase
+import com.sillyapps.profiler_db.repositories.ProfilerDataSource
 import com.sillyapps.profiler_db.repositories.ProfilerRepositoryImpl
 import dagger.*
 import kotlinx.coroutines.CoroutineScope
 
-@Component(modules = [DatabaseModule::class, RepositoryModule::class])
+@Component(modules = [DatabaseModule::class, RepositoryModule::class, IOModule::class])
 @AppScope
 interface ProfilerDbComponent {
 
@@ -26,6 +30,9 @@ interface ProfilerDbComponent {
     @BindsInstance
     fun database(db: ProfilerDatabase): Builder
 
+    @BindsInstance
+    fun sharedPref(sharedPreferences: SharedPreferences): Builder
+
     fun build(): ProfilerDbComponent
   }
 }
@@ -35,6 +42,10 @@ interface RepositoryModule {
   @AppScope
   @Binds
   fun bindRepository(repository: ProfilerRepositoryImpl): ProfilerRepository
+
+  @AppScope
+  @Binds
+  fun bindProfilerStateDataSource(dataSource: ProfilerDataSourceImpl): ProfilerDataSource
 }
 
 @Module

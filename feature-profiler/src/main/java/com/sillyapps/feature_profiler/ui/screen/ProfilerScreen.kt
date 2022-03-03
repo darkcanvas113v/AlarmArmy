@@ -1,22 +1,26 @@
 package com.sillyapps.feature_profiler.ui.screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sillyapps.common_models.alarm.profiler.ProfilerAlarm
+import com.sillyapps.common_models.alarm.profiler.ProfilerState
 import com.sillyapps.core_time.Time
+import com.sillyapps.core_ui.components.StateButton
 import com.sillyapps.core_ui.theme.AlarmArmyTheme
+import com.sillyapps.core_ui.theme.Red
 import com.sillyapps.core_ui.theme.Typography
 import com.sillyapps.feature_profiler.ui.components.IntervalLayout
 import com.sillyapps.feature_profiler.ui.model.UIProfilerAlarm
@@ -32,6 +36,10 @@ fun ProfilerScreen(
   val alarms by remember(profilerScreenStateHolder) {
     profilerScreenStateHolder.getProfilerAlarms()
   }.collectAsState(initial = listOf())
+
+  val state by remember(profilerScreenStateHolder) {
+    profilerScreenStateHolder.getProfilerState()
+  }.collectAsState(initial = false)
 
   // TODO maybe optimize it a little bit?
   val wakingAlarms = alarms.filter { it.offset < 0L }.sortedBy { it.offset }
@@ -95,6 +103,20 @@ fun ProfilerScreen(
       ) {
         Icon(Icons.Filled.Add, "")
       }
+
+      StateButton(
+        text = if (state) "ON" else "OFF",
+        state = state,
+        setState = { profilerScreenStateHolder.setProfilerState(!state) },
+        shape = MaterialTheme.shapes.medium,
+        alternativeColor = Red,
+        alternativeContentColor = Color.White,
+        modifier = Modifier
+          .align(Alignment.TopEnd)
+          .padding(16.dp)
+          .background(if (state) MaterialTheme.colors.primary else Red)
+          .size(width = 80.dp, height = 42.dp)
+      )
     }
   }
 
@@ -119,17 +141,30 @@ fun ProfilerScreenPreview() {
     ).map { ProfilerAlarm(0, it).toProfilerModel() }
   }
 
+  val state = remember {
+    mutableStateOf(
+      ProfilerState(enabled = true)
+    )
+  }
+
   val stateHolder = object : ProfilerScreenStateHolder {
     override fun getProfilerAlarms(): Flow<List<UIProfilerAlarm>> = flow {
       emit(alarms)
     }
 
     override fun updateProfilerAlarm(profilerAlarm: UIProfilerAlarm) {
-
     }
 
     override fun deleteProfilerAlarm(profilerAlarm: UIProfilerAlarm) {
 
+    }
+
+    override fun setProfilerState(state: Boolean) {
+
+    }
+
+    override fun getProfilerState(): Flow<Boolean> = flow {
+      emit(state.value.enabled)
     }
   }
 

@@ -24,15 +24,21 @@ fun RepeatButtons(
 ) {
 
   Column {
-    Box(modifier = Modifier.fillMaxWidth().padding(top = 16.dp)) {
+    Box(modifier = Modifier
+      .fillMaxWidth()
+      .padding(top = 16.dp)) {
       Button(
-        modifier = Modifier.align(Alignment.CenterStart).padding(start = 16.dp),
+        modifier = Modifier
+          .align(Alignment.CenterStart)
+          .padding(start = 16.dp),
         onClick = onEnableAll) {
         Text(text = "Every day")
       }
 
       Button(
-        modifier = Modifier.align(Alignment.CenterEnd).padding(end = 16.dp),
+        modifier = Modifier
+          .align(Alignment.CenterEnd)
+          .padding(end = 16.dp),
         onClick = onDisableAll) {
         Text(text = "Only once")
       }
@@ -40,44 +46,44 @@ fun RepeatButtons(
 
     Row(
       horizontalArrangement = Arrangement.SpaceEvenly,
-      modifier = Modifier.fillMaxWidth().padding(top = 32.dp)
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(top = 32.dp)
     ) {
-      StateButton(text = "Mo", state = weekDays.mo, setState = { onToggleDay(com.sillyapps.core_time.AlarmConstants.mo) })
-      StateButton(text = "Tu", state = weekDays.tu, setState = { onToggleDay(com.sillyapps.core_time.AlarmConstants.tu) })
-      StateButton(text = "We", state = weekDays.we, setState = { onToggleDay(com.sillyapps.core_time.AlarmConstants.we) })
-      StateButton(text = "Th", state = weekDays.th, setState = { onToggleDay(com.sillyapps.core_time.AlarmConstants.th) })
+      DayButton(text = "Mo", state = weekDays.mo, setState = { onToggleDay(com.sillyapps.core_time.AlarmConstants.mo) })
+      DayButton(text = "Tu", state = weekDays.tu, setState = { onToggleDay(com.sillyapps.core_time.AlarmConstants.tu) })
+      DayButton(text = "We", state = weekDays.we, setState = { onToggleDay(com.sillyapps.core_time.AlarmConstants.we) })
+      DayButton(text = "Th", state = weekDays.th, setState = { onToggleDay(com.sillyapps.core_time.AlarmConstants.th) })
     }
 
     Row(
       horizontalArrangement = Arrangement.SpaceEvenly,
-      modifier = Modifier.fillMaxWidth().padding(top = 16.dp, bottom = 32.dp)
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(top = 16.dp, bottom = 32.dp)
     ) {
-      StateButton(text = "Fr", state = weekDays.fr, setState = { onToggleDay(com.sillyapps.core_time.AlarmConstants.fr) })
-      StateButton(text = "Sa", state = weekDays.sa, setState = { onToggleDay(com.sillyapps.core_time.AlarmConstants.sa) })
-      StateButton(text = "Su", state = weekDays.su, setState = { onToggleDay(com.sillyapps.core_time.AlarmConstants.su) })
+      DayButton(text = "Fr", state = weekDays.fr, setState = { onToggleDay(com.sillyapps.core_time.AlarmConstants.fr) })
+      DayButton(text = "Sa", state = weekDays.sa, setState = { onToggleDay(com.sillyapps.core_time.AlarmConstants.sa) })
+      DayButton(text = "Su", state = weekDays.su, setState = { onToggleDay(com.sillyapps.core_time.AlarmConstants.su) })
     }
   }
 
 }
 
 @Composable
-fun StateButton(
+fun DayButton(
   text: String,
   state: Boolean,
-  setState: (Boolean) -> Unit) {
-
-  val backgroundColor by
-    animateColorAsState(targetValue =
-      if (state) MaterialTheme.colors.primary else MaterialTheme.colors.error)
-
-  Button(
-    onClick = { setState(!state) },
-    modifier = Modifier
-      .size(64.dp, 64.dp),
+  setState: (Boolean) -> Unit
+) {
+  com.sillyapps.core_ui.components.StateButton(
+    text = text,
+    state = state,
+    setState = setState,
     shape = CircleShape,
-    colors = ButtonDefaults.buttonColors(
-      backgroundColor = backgroundColor),
-    content = { Text(text = text) }
+    alternativeColor = MaterialTheme.colors.error,
+    alternativeContentColor = MaterialTheme.colors.onError,
+    modifier = Modifier.size(64.dp)
   )
 }
 
@@ -129,7 +135,7 @@ fun StateButtonPreview() {
       val (state, setState) = remember {
         mutableStateOf(false)
       }
-      StateButton(text = "mo", state = state, setState = setState)
+      DayButton(text = "mo", state = state, setState = setState)
     }
   }
 }

@@ -2,7 +2,7 @@ package com.sillyapps.feature_profiler.ui.screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sillyapps.common_models.alarm.profiler.ProfilerAlarm
+import com.sillyapps.common_models.alarm.profiler.ProfilerState
 import com.sillyapps.common_profiler_usecases.ProfilerRepository
 import com.sillyapps.feature_profiler.ui.model.UIProfilerAlarm
 import com.sillyapps.feature_profiler.ui.model.toCommonModel
@@ -16,11 +16,8 @@ class ProfilerScreenViewModel @Inject constructor(
   private val profilerRepository: ProfilerRepository
 ): ViewModel(), ProfilerScreenStateHolder {
 
-  private val alarms = profilerRepository.getProfilerAlarms().map { alarms -> alarms.map { it.toProfilerModel() } }
-
-  override fun getProfilerAlarms(): Flow<List<UIProfilerAlarm>> {
-    return alarms
-  }
+  override fun getProfilerAlarms(): Flow<List<UIProfilerAlarm>> =
+    profilerRepository.getProfilerAlarms().map { alarms -> alarms.map { it.toProfilerModel() } }
 
   override fun deleteProfilerAlarm(profilerAlarm: UIProfilerAlarm) {
     viewModelScope.launch { profilerRepository.deleteProfilerAlarm(profilerAlarm.toCommonModel()) }
@@ -30,4 +27,13 @@ class ProfilerScreenViewModel @Inject constructor(
     if (profilerAlarm.offset == 0L) return
     viewModelScope.launch { profilerRepository.upsertProfilerAlarm(profilerAlarm.toCommonModel()) }
   }
+
+  override fun setProfilerState(state: Boolean) {
+    viewModelScope.launch {
+      profilerRepository.setProfilerState(ProfilerState(enabled = state))
+    }
+  }
+
+  override fun getProfilerState(): Flow<Boolean> = profilerRepository.getProfilerState().map { it.enabled }
+
 }

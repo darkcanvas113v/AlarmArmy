@@ -1,4 +1,4 @@
-package com.sillyapps.alarmarmy.database
+package com.sillyapps.alarmarmy.data
 
 import android.content.Context
 import androidx.room.Database

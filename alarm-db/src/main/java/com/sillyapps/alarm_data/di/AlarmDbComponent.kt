@@ -1,6 +1,7 @@
 package com.sillyapps.alarm_data.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.sillyapps.alarm_data.common_alarm.AlarmRepositoryImpl
 import com.sillyapps.alarm_data.current_alarm.CurrentAlarmRepositoryImpl
 import com.sillyapps.alarm_data.persistence.AlarmDatabase
@@ -29,6 +30,9 @@ interface AlarmDbComponent {
 
     @BindsInstance
     fun database(database: AlarmDatabase): Builder
+
+    @BindsInstance
+    fun sharedPref(sharedPreferences: SharedPreferences): Builder
 
     fun build(): AlarmDbComponent
   }
