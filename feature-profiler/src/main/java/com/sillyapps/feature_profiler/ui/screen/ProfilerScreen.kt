@@ -2,7 +2,6 @@ package com.sillyapps.feature_profiler.ui.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -11,11 +10,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.sillyapps.common_models.alarm.profiler.ProfilerAlarm
+import com.sillyapps.common_models.alarm.profiler.ProfilerOffset
 import com.sillyapps.common_models.alarm.profiler.ProfilerState
 import com.sillyapps.core_time.Time
 import com.sillyapps.core_ui.components.StateButton
@@ -138,7 +136,7 @@ fun ProfilerScreenPreview() {
   val alarms = remember {
     mutableStateListOf(
       -5 * Time.m, -10 * Time.m, 5 * Time.m
-    ).map { ProfilerAlarm(0, it).toProfilerModel() }
+    ).map { ProfilerOffset(0, it).toProfilerModel() }
   }
 
   val state = remember {

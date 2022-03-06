@@ -1,7 +1,6 @@
 package com.sillyapps.feature_profiler.ui.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,7 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.sillyapps.common_models.alarm.profiler.ProfilerAlarm
+import com.sillyapps.common_models.alarm.profiler.ProfilerOffset
 import com.sillyapps.core_time.Time
 import com.sillyapps.core_ui.theme.*
 import com.sillyapps.feature_profiler.R
@@ -192,11 +191,11 @@ fun IntervalLayoutItemPreview() {
 @Composable
 fun IntervalLayoutPreview() {
   val wakingAlarms = remember {
-    listOf(-5 * Time.m, -10 * Time.m, -15 * Time.m).map { ProfilerAlarm(0, it).toProfilerModel() }
+    listOf(-5 * Time.m, -10 * Time.m, -15 * Time.m).map { ProfilerOffset(0, it).toProfilerModel() }
   }
 
   val warningAlarms = remember {
-    listOf(5 * Time.m, 10 * Time.m, 15 * Time.m).map { ProfilerAlarm(0, it).toProfilerModel() }
+    listOf(5 * Time.m, 10 * Time.m, 15 * Time.m).map { ProfilerOffset(0, it).toProfilerModel() }
   }
 
   AlarmArmyTheme {

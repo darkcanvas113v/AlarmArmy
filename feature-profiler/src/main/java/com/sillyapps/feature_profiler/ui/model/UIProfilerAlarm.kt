@@ -1,10 +1,9 @@
 package com.sillyapps.feature_profiler.ui.model
 
 import androidx.compose.ui.graphics.Color
-import com.sillyapps.common_models.alarm.profiler.ProfilerAlarm
+import com.sillyapps.common_models.alarm.profiler.ProfilerOffset
 import com.sillyapps.core_time.convertMillisToStringFormatWithSign
 import com.sillyapps.core_ui.theme.Blue
-import com.sillyapps.core_ui.theme.Green500
 import com.sillyapps.core_ui.theme.Red
 
 data class UIProfilerAlarm(
@@ -19,7 +18,7 @@ data class UIProfilerAlarm(
   }
 }
 
-fun ProfilerAlarm.toProfilerModel(): UIProfilerAlarm {
+fun ProfilerOffset.toProfilerModel(): UIProfilerAlarm {
   return UIProfilerAlarm(
     id = id,
     offset = offset,
@@ -31,6 +30,6 @@ fun ProfilerAlarm.toProfilerModel(): UIProfilerAlarm {
   )
 }
 
-fun UIProfilerAlarm.toCommonModel(): ProfilerAlarm {
-  return ProfilerAlarm(id, offset)
+fun UIProfilerAlarm.toCommonModel(): ProfilerOffset {
+  return ProfilerOffset(id, offset)
 }

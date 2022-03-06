@@ -9,15 +9,24 @@ import com.sillyapps.alarm_domain.repositories.AlarmRepository
 import com.sillyapps.alarm_domain.repositories.CurrentAlarmRepository
 import com.sillyapps.alarm_scheduler.di.AlarmWatcherComponent
 import com.sillyapps.alarm_scheduler.service.AlarmWatcherService
+import com.sillyapps.common_profiler_usecases.ProfilerRepository
 import com.sillyapps.feature_alarm_setter_api.AlarmSetter
 
 fun bindAlarmScheduler(
   context: Context,
   alarmSetter: AlarmSetter,
   alarmRepository: AlarmRepository,
-  currentAlarmRepository: CurrentAlarmRepository
+  currentAlarmRepository: CurrentAlarmRepository,
+  profilerRepository: ProfilerRepository
 ): ServiceConnection {
-  AlarmWatcherComponent.initialize(context, alarmSetter, alarmRepository, currentAlarmRepository)
+  AlarmWatcherComponent.initialize(
+    context = context,
+    alarmSetter = alarmSetter,
+    alarmRepository = alarmRepository,
+    currentAlarmRepository = currentAlarmRepository,
+    profilerRepository = profilerRepository
+  )
+
   return bindService(context)
 }
 

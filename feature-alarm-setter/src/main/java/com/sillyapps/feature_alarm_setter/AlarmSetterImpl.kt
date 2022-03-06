@@ -39,15 +39,16 @@ internal class AlarmSetterImpl(
 
   private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-  override fun setAlarm(alarm: AlarmWithRemainingTime) {
+  override fun setAlarm(alarm: AlarmWithRemainingTime, time: Long) {
     val context = context.get() ?: return
 
     updateCurrentAlarm(alarm)
 
-    val untilString = "Alarm will ring after ${convertMillisToStringFormatWithDays(alarm.remainingTime)}"
+    val untilString = "Alarm will ring after ${convertMillisToStringFormatWithDays(
+      time - System.currentTimeMillis())}"
 
     // TODO create showIntent, to handle the situation when user clicks the alarm icon in the notification drawer
-    val alarmInfo = AlarmManager.AlarmClockInfo(alarm.startupTime, null)
+    val alarmInfo = AlarmManager.AlarmClockInfo(time, null)
 
     alarmManager.cancel(pi)
 

@@ -24,6 +24,7 @@ fun AppNavHost(
   val backStackEntry = navController.currentBackStackEntryAsState()
   val currentScreen = Screen.fromRoute(backStackEntry.value?.destination?.route)
 
+  // TODO Fix backButton navigation
   Column() {
     Tabs(
       tabs = listOf(TabItem.Alarm, TabItem.Profiler),

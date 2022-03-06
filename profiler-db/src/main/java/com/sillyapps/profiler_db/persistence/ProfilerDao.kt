@@ -1,36 +1,36 @@
 package com.sillyapps.profiler_db.persistence
 
 import androidx.room.*
-import com.sillyapps.profiler_db.model.ProfilerAlarmDto
+import com.sillyapps.profiler_db.model.ProfilerOffsetDto
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProfilerDao {
 
   @Query("select * from profiler_alarm where id = :id")
-  fun get(id: Long): ProfilerAlarmDto?
+  fun get(id: Long): ProfilerOffsetDto?
 
   @Query("select * from profiler_alarm")
-  fun observeAll(): Flow<List<ProfilerAlarmDto>>
+  fun observeAll(): Flow<List<ProfilerOffsetDto>>
 
   @Query("select * from profiler_alarm where id = :id")
-  fun observeOne(id: Long): Flow<ProfilerAlarmDto>
+  fun observeOne(id: Long): Flow<ProfilerOffsetDto>
 
   @Insert(onConflict = OnConflictStrategy.IGNORE)
-  suspend fun insert(alarm: ProfilerAlarmDto): Long
+  suspend fun insert(offset: ProfilerOffsetDto): Long
 
   @Update
-  suspend fun update(alarm: ProfilerAlarmDto)
+  suspend fun update(offset: ProfilerOffsetDto)
 
   @Delete
-  suspend fun delete(alarm: ProfilerAlarmDto)
+  suspend fun delete(offset: ProfilerOffsetDto)
 
   @Transaction
-  suspend fun upsert(alarm: ProfilerAlarmDto) {
-    val id = insert(alarm)
+  suspend fun upsert(offset: ProfilerOffsetDto) {
+    val id = insert(offset)
 
     if (id == -1L) {
-      update(alarm)
+      update(offset)
     }
   }
 

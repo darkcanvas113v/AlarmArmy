@@ -30,7 +30,8 @@ class MainActivity : ComponentActivity() {
       context = this,
       alarmSetter = app.alarmSetter,
       alarmRepository = alarmDbComponent.alarmRepository,
-      currentAlarmRepository = alarmDbComponent.currentAlarmRepository
+      currentAlarmRepository = alarmDbComponent.currentAlarmRepository,
+      profilerRepository = profilerDbComponent.profilerRepository
     )
 
     setContent {

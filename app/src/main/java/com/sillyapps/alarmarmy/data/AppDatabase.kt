@@ -7,11 +7,11 @@ import androidx.room.RoomDatabase
 import com.sillyapps.alarm_data.common_alarm.model.AlarmDto
 import com.sillyapps.alarm_data.persistence.AlarmDao
 import com.sillyapps.alarm_data.persistence.AlarmDatabase
-import com.sillyapps.profiler_db.model.ProfilerAlarmDto
+import com.sillyapps.profiler_db.model.ProfilerOffsetDto
 import com.sillyapps.profiler_db.persistence.ProfilerDao
 import com.sillyapps.profiler_db.persistence.ProfilerDatabase
 
-@Database(entities = [AlarmDto::class, ProfilerAlarmDto::class], version = 4, exportSchema = false)
+@Database(entities = [AlarmDto::class, ProfilerOffsetDto::class], version = 4, exportSchema = false)
 abstract class AppDatabase: RoomDatabase(), AlarmDatabase, ProfilerDatabase {
 
   abstract val alarmDao: AlarmDao
