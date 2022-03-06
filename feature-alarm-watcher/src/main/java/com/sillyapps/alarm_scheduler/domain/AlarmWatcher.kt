@@ -102,7 +102,10 @@ class AlarmWatcher @Inject constructor(
     val alarms = buildProfilerAlarms(currentAlarm)
 
     updateProfilerAlarmsUseCase(alarms = alarms)
-    alarmSetter?.setAlarm(currentAlarm, alarms.first().time)
+
+    // To solve problem then alarm is out of range
+    val firstValidAlarm = alarms.first { it.time <= System.currentTimeMillis() }
+    alarmSetter?.setAlarm(currentAlarm, firstValidAlarm.time)
   }
 
   private suspend fun buildProfilerAlarms(currentAlarm: AlarmWithRemainingTime): List<ProfilerAlarm> {
