@@ -28,9 +28,8 @@ fun AppNavHost(
   Column() {
     Tabs(
       tabs = listOf(TabItem.Alarm, TabItem.Profiler),
-      onTabClicked = {
-        navController.navigate(it)
-      })
+      navController = navController
+    )
 
     NavHost(
       navController = navController,

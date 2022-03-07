@@ -13,7 +13,10 @@ fun NavGraphBuilder.alarmGraph(
 ) {
   navigation(startDestination = Screen.AlarmList.name, route = AlarmNavigation.alarmGraphRoute) {
 
-    composable(Screen.AlarmList.name) {
+    composable(
+      route = Screen.AlarmList.name,
+
+    ) {
       MainScreenNavigation(
         repository = alarmDbComponent.alarmRepository,
         onItemClick = { id -> navController.navigate("${Screen.AlarmEditor.name}/$id") })

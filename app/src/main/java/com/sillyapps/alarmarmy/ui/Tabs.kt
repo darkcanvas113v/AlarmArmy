@@ -1,21 +1,21 @@
 package com.sillyapps.alarmarmy.ui
 
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.navigation.NavController
 import com.sillyapps.core_ui.R
-import com.sillyapps.core_ui.theme.DarkBlue900
-import kotlinx.coroutines.launch
+import com.sillyapps.core_ui.compose.currentRoute
 
 @Composable
-fun Tabs(tabs: List<TabItem>, onTabClicked: (String) -> Unit) {
-  var tabIndex by remember {
-    mutableStateOf(0)
-  }
+fun Tabs(tabs: List<TabItem>, navController: NavController) {
+
+  val currentRoute = currentRoute(navController = navController)
+  val tabIndex =
+    if (currentRoute == null)
+      0
+    else
+      tabs.indexOfFirst { it.route == currentRoute }
 
   TabRow(
     selectedTabIndex = tabIndex
@@ -25,10 +25,13 @@ fun Tabs(tabs: List<TabItem>, onTabClicked: (String) -> Unit) {
       Tab(
         icon = { Icon(painter = painterResource(id = tab.icon), contentDescription = "") },
         text = { Text(tab.title) },
-        selected = tabIndex == index,
+        selected = currentRoute == tab.route,
         onClick = {
-          tabIndex = index
-          onTabClicked(tab.route)
+          if (currentRoute != tab.route)
+            navController.navigate(tab.route) {
+              popUpTo(Screen.AlarmList.name)
+              launchSingleTop = true
+            }
         },
       )
     }
@@ -36,6 +39,6 @@ fun Tabs(tabs: List<TabItem>, onTabClicked: (String) -> Unit) {
 }
 
 sealed class TabItem(val icon: Int, val title: String, val route: String) {
-  object Alarm: TabItem(R.drawable.ic_alarm, "Alarm", Screen.AlarmList.name)
-  object Profiler: TabItem(R.drawable.ic_add, "Profiler", Screen.Profile.name)
+  object Alarm : TabItem(R.drawable.ic_alarm, "Alarm", Screen.AlarmList.name)
+  object Profiler : TabItem(R.drawable.ic_add, "Profiler", Screen.Profile.name)
 }
