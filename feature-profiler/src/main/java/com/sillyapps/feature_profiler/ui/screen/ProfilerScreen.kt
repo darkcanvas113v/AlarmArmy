@@ -16,10 +16,10 @@ import androidx.compose.ui.unit.dp
 import com.sillyapps.common_models.alarm.profiler.ProfilerOffset
 import com.sillyapps.common_models.alarm.profiler.ProfilerState
 import com.sillyapps.core_time.Time
-import com.sillyapps.core_ui.components.StateButton
-import com.sillyapps.core_ui.theme.AlarmArmyTheme
-import com.sillyapps.core_ui.theme.Red
-import com.sillyapps.core_ui.theme.Typography
+import com.sillyapps.core_ui.compose.components.StateButton
+import com.sillyapps.core_ui.compose.theme.AlarmArmyTheme
+import com.sillyapps.core_ui.compose.theme.Red
+import com.sillyapps.core_ui.compose.theme.Typography
 import com.sillyapps.feature_profiler.ui.components.IntervalLayout
 import com.sillyapps.feature_profiler.ui.model.UIProfilerAlarm
 import com.sillyapps.feature_profiler.ui.model.toProfilerModel

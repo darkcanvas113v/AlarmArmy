@@ -7,6 +7,6 @@ interface CurrentAlarmRepository {
 
   fun getCurrentAlarm(): Flow<AlarmWithRemainingTime?>
 
-  suspend fun updateCurrentAlarm(newAlarm: AlarmWithRemainingTime?)
+  suspend fun updateCurrentAlarm(newAlarmWithRemainingTime: AlarmWithRemainingTime?)
 
 }

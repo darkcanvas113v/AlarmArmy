@@ -16,10 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sillyapps.alarm_editor_ui.ui.components.RepeatButtons
-import com.sillyapps.core_ui.components.TimePicker
+import com.sillyapps.core_ui.compose.components.TimePicker
 import com.sillyapps.alarm_editor_ui.ui.model.WeekDays
 import com.sillyapps.alarm_editor_ui.ui.model.UIAlarm
-import com.sillyapps.core_ui.theme.AlarmArmyTheme
+import com.sillyapps.core_ui.compose.theme.AlarmArmyTheme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 

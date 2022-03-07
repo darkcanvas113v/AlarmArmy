@@ -1,11 +1,7 @@
 package com.sillyapps.alarmarmy
 
-import android.content.Intent
 import android.content.ServiceConnection
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.sillyapps.alarm_scheduler.api.bindAlarmScheduler
@@ -23,7 +19,7 @@ class MainActivity : ComponentActivity() {
 
     val app = application as App
     val alarmDbComponent = app.alarmDbComponent
-    val profilerDbComponent = app.profilerAlarmComponent
+    val profilerDbComponent = app.profilerComponent
     alarmSetter = app.alarmSetter
 
     alarmWatcherConnection = bindAlarmScheduler(

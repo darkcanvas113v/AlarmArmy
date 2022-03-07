@@ -3,6 +3,7 @@ package com.sillyapps.feature_next_alarm_setter.di
 import android.content.Context
 import com.sillyapps.alarm_domain.repositories.AlarmRepository
 import com.sillyapps.alarm_domain.repositories.CurrentAlarmRepository
+import com.sillyapps.common_profiler_usecases.ProfilerRepository
 import com.sillyapps.core_di.FeatureScope
 import com.sillyapps.core_di.modules.IOModule
 import com.sillyapps.feature_alarm_setter_api.AlarmSetter
@@ -34,6 +35,9 @@ internal interface NextAlarmSetterComponent {
     @BindsInstance
     fun currentAlarmRepository(repository: CurrentAlarmRepository): Builder
 
+    @BindsInstance
+    fun profilerRepository(repository: ProfilerRepository): Builder
+
     fun build(): NextAlarmSetterComponent
   }
 
@@ -45,7 +49,8 @@ internal interface NextAlarmSetterComponent {
       context: Context,
       alarmSetter: AlarmSetter,
       alarmRepository: AlarmRepository,
-      currentAlarmRepository: CurrentAlarmRepository
+      currentAlarmRepository: CurrentAlarmRepository,
+      profilerRepository: ProfilerRepository
     ) {
       synchronized(this) {
         INSTANCE = DaggerNextAlarmSetterComponent.builder()
@@ -53,6 +58,7 @@ internal interface NextAlarmSetterComponent {
           .alarmSetter(alarmSetter)
           .alarmRepository(alarmRepository)
           .currentAlarmRepository(currentAlarmRepository)
+          .profilerRepository(profilerRepository)
           .build()
       }
     }

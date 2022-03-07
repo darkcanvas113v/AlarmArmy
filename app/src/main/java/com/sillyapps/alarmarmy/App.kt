@@ -31,7 +31,7 @@ class App : Application(), ApplicationApi {
       .build()
   }
 
-  val profilerAlarmComponent by lazy {
+  val profilerComponent by lazy {
     DaggerProfilerDbComponent.builder()
       .context(applicationContext)
       .coroutineScope(appScope)
@@ -67,7 +67,8 @@ class App : Application(), ApplicationApi {
       context = applicationContext,
       alarmSetter = alarmSetter,
       alarmRepository = alarmDbComponent.alarmRepository,
-      currentAlarmRepository = alarmDbComponent.currentAlarmRepository
+      currentAlarmRepository = alarmDbComponent.currentAlarmRepository,
+      profilerRepository = profilerComponent.profilerRepository
     )
   }
 

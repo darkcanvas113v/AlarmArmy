@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.sillyapps.common_models.alarm.profiler.ProfilerOffset
 import com.sillyapps.core_time.Time
-import com.sillyapps.core_ui.theme.*
+import com.sillyapps.core_ui.compose.theme.*
 import com.sillyapps.feature_profiler.R
 import com.sillyapps.feature_profiler.ui.model.UIProfilerAlarm
 import com.sillyapps.feature_profiler.ui.model.toProfilerModel

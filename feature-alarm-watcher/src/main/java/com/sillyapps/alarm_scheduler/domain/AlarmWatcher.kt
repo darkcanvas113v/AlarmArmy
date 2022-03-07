@@ -1,7 +1,6 @@
 package com.sillyapps.alarm_scheduler.domain
 
 import com.sillyapps.alarm_domain.repositories.CurrentAlarmRepository
-import com.sillyapps.common_models.alarm.alarm.AlarmWithRemainingTime
 import com.sillyapps.alarm_domain.use_cases.GetClosestActiveAlarmUseCase
 import com.sillyapps.alarm_domain.use_cases.UpdateAlarmUseCase
 import com.sillyapps.common_models.alarm.alarm.Alarm
@@ -30,7 +29,7 @@ class AlarmWatcher @Inject constructor(
   private val closestAlarm = getClosestActiveAlarmUseCase()
   private var alarmSetter: AlarmSetter? = null
 
-  private val activeAlarm: Flow<AlarmWithRemainingTime?> = repositoryCurrent.getCurrentAlarm()
+  private val activeAlarmWithRemainingTime: Flow<com.sillyapps.common_models.alarm.alarm.AlarmWithRemainingTime?> = repositoryCurrent.getCurrentAlarm()
 
   private val profilerIsEnabled = getProfilerStateUseCase().map { it.enabled }
   private val profilerOffsets = getProfilerOffsetsUseCase()
@@ -69,47 +68,47 @@ class AlarmWatcher @Inject constructor(
     updateAlarmUseCase(alarm)
   }
 
-  private suspend fun handleUpdateOnAlarms(newAlarm: AlarmWithRemainingTime?) {
-    if (newAlarm == null) {
+  private suspend fun handleUpdateOnAlarms(newAlarmWithRemainingTime: com.sillyapps.common_models.alarm.alarm.AlarmWithRemainingTime?) {
+    if (newAlarmWithRemainingTime == null) {
       alarmSetter?.cancelAlarm()
       return
     }
 
-    val currentAlarm = activeAlarm.first()
+    val currentAlarm = activeAlarmWithRemainingTime.first()
 
-    if (!newAlarm.isSameAs(currentAlarm)) {
+    if (!newAlarmWithRemainingTime.isSameAs(currentAlarm)) {
       if (profilerIsEnabled.first()) {
-        setAlarmAccordingToProfiler(newAlarm)
+        setAlarmAccordingToProfiler(newAlarmWithRemainingTime)
         return
       }
 
-      alarmSetter?.setAlarm(newAlarm)
+      alarmSetter?.setMainAlarm(newAlarmWithRemainingTime)
     }
   }
 
   private suspend fun handleUpdateOnProfiler() {
-    val currentAlarm = activeAlarm.first() ?: return
+    val currentAlarm = activeAlarmWithRemainingTime.first() ?: return
 
     if (!profilerIsEnabled.first()) {
-      alarmSetter?.setAlarm(currentAlarm)
+      alarmSetter?.setMainAlarm(currentAlarm)
       return
     }
 
     setAlarmAccordingToProfiler(currentAlarm)
   }
 
-  private suspend fun setAlarmAccordingToProfiler(currentAlarm: AlarmWithRemainingTime) {
-    val alarms = buildProfilerAlarms(currentAlarm)
+  private suspend fun setAlarmAccordingToProfiler(currentAlarmWithRemainingTime: com.sillyapps.common_models.alarm.alarm.AlarmWithRemainingTime) {
+    val alarms = buildProfilerAlarms(currentAlarmWithRemainingTime)
 
     updateProfilerAlarmsUseCase(alarms = alarms)
 
     // To solve problem then alarm is out of range
     val firstValidAlarm = alarms.first { it.time <= System.currentTimeMillis() }
-    alarmSetter?.setAlarm(currentAlarm, firstValidAlarm.time)
+    alarmSetter?.setAlarm(firstValidAlarm.time)
   }
 
-  private suspend fun buildProfilerAlarms(currentAlarm: AlarmWithRemainingTime): List<ProfilerAlarm> {
-    return profilerOffsets.first().map { it.toAlarm(currentAlarm.startupTime) }.sortedBy { it.time }
+  private suspend fun buildProfilerAlarms(currentAlarmWithRemainingTime: com.sillyapps.common_models.alarm.alarm.AlarmWithRemainingTime): List<ProfilerAlarm> {
+    return profilerOffsets.first().map { it.toAlarm(currentAlarmWithRemainingTime.startupTime) }.sortedBy { it.time }
   }
 
 }

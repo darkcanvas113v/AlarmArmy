@@ -47,6 +47,7 @@ dependencies {
   implementation composeDeps.uiTooling
   implementation composeDeps.material
   implementation composeDeps.viewModel
+  implementation composeDeps.navigation
 
   implementation lifecycleDeps.viewModel
 }

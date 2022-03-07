@@ -1,4 +1,4 @@
-package com.sillyapps.core_ui.components
+package com.sillyapps.core_ui.compose.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
@@ -21,8 +21,8 @@ import androidx.compose.ui.unit.dp
 import com.sillyapps.core_time.convertToMillis
 import com.sillyapps.core_time.formatValue
 import com.sillyapps.core_ui.showToast
-import com.sillyapps.core_ui.theme.AlarmArmyTheme
-import com.sillyapps.core_ui.theme.Typography
+import com.sillyapps.core_ui.compose.theme.AlarmArmyTheme
+import com.sillyapps.core_ui.compose.theme.Typography
 
 @Composable
 fun TimePicker(

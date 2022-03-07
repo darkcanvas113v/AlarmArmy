@@ -1,7 +1,5 @@
 package com.sillyapps.profiler_db.model
 
-import com.sillyapps.common_models.alarm.alarm.AlarmWithRemainingTime
-import com.sillyapps.common_models.alarm.profiler.ProfilerAlarm
 import com.sillyapps.common_models.alarm.profiler.ProfilerState
 import com.squareup.moshi.JsonClass
 

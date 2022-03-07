@@ -39,10 +39,14 @@ internal class AlarmSetterImpl(
 
   private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-  override fun setAlarm(alarm: AlarmWithRemainingTime, time: Long) {
-    val context = context.get() ?: return
-
+  override fun setMainAlarm(alarm: AlarmWithRemainingTime) {
     updateCurrentAlarm(alarm)
+
+    setAlarm(alarm.startupTime)
+  }
+
+  override fun setAlarm(time: Long) {
+    val context = context.get() ?: return
 
     val untilString = "Alarm will ring after ${convertMillisToStringFormatWithDays(
       time - System.currentTimeMillis())}"
@@ -69,9 +73,9 @@ internal class AlarmSetterImpl(
     alarmManager.cancel(pi)
   }
 
-  private fun updateCurrentAlarm(alarm: AlarmWithRemainingTime) {
-    if (alarm.id == 0L) return
-    scope.launch { updateCurrentAlarmUseCase(alarm) }
+  private fun updateCurrentAlarm(alarmWithRemainingTime: AlarmWithRemainingTime) {
+    if (alarmWithRemainingTime.id == 0L) return
+    scope.launch { updateCurrentAlarmUseCase(alarmWithRemainingTime) }
   }
 
   private fun scheduleExactAlarmPermissionIsGranted(context: Context): Boolean {

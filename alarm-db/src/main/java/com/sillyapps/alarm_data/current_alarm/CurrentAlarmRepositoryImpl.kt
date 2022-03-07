@@ -26,8 +26,8 @@ class CurrentAlarmRepositoryImpl @Inject constructor(
     }
   }
 
-  override suspend fun updateCurrentAlarm(newAlarm: AlarmWithRemainingTime?): Unit = withContext(ioDispatcher) {
-    currentAlarmDataSource.update(newAlarm?.toDataModel())
+  override suspend fun updateCurrentAlarm(newAlarmWithRemainingTime: AlarmWithRemainingTime?): Unit = withContext(ioDispatcher) {
+    currentAlarmDataSource.update(newAlarmWithRemainingTime?.toDataModel())
   }
 
   override fun getCurrentAlarm(): Flow<AlarmWithRemainingTime?> = currentAlarmDataSource.observe().map { it?.toDomainModel() }

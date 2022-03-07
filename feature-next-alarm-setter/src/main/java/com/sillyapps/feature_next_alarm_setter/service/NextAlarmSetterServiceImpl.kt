@@ -72,16 +72,14 @@ class NextAlarmSetterServiceImpl: Service(), NextAlarmSetterService {
     scope.launch {
       val nextAlarm = getNextAlarmByDozeUseCase()
 
-      if (nextAlarm == null) {
-        disableAlarm(alarmIsSetCallback)
-        return@launch
-      }
-      setAlarm(nextAlarm, alarmIsSetCallback)
+      alarmSetter.setAlarm(nextAlarm.time)
+      alarmIsSetCallback()
+      stopSelf()
     }
   }
 
-  private fun setAlarm(alarm: AlarmWithRemainingTime, alarmIsSetCallback: () -> Unit) {
-    alarmSetter.setAlarm(alarm)
+  private fun setAlarm(alarmWithRemainingTime: AlarmWithRemainingTime, alarmIsSetCallback: () -> Unit) {
+    alarmSetter.setMainAlarm(alarmWithRemainingTime)
     alarmIsSetCallback()
     stopSelf()
   }

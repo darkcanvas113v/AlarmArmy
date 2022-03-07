@@ -7,7 +7,7 @@ import javax.inject.Inject
 class UpdateCurrentAlarmUseCase @Inject constructor(
   private val repository: CurrentAlarmRepository
 ) {
-  suspend operator fun invoke(alarm: AlarmWithRemainingTime?) {
-    return repository.updateCurrentAlarm(alarm)
+  suspend operator fun invoke(alarmWithRemainingTime: AlarmWithRemainingTime?) {
+    return repository.updateCurrentAlarm(alarmWithRemainingTime)
   }
 }

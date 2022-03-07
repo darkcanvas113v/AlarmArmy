@@ -14,9 +14,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.sillyapps.core_time.Time
-import com.sillyapps.core_ui.components.TimePickerItem
-import com.sillyapps.core_ui.theme.AlarmArmyTheme
-import com.sillyapps.core_ui.theme.Typography
+import com.sillyapps.core_ui.compose.components.TimePickerItem
+import com.sillyapps.core_ui.compose.theme.AlarmArmyTheme
+import com.sillyapps.core_ui.compose.theme.Typography
 import com.sillyapps.feature_profiler.ui.model.UIProfilerAlarm
 
 @Composable

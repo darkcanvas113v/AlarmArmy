@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sillyapps.core_ui.theme
+package com.sillyapps.core_ui.compose.theme
 
 import androidx.compose.material.darkColors
 import androidx.compose.ui.graphics.Color

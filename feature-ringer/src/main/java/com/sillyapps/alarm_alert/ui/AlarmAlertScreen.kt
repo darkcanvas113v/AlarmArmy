@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.sillyapps.core_ui.theme.AlarmArmyTheme
-import com.sillyapps.core_ui.theme.Typography
+import com.sillyapps.core_ui.compose.theme.AlarmArmyTheme
+import com.sillyapps.core_ui.compose.theme.Typography
 
 @Composable
 fun AlarmAlertScreen(

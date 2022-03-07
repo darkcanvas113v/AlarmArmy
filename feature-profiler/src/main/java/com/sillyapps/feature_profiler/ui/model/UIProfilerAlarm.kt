@@ -3,8 +3,8 @@ package com.sillyapps.feature_profiler.ui.model
 import androidx.compose.ui.graphics.Color
 import com.sillyapps.common_models.alarm.profiler.ProfilerOffset
 import com.sillyapps.core_time.convertMillisToStringFormatWithSign
-import com.sillyapps.core_ui.theme.Blue
-import com.sillyapps.core_ui.theme.Red
+import com.sillyapps.core_ui.compose.theme.Blue
+import com.sillyapps.core_ui.compose.theme.Red
 
 data class UIProfilerAlarm(
   val id: Long,

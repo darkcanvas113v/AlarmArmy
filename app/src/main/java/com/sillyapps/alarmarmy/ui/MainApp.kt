@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import com.sillyapps.alarm_data.di.AlarmDbComponent
 import com.sillyapps.alarmarmy.di.DaggerAppComponent
 import com.sillyapps.alarmarmy.navigation.AppNavHost
-import com.sillyapps.core_ui.theme.AlarmArmyTheme
+import com.sillyapps.core_ui.compose.theme.AlarmArmyTheme
 import com.sillyapps.profiler_db.di.ProfilerDbComponent
 
 @Composable

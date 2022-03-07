@@ -1,11 +1,9 @@
 package com.sillyapps.alarm_editor_ui.ui.components
 
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -13,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sillyapps.alarm_editor_ui.ui.model.WeekDays
-import com.sillyapps.core_ui.theme.AlarmArmyTheme
+import com.sillyapps.core_ui.compose.theme.AlarmArmyTheme
 
 @Composable
 fun RepeatButtons(
@@ -76,7 +74,7 @@ fun DayButton(
   state: Boolean,
   setState: (Boolean) -> Unit
 ) {
-  com.sillyapps.core_ui.components.StateButton(
+  com.sillyapps.core_ui.compose.components.StateButton(
     text = text,
     state = state,
     setState = setState,

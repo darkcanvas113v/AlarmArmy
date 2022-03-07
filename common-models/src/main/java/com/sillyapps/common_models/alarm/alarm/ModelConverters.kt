@@ -1,7 +1,5 @@
 package com.sillyapps.common_models.alarm.alarm
 
-import com.sillyapps.common_models.alarm.alarm.Alarm
-import com.sillyapps.common_models.alarm.alarm.AlarmWithRemainingTime
 import com.sillyapps.core_time.getRemainingTime
 
 fun Alarm.calculateRemainingTime(from: Long = System.currentTimeMillis()): AlarmWithRemainingTime {
