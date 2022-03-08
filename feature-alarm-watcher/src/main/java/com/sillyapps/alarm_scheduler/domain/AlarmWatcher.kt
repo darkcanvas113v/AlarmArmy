@@ -103,7 +103,7 @@ class AlarmWatcher @Inject constructor(
     updateProfilerAlarmsUseCase(alarms = alarms)
 
     // To solve problem then alarm is out of range
-    val firstValidAlarm = alarms.first { it.time <= System.currentTimeMillis() }
+    val firstValidAlarm = alarms.first { it.time >= System.currentTimeMillis() }
     alarmSetter?.setAlarm(firstValidAlarm.time)
   }
 
