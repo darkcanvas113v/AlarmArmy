@@ -40,8 +40,8 @@ fun ProfilerScreen(
   }.collectAsState(initial = false)
 
   // TODO maybe optimize it a little bit?
-  val wakingAlarms = alarms.filter { it.offset < 0L }.sortedBy { it.offset }
-  val warningAlarms = alarms.filter { it.offset > 0L }.sortedBy { it.offset }
+  val wakingAlarms = alarms.filter { it.value < 0L }.sortedByDescending { it.value }
+  val warningAlarms = alarms.filter { it.value > 0L }.sortedBy { it.value }
 
   var showAlarmDialog by remember {
     mutableStateOf(false)

@@ -31,7 +31,7 @@ fun AlarmDialog(
   }
 
   var sign by remember {
-    mutableStateOf(-1)
+    mutableStateOf(alarm.sign)
   }
 
   val focusManager = LocalFocusManager.current
@@ -84,7 +84,7 @@ fun AlarmDialog(
           }
           TextButton(
             onClick = {
-              onGetResult(alarm.copy(offset = sign * offsetByMinutes * Time.m))
+              onGetResult(alarm.copy(offset = sign * offsetByMinutes * Time.m, sign = sign))
             }) {
             Text(text = "Confirm")
           }

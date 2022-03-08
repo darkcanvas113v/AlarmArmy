@@ -6,3 +6,14 @@ fun <T> List<T>.findIndexOfFirst(satisfyCondition: (T) -> Boolean): Int? {
 
   return null
 }
+
+object Math {
+  fun sign(value: Int): Int {
+    return if (value < 0) -1 else 1
+  }
+
+  fun sign(value: Long): Int {
+    return if (value < 0) -1 else 1
+  }
+}
+
