@@ -25,7 +25,22 @@ fun AlarmDialog(
   onDismiss: () -> Unit,
   alarm: UIProfilerAlarm,
 ) {
+  Dialog(
+    onDismissRequest = { onDismiss() },
+  ) {
+    AlarmDialogContent(
+      onGetResult = onGetResult,
+      onDismiss = onDismiss,
+      alarm = alarm)
+  }
+}
 
+@Composable
+fun AlarmDialogContent(
+  onGetResult: (UIProfilerAlarm) -> Unit,
+  onDismiss: () -> Unit,
+  alarm: UIProfilerAlarm,
+) {
   var offsetByMinutes by remember {
     mutableStateOf((alarm.offset / Time.m).toInt())
   }
@@ -36,58 +51,70 @@ fun AlarmDialog(
 
   val focusManager = LocalFocusManager.current
 
-  Dialog(
-    onDismissRequest = { onDismiss() },
-  ) {
-    Surface() {
-      Column(modifier = Modifier.padding(16.dp)) {
-        Text(text = "Pick offset", style = MaterialTheme.typography.subtitle1)
+  Surface() {
+    Column(modifier = Modifier.padding(16.dp)) {
+      Text(text = "Pick offset", style = MaterialTheme.typography.subtitle1)
 
-        Row(
-          modifier = Modifier
-//            .fillMaxWidth()
-            .weight(1f, fill = false)
-            .padding(vertical = 16.dp)
-        ) {
-          TextButton(
-            onClick = { sign = -sign },
-            modifier = Modifier.padding(end = 16.dp).align(Alignment.CenterVertically)
-          ) {
-            Text(
-              text = if (sign == -1) "-" else "+",
-              style = Typography.h3
-            )
-          }
-          TimePickerItem(
-            value = offsetByMinutes,
-            valueChanged = { offsetByMinutes = it },
-            maxValue = 99,
-            modifier = Modifier.align(Alignment.CenterVertically),
-            keyboardOptions = KeyboardOptions(
-              imeAction = ImeAction.Done,
-              keyboardType = KeyboardType.Number
-            ),
-            keyboardActions = KeyboardActions(
-              onDone = {
-                focusManager.clearFocus()
-              }
-            )
+      TextButton(
+        onClick = { sign = -sign },
+        modifier = Modifier
+          .padding(top = 16.dp)
+          .align(Alignment.CenterHorizontally)
+      ) {
+        Text(
+          text = if (sign == -1) "-" else "+",
+          style = Typography.h3
+        )
+      }
+
+      Column(
+        modifier = Modifier
+          .align(Alignment.CenterHorizontally)
+      ) {
+
+
+        TimePickerItem(
+          value = offsetByMinutes,
+          valueChanged = { offsetByMinutes = it },
+          maxValue = 99,
+//            modifier = Modifier.align(Alignment.CenterVertically),
+          keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Done,
+            keyboardType = KeyboardType.Number
+          ),
+          keyboardActions = KeyboardActions(
+            onDone = {
+              focusManager.clearFocus()
+            }
           )
-        }
+        )
+        Text(
+          text = "minutes",
+          modifier = Modifier
+            .align(Alignment.End)
+            .padding(top = 4.dp)
+        )
 
-        Row(
-          modifier = Modifier.fillMaxWidth(),
-          horizontalArrangement = Arrangement.End
+      }
+
+
+
+      Row(
+        modifier = Modifier
+          .padding(top = 16.dp)
+          .align(Alignment.End),
+        horizontalArrangement = Arrangement.End
+      ) {
+        TextButton(
+          onClick = onDismiss,
         ) {
-          TextButton(onClick = onDismiss) {
-            Text(text = "Cancel")
-          }
-          TextButton(
-            onClick = {
-              onGetResult(alarm.copy(offset = sign * offsetByMinutes * Time.m, sign = sign))
-            }) {
-            Text(text = "Confirm")
-          }
+          Text(text = "Cancel")
+        }
+        TextButton(
+          onClick = {
+            onGetResult(alarm.copy(offset = sign * offsetByMinutes * Time.m, sign = sign))
+          }) {
+          Text(text = "Confirm")
         }
       }
     }
@@ -98,6 +125,6 @@ fun AlarmDialog(
 @Composable
 fun AlarmDialogPreview() {
   AlarmArmyTheme {
-    AlarmDialog(onGetResult = {}, onDismiss = {}, alarm = UIProfilerAlarm.DEFAULT)
+    AlarmDialogContent(onGetResult = {}, onDismiss = {}, alarm = UIProfilerAlarm.DEFAULT)
   }
 }
