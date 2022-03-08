@@ -11,11 +11,9 @@ import com.sillyapps.core_ui.compose.currentRoute
 fun Tabs(tabs: List<TabItem>, navController: NavController) {
 
   val currentRoute = currentRoute(navController = navController)
+  val ind = tabs.indexOfFirst { it.route == currentRoute }
   val tabIndex =
-    if (currentRoute == null)
-      0
-    else
-      tabs.indexOfFirst { it.route == currentRoute }
+    if (ind == -1) 0 else ind
 
   TabRow(
     selectedTabIndex = tabIndex
